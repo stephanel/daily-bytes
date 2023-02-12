@@ -28,7 +28,7 @@ jobs:
         dotnet-version: 7.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ${{ input.dotnetAppPath }}
+      working-directory: ${{ inputs.dotnetAppPath }}
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ${{ input.dotnetAppPath }}
+      working-directory: ${{ inputs.dotnetAppPath }}
