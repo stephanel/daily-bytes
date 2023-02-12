@@ -11,12 +11,12 @@ on:
         type: string
         required: true
 
+run-name: .NET Run Tests - ${{ inputs.dotnetAppPath }}
+
 jobs:
   Run-Tests:
 
     runs-on: ubuntu-latest
-
-    run-name: .NET Run Tests - ${{ inputs.dotnetAppPath }}
 
     steps:
     - uses: actions/checkout@v3
