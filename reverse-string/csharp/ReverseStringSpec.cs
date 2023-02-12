@@ -6,10 +6,11 @@ namespace ReverseString.Tests;
 
 public class ReverseStringSpec
 {
-    [Fact]
-    public void ShouldReverseString()
+    [Theory]
+    [InlineData("Cat", "taC")]
+    public void ShouldReverseString(string input, string expected)
     {
-        reverse("Cat").Should().Be("taC");
+        reverse(input).Should().Be(expected);
     }
 
     private string reverse(string text)
