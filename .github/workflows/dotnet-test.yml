@@ -12,7 +12,7 @@ on:
     inputs:
       dotnetAppPath:
         description: 'Folder of the .NET app'
-        type: environment
+        type: string
         required: true
 
 defaults:
