@@ -3,7 +3,7 @@ My learning daily bytes using various tech/languages.
 
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
 
-## Run .NET Test using GitHub Actions
+## Run the .NET Tests using GitHub Actions
 
 A workflow for running the .NET tests manually is available in `Github Actions`. When running it, You will be asked for the input `Folder of the .NET app` which should be the relative path of the directoy of the .NET code.
 
