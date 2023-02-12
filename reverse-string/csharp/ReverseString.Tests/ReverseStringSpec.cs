@@ -21,7 +21,7 @@ public class ReverseStringSpec
     [InlineData("civic", "civic")]
     public void ShouldReverseStringUsingLinq(string input, string expected)
         => new ReverseStringLinq()
-            .ReverseLinq(input)
+            .Reverse(input)
             .Should()
             .Be(expected);
 

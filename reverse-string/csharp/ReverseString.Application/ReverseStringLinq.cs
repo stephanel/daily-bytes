@@ -2,7 +2,7 @@
 {
     internal class ReverseStringLinq
     {
-        internal string ReverseLinq(string input)
+        internal string Reverse(string input)
             => string.Join(string.Empty, input.Reverse());
     }
 }
