@@ -10,4 +10,9 @@ public class ReverseStringSpec
     {
         reverse("Cat").Should().Be("taC");
     }
+
+    private string reverse(string v)
+    {
+        throw new NotImplementedException();
+    }
 }
