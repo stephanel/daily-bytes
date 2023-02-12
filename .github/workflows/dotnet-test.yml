@@ -15,6 +15,10 @@ on:
         type: environment
         required: true
 
+defaults:
+  run:
+    working-directory: ${{ input.dotnetAppPath }}
+    
 jobs:
   build:
 
