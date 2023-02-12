@@ -24,4 +24,15 @@ public class ReverseStringSpec
             .ReverseLinq(input)
             .Should()
             .Be(expected);
+
+    [Theory]
+    [InlineData("Cat", "taC")]
+    [InlineData("The Daily Byte", "etyB yliaD ehT")]
+    [InlineData("civic", "civic")]
+    public void ShouldReverseStringUsingSpan(string input, string expected)
+        => new ReverseStringSpan()
+            .Reverse(input)
+            .Should()
+            .Be(expected);
+
 }

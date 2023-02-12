@@ -25,4 +25,8 @@ public class ReverseStringBenchmark
     [Benchmark]
     public void ReverseStringUsingLinq()
         => new ReverseStringLinq().ReverseLinq(randomText);
+
+    [Benchmark]
+    public void ReverseStringUsingSpan()
+        => new ReverseStringSpan().Reverse(randomText);
 }
