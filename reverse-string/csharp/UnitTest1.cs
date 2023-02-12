@@ -1,4 +1,4 @@
-namespace csharp;
+namespace ReverseString.Tests;
 
 public class UnitTest1
 {
