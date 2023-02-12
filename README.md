@@ -1,2 +1,2 @@
-# daily-bytes
-My learning daily bytes
+# My Daily Bytes
+My learning daily bytes using various tech/languages.
