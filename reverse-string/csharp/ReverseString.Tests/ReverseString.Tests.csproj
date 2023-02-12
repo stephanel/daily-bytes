@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ReverseString.Application\ReverseString.Application.csproj" />
+  </ItemGroup>
+
 </Project>
