@@ -1,4 +1,5 @@
 using FluentAssertions;
+using System.Text;
 using Xunit.Sdk;
 
 namespace ReverseString.Tests;
@@ -11,8 +12,13 @@ public class ReverseStringSpec
         reverse("Cat").Should().Be("taC");
     }
 
-    private string reverse(string v)
+    private string reverse(string text)
     {
-        throw new NotImplementedException();
+        StringBuilder builder = new();
+        for(int i= text.Length - 1; i >= 0; i--)
+        {
+            builder.Append(text[i]);
+        }
+        return builder.ToString();
     }
 }
