@@ -1,7 +1,5 @@
 using FluentAssertions;
 using ReverseString.Application;
-using System.Text;
-using Xunit.Sdk;
 
 namespace ReverseString.Tests;
 
