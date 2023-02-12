@@ -9,3 +9,9 @@ Ex: Given the following strings...
 “civic”, return “civic”
 ```
 
+## Run the tests
+
+```
+cd revers-string\csharp
+dotnet test
+```
