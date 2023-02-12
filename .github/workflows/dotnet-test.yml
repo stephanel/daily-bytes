@@ -16,6 +16,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    run-name: .NET Run Tests - ${{ inputs.dotnetAppPath }}
+
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
