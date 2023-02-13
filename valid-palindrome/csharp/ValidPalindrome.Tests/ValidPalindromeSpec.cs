@@ -1,4 +1,5 @@
 using FluentAssertions;
+using System.Text.RegularExpressions;
 using Xunit.Sdk;
 
 namespace ValidPalindrome.Tests;
@@ -24,10 +25,28 @@ public class ValidPalindromeSpec
     {
         ValidateUsingAsciiCodeForLoop(input).Should().Be(expected);
     }
-    
-    private bool ValidateUsingAsciiCodeLinq(string v)
+
+    [Theory]
+    [InlineData("level", true)]
+    [InlineData("algorithm", false)]
+    [InlineData("A man, a plan, a canal: Panama.", true)]
+    [InlineData("ABCD;!*$dcba.", true)]
+    public void ShouldValidatePalindromeRegexForLoop(string input, bool expected)
     {
-        var cleaned = v
+        ValidateUsingRegexForLoop(input).Should().Be(expected);
+    }
+
+    static Regex rgx = new Regex("[^a-zA-Z-]"); // to remove all except alpha characters
+    private object ValidateUsingRegexForLoop(string input)
+    {
+        var cleaned = rgx.Replace(input, string.Empty).ToLower();
+        var reverted = cleaned.Reverse();
+        return Enumerable.SequenceEqual(cleaned, reverted);
+    }
+
+    private bool ValidateUsingAsciiCodeLinq(string input)
+    {
+        var cleaned = input
             .ToLower()
             .Where(c => (short)c >= 97 && (short)c <= 122)
             ;
@@ -36,9 +55,9 @@ public class ValidPalindromeSpec
         return Enumerable.SequenceEqual(cleaned, reverted);
     }
 
-    private bool ValidateUsingAsciiCodeForLoop(string v)
+    private bool ValidateUsingAsciiCodeForLoop(string input)
     {
-        var cleaned = v
+        var cleaned = input
             .ToLower()
             .Where(c => (short)c >= 97 && (short)c <= 122)
             .ToArray();
