@@ -2,7 +2,7 @@
 My learning daily bytes using various tech/languages.
 
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
-- [Valid Palyndrome - C#](https://github.com/stephanel/daily-bytes/tree/master/valid-palyndrome/csharp)
+- [Valid Palindrome - C#](https://github.com/stephanel/daily-bytes/tree/master/valid-palindrome/csharp)
 
 ## Run the .NET Tests using GitHub Actions
 
