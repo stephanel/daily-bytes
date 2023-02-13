@@ -1,3 +1,6 @@
+using FluentAssertions;
+using Xunit.Sdk;
+
 namespace ValidPalindrome.Tests;
 
 public class ValidPalindromeSpec
@@ -7,7 +10,14 @@ public class ValidPalindromeSpec
     //"A man, a plan, a canal: Panama.", return true
 
     [Fact]
-    public void Test1()
+    public void ShouldValidatePalindrome()
     {
+        bool actual = validate("level");
+        actual.Should().Be(true);
+    }
+
+    private bool validate(string v)
+    {
+        throw new NotImplementedException();
     }
 }
