@@ -12,6 +12,7 @@ public class ValidPalindromeSpec
     [Theory]
     [InlineData("level", true)]
     [InlineData("algorithm", false)]
+    [InlineData("A man, a plan, a canal: Panama.", true)]
     public void ShouldValidatePalindrome(string input, bool expected)
     {
         bool actual = validate(input);
