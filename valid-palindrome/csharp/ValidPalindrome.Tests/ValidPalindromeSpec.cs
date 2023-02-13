@@ -5,14 +5,11 @@ namespace ValidPalindrome.Tests;
 
 public class ValidPalindromeSpec
 {
-    //"level", return true
-    //"algorithm", return false
-    //"A man, a plan, a canal: Panama.", return true
-
     [Theory]
     [InlineData("level", true)]
     [InlineData("algorithm", false)]
     [InlineData("A man, a plan, a canal: Panama.", true)]
+    [InlineData("ABCD;!*$dcba.", true)]
     public void ShouldValidatePalindrome(string input, bool expected)
     {
         bool actual = validate(input);
