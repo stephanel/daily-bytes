@@ -21,10 +21,11 @@ dotnet test
 cd reverse-string\csharp
 dotnet run --project ./ReverseString.Benchmark/ReverseString.Benchmark.csproj -c Release
 
-|                    Method |       Mean |     Error |    StdDev |     Median |   Gen0 | Allocated |
-|-------------------------- |-----------:|----------:|----------:|-----------:|-------:|----------:|
-| ReverseStringUsingForLoop |   796.8 ns |   7.33 ns |   6.50 ns |   797.5 ns | 0.0219 |    1.4 KB |
-|    ReverseStringUsingLinq | 7,057.8 ns | 140.79 ns | 360.89 ns | 6,960.5 ns | 0.1221 |   7.76 KB |
-|    ReverseStringUsingSpan | 2,461.6 ns |  49.15 ns | 136.18 ns | 2,404.3 ns | 0.0305 |   1.83 KB |
+|                             Method |       Mean |     Error |    StdDev |   Gen0 | Allocated |
+|----------------------------------- |-----------:|----------:|----------:|-------:|----------:|
+| ReverseString_StringbuilderForLoop |   807.3 ns |  13.72 ns |  15.80 ns | 0.0219 |    1.4 KB |
+|          ReverseString_LinqReverse | 6,885.9 ns | 131.03 ns | 128.69 ns | 0.1221 |   7.76 KB |
+|          ReverseString_SpanReverse | 2,368.0 ns |  45.98 ns |  68.82 ns | 0.0305 |   1.83 KB |
+|          ReverseString_SpanForLoop | 2,623.1 ns |  46.87 ns |  48.14 ns | 0.0305 |   1.83 KB |
 
 ```
