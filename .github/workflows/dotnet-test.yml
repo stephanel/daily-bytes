@@ -11,7 +11,7 @@ on:
         type: string
         required: true
 
-run-name: .NET Run Tests - $GITHUB_REF - ${{ inputs.dotnetAppPath }}
+run-name: .NET Run Tests - ${{ github.ref_name }} - ${{ inputs.dotnetAppPath }}
 
 jobs:
   Run-Tests:
@@ -25,5 +25,5 @@ jobs:
       with:
         dotnet-version: 7.x
     - name: Test
-      run: dotnet test --verbosity normal
+      run: dotnet test -l "console;verbosity=normal"
       working-directory: ${{ inputs.dotnetAppPath }}
