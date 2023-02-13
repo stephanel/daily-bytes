@@ -21,6 +21,14 @@ public class ValidPalindromeSpec
 
     private bool validate(string v)
     {
-        return v == string.Join(string.Empty, v.Reverse());
+        var cleaned = v
+            .Replace(" ", string.Empty)
+            .Replace(",", string.Empty)
+            .Replace(":", string.Empty)
+            .Replace(".", string.Empty)
+            .ToLower()
+            ;
+        var reverted = string.Join(string.Empty, cleaned.Reverse());
+        return cleaned == reverted;
     }
 }
