@@ -11,7 +11,7 @@ on:
         type: string
         required: true
 
-run-name: .NET Run Tests - ${{ inputs.dotnetAppPath }}
+run-name: .NET Run Tests - $GITHUB_REF - ${{ inputs.dotnetAppPath }}
 
 jobs:
   Run-Tests:
