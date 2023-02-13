@@ -9,11 +9,12 @@ public class ValidPalindromeSpec
     //"algorithm", return false
     //"A man, a plan, a canal: Panama.", return true
 
-    [Fact]
-    public void ShouldValidatePalindrome()
+    [Theory]
+    [InlineData("level", true)]
+    public void ShouldValidatePalindrome(string input, bool expected)
     {
-        bool actual = validate("level");
-        actual.Should().Be(true);
+        bool actual = validate(input);
+        actual.Should().Be(expected);
     }
 
     private bool validate(string v)
