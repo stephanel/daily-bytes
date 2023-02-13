@@ -18,6 +18,6 @@ public class ValidPalindromeSpec
 
     private bool validate(string v)
     {
-        throw new NotImplementedException();
+        return v == string.Join(string.Empty, v.Reverse());
     }
 }
