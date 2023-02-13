@@ -1,6 +1,6 @@
 ﻿namespace ReverseString.Application
 {
-    internal class ReverseStringLinq
+    internal class ReverseStringLinqReverse
     {
         internal string Reverse(string input)
             => string.Join(string.Empty, input.Reverse());

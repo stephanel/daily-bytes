@@ -1,6 +1,6 @@
 ﻿namespace ReverseString.Application
 {
-    internal class ReverseStringSpan
+    internal class ReverseStringSpanReverse
     {
         internal string Reverse(string input)
         {

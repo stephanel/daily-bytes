@@ -2,7 +2,7 @@
 
 namespace ReverseString.Application
 {
-    internal class ReverseStringForLoop
+    internal class ReverseStringStringBuilderForLoop
     {
         internal string Reverse(string text)
         {

@@ -19,14 +19,18 @@ public class ReverseStringBenchmark
     }
 
     [Benchmark]
-    public void ReverseStringUsingForLoop()
-        => new ReverseStringForLoop().Reverse(randomText);
+    public void ReverseString_StringbuilderForLoop()
+        => new ReverseStringStringBuilderForLoop().Reverse(randomText);
 
     [Benchmark]
-    public void ReverseStringUsingLinq()
-        => new ReverseStringLinq().Reverse(randomText);
+    public void ReverseString_LinqReverse()
+        => new ReverseStringLinqReverse().Reverse(randomText);
 
     [Benchmark]
-    public void ReverseStringUsingSpan()
-        => new ReverseStringSpan().Reverse(randomText);
+    public void ReverseString_SpanReverse()
+        => new ReverseStringSpanReverse().Reverse(randomText);
+
+    [Benchmark]
+    public void ReverseString_SpanForLoop()
+        => new ReverseStringSpanForLoop().Reverse(randomText);
 }
