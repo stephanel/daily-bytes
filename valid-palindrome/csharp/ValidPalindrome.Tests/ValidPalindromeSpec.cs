@@ -11,6 +11,7 @@ public class ValidPalindromeSpec
 
     [Theory]
     [InlineData("level", true)]
+    [InlineData("algorithm", false)]
     public void ShouldValidatePalindrome(string input, bool expected)
     {
         bool actual = validate(input);
