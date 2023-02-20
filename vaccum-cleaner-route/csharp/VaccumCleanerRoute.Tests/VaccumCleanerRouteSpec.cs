@@ -1,3 +1,5 @@
+using Xunit.Sdk;
+
 namespace VaccumCleanerRoute.Tests;
 
 public class VaccumCleanerRouteSpec
@@ -6,18 +8,15 @@ public class VaccumCleanerRouteSpec
     //"URURD", return false
     //"RUULLDRD", return true
 
-    [Fact]
-    public void ShouldReturnTrue_WhenCommandsAreLR()
+    [Theory]
+    [InlineData("LR", true)]
+    [InlineData("URURD", false)]
+    public void ShouldReturnWetherOrNotTheVaccumCleanerReturnsToItsOriginalPosition(
+        string commands, 
+        bool expected)
     {
-        var actual = when("LR");
-        actual.Should().BeTrue();
-    }
-
-    [Fact]
-    public void ShouldReturnTrue_WhenCommandsAreURURD()
-    {
-        var actual = when("URURD");
-        actual.Should().BeFalse();
+        var actual = when(commands);
+        actual.Should().Be(expected);
     }
 
     private bool when(string commands)
