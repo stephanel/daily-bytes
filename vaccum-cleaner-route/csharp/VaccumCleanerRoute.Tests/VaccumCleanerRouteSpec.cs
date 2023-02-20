@@ -11,6 +11,7 @@ public class VaccumCleanerRouteSpec
     [Theory]
     [InlineData("LR", true)]
     [InlineData("URURD", false)]
+    [InlineData("RUULLDRD", true)]
     public void ShouldReturnWetherOrNotTheVaccumCleanerReturnsToItsOriginalPosition(
         string commands, 
         bool expected)
