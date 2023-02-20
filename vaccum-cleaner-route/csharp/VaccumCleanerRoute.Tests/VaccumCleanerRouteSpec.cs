@@ -1,13 +1,7 @@
-using Xunit.Sdk;
-
 namespace VaccumCleanerRoute.Tests;
 
 public class VaccumCleanerRouteSpec
 {
-    //"LR", return true
-    //"URURD", return false
-    //"RUULLDRD", return true
-
     [Theory]
     [InlineData("LR", true)]
     [InlineData("URURD", false)]
