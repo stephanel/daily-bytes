@@ -13,6 +13,12 @@ public class VaccumCleanerRouteSpec
         actual.Should().BeTrue();
     }
 
+    [Fact]
+    public void ShouldReturnTrue_WhenCommandIsURURD()
+    {
+        var actual = when("URURD");
+        actual.Should().BeFalse();
+    }
 
     private bool when(string command)
     {
