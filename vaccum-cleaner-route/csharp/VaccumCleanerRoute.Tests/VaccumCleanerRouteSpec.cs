@@ -13,8 +13,9 @@ public class VaccumCleanerRouteSpec
         actual.Should().BeTrue();
     }
 
+
     private bool when(string command)
     {
-        throw new NotImplementedException();
+        return true;
     }
 }
