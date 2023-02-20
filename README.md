@@ -21,3 +21,14 @@ Example: to run the tests of the project `ReverseString`, enter `reverse-string/
 4. Fill the textbox with the correct path, and click the button `Run workflow`
 
 ![run the 'dotnet test' workflow manually](./documentation/Manually%20run%20the%20'dotnet%20test'%20workflow.jpg)
+
+## Add a new C# project
+```
+mkdir newdir
+cd newdir
+
+dotnet new sln -n solution_name
+dotnet new console -o /path/to/project/folder -n project_name
+dotnet sln add /path/to/project/folder
+dotnet add /path/to/project/folder package package_name
+```
