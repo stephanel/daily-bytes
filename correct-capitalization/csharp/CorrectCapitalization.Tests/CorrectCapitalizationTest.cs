@@ -9,9 +9,12 @@ public class CorrectCapitalizationTest
 
     [Theory]
     [InlineData("USA")]
+    [InlineData("NATO")]
     public void ShouldHaveCorrectCapitalization(string input)
         => IsCapitalizationCorrect(input).Should().BeTrue();
 
     private bool IsCapitalizationCorrect(string v)
-        => "USA" == v;
+    {
+        return v.Where(c => char.IsUpper(c)).Count() == v.Length;
+    }
 }
