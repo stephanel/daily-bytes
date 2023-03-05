@@ -8,7 +8,7 @@ My learning daily bytes using various tech/languages.
 - [Correct Capitalization - C#](https://github.com/stephanel/daily-bytes/tree/master/correct-capitalization/csharp)
 
 ## Benchmarks
-- [Count nuber of occurences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
+- [Count number of occurences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
 
 
 ## Run the .NET Tests using GitHub Actions
