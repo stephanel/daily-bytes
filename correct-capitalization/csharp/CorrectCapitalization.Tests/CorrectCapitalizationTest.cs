@@ -16,8 +16,14 @@ public class CorrectCapitalizationTest
 
     private bool IsCapitalizationCorrect(string v)
     {
-        return v.Where(c => char.IsUpper(c)).Count() == v.Length
-            || (char.IsUpper(v.First())
-                && v.Skip(1).Where(c => char.IsLower(c)).Count() == v.Length-1);
+        return AllLettersAreCapitalized(v)
+            || FirstLetterOnlyIsCapitalized(v);
     }
+
+    private bool AllLettersAreCapitalized(string v)
+        => v.Where(c => char.IsUpper(c)).Count() == v.Length;
+
+    private bool FirstLetterOnlyIsCapitalized(string v)
+        => char.IsUpper(v.First())
+                && v.Skip(1).Where(c => char.IsLower(c)).Count() == v.Length - 1;
 }
