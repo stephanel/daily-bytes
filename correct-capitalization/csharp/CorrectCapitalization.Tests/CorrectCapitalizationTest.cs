@@ -11,6 +11,7 @@ public class CorrectCapitalizationTest
     [InlineData("USA")]
     [InlineData("NATO")]
     [InlineData("Calvin")]
+    [InlineData("coding")]
     public void ShouldHaveCorrectCapitalization(string input)
         => IsCapitalizationCorrect(input).Should().BeTrue();
 
@@ -22,8 +23,12 @@ public class CorrectCapitalizationTest
     private bool IsCapitalizationCorrect(string v)
     {
         return AllLettersAreCapitalized(v)
-            || FirstLetterOnlyIsCapitalized(v);
+            || FirstLetterOnlyIsCapitalized(v)
+            || NoLettersAreCapitalized(v);
     }
+
+    private bool NoLettersAreCapitalized(string v)
+        => v.Where(x => char.IsLower(x)).Count() == v.Length;
 
     private bool AllLettersAreCapitalized(string v)
         => v.Where(c => char.IsUpper(c)).Count() == v.Length;
