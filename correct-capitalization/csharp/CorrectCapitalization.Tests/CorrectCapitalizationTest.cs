@@ -14,6 +14,11 @@ public class CorrectCapitalizationTest
     public void ShouldHaveCorrectCapitalization(string input)
         => IsCapitalizationCorrect(input).Should().BeTrue();
 
+    [Theory]
+    [InlineData("compUter")]
+    public void ShouldNotHaveCorrectCapitalization(string input)
+        => IsCapitalizationCorrect(input).Should().BeFalse();
+
     private bool IsCapitalizationCorrect(string v)
     {
         return AllLettersAreCapitalized(v)
