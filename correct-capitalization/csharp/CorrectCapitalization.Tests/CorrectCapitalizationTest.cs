@@ -7,11 +7,10 @@ public class CorrectCapitalizationTest
     //"compUter", return false
     //"coding", return true
 
-    [Fact]
-    public void UsaIsCorrectCapitalization()
-    {
-        IsCapitalizationCorrect("USA").Should().BeTrue();
-    }
+    [Theory]
+    [InlineData("USA")]
+    public void ShouldHaveCorrectCapitalization(string input)
+        => IsCapitalizationCorrect(input).Should().BeTrue();
 
     private bool IsCapitalizationCorrect(string v)
         => "USA" == v;
