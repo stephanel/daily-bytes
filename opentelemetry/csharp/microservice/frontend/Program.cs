@@ -1,4 +1,7 @@
 using frontend;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,25 @@ builder.Services.AddHttpClient<WeatherClient>(client =>
     var backendSection = builder.Configuration.GetSection("Backend");
     client.BaseAddress = new Uri(backendSection["BaseAddress"]);
 });
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+        tracerProviderBuilder
+            .AddSource(DiagnosticsConfig.ActivitySource.Name)
+            .ConfigureResource(resource => resource
+                .AddService(DiagnosticsConfig.ServiceName))
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter())
+    //.WithMetrics(metricsProviderBuilder =>
+    //    metricsProviderBuilder
+    //        .ConfigureResource(resource => resource
+    //            .AddService(DiagnosticsConfig.ServiceName))
+    //        .AddAspNetCoreInstrumentation()
+    //        .AddConsoleExporter()
+    //        .AddOtlpExporter())
+    ;
 
 var app = builder.Build();
 

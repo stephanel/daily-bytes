@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using OpenTelemetry;
+using System.Text.Json;
 
 namespace frontend
 {
