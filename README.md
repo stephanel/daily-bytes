@@ -11,7 +11,7 @@ My learning daily bytes using various tech/languages.
 - [Count number of occurences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
 
 ## OpenTelemetry Code Instrumentation
-_ [C#](https://github.com/stephanel/daily-bytes/tree/master/opentelemetry/csharp)
+- [OpenTelemetry AspNetCore Intrumentation](https://github.com/stephanel/daily-bytes/tree/master/opentelemetry/csharp)
 
 ## Run the .NET Tests using GitHub Actions
 
