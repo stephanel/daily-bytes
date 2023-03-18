@@ -1,7 +1,7 @@
 # My Daily Bytes
 My learning daily bytes using various tech/languages.
 
-## Kata
+## Code Kata
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
 - [Valid Palindrome - C#](https://github.com/stephanel/daily-bytes/tree/master/valid-palindrome/csharp)
 - [Vaccum Cleaner Route - C#](https://github.com/stephanel/daily-bytes/tree/master/vaccum-cleaner-route/csharp)
@@ -10,6 +10,8 @@ My learning daily bytes using various tech/languages.
 ## Benchmarks
 - [Count number of occurences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
 
+## OpenTelemetry Code Instrumentation
+_ [C#](https://github.com/stephanel/daily-bytes/tree/master/opentelemetry/csharp)
 
 ## Run the .NET Tests using GitHub Actions
 
