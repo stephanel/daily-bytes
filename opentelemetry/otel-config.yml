@@ -1,0 +1,14 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+ 
+exporters:
+  jaeger:
+    endpoint: jaeger-all-in-one:14250
+ 
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [jaeger]
