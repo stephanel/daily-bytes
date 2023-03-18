@@ -68,5 +68,5 @@ dotnet run --project ./csharp/microservice/frontend/frontend.csproj
 
 * Navigate to http://localhost:16686, and search for the service `BlazorFrontend` or `BackendRestService` to find the traces.
 
-  ![visualize the trace in Jaeger](./opentelemetry/documentation/traces-in-jaeger.jpg)
+  ![visualize the trace in Jaeger](./documentation/traces-in-jaeger.jpg)
 
