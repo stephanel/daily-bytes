@@ -1,3 +1,6 @@
+using Castle.DynamicProxy;
+using System.Reflection;
+
 namespace CastleDynamicProxyTests;
 
 public class DynamicProxyTests
@@ -58,7 +61,7 @@ public class DynamicProxyTests
     {
         var rex = new Pet();
         Action action = () => Freezable.Freeze(rex);
-        action.Should().Throw<InvalidOperationException>();
+        action.Should().Throw<NotFreezableObjectException>();
     }
 }
 
@@ -70,27 +73,83 @@ internal class ObjectFrozenException : Exception
 {
 }
 
-class Pet
+public class Pet
 {
-    public int Age { get; set; }
-    public bool Deceased { get; set; }
-    public string Name { get; set; } = null!;
+    public virtual string Name { get; set; } = null!;
+    public virtual int Age { get; set; } = 0;
+    public virtual bool Deceased { get; set; }
+
+    public override string ToString()
+    {
+        return $"Name: {Name}, Age: {Age}, Deceased: {Deceased}";
+    }
+}
+
+interface IFreezable
+{
+    bool IsFrozen { get; }
+    void Freeze();
 }
 
 class Freezable
 {
-    public static bool IsFreezable<T>(T value) where T : class
+    private static readonly ProxyGenerator Generator = new ProxyGenerator();
+
+    private static readonly Dictionary<object, IFreezable> InstanceMap = new();
+
+    public static bool IsFreezable<TFreezable>(TFreezable value) where TFreezable : class, new()
+        => value != null && InstanceMap.ContainsKey(value);
+
+    public static void Freeze<T>(T value) where T : class, new()
     {
-        throw new NotImplementedException();
+        if (!IsFreezable(value))
+        {
+            throw new NotFreezableObjectException();
+        }
+
+        InstanceMap[value].Freeze();
     }
 
-    public static T MakeFreezable<T>() where T : class
+    public static bool IsFrozen(object value)
+        => IsFreezable(value) && InstanceMap[value].IsFrozen;
+
+    public static TFreezable MakeFreezable<TFreezable>() where TFreezable : class, new()
     {
-        throw new NotImplementedException();
+        var freezableInterceptor = new FreezableInterceptor();
+        var proxy = Generator.CreateClassProxy<TFreezable>(new CallLoggingInterceptor(), freezableInterceptor);
+        InstanceMap.Add(proxy, freezableInterceptor);
+        return proxy;
+    }
+}
+
+class CallLoggingInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        Console.WriteLine($"Intercepting: { invocation.Method}");
+        invocation.Proceed();
+    }
+}
+
+internal class FreezableInterceptor : IInterceptor, IFreezable
+{
+    public void Freeze()
+    {
+        IsFrozen = true;
     }
 
-    internal static void Freeze(Pet pet)
+    public bool IsFrozen { get; private set; }
+
+    public void Intercept(IInvocation invocation)
     {
-        throw new NotImplementedException();
+        if (IsFrozen && IsSetter(invocation.Method))
+        {
+            throw new ObjectFrozenException();
+        }
+
+        invocation.Proceed();
     }
+
+    private static bool IsSetter(MethodInfo method)
+        => method.IsSpecialName && method.Name.StartsWith("set_", StringComparison.OrdinalIgnoreCase);
 }
