@@ -8,29 +8,37 @@ class Freezable
 {
     private static readonly ProxyGenerator Generator = new ProxyGenerator();
 
-    private static readonly Dictionary<object, IFreezable> InstanceMap = new();
+    public static bool IsFreezable(object obj) => AsFreezable(obj) != null;
 
-    public static bool IsFreezable<TFreezable>(TFreezable value) where TFreezable : class, new()
-        => value != null && InstanceMap.ContainsKey(value);
-
-    public static void Freeze<T>(T value) where T : class, new()
+    private static IFreezable AsFreezable(object target)
     {
-        if (!IsFreezable(value))
-        {
-            throw new NotFreezableObjectException();
-        }
-
-        InstanceMap[value].Freeze();
+        if (target == null)
+            return null!;
+        var hack = target as IProxyTargetAccessor;
+        if (hack == null)
+            return null!;
+        return (hack.GetInterceptors().FirstOrDefault(i => i is FreezableInterceptor) as IFreezable)!;
     }
 
-    //public static bool IsFrozen(object value)
-    //    => IsFreezable(value) && InstanceMap[value].IsFrozen;
+    public static bool IsFrozen(object obj)
+    {
+        var freezable = AsFreezable(obj);
+        return freezable != null && freezable.IsFrozen;
+    }
+
+    public static void Freeze(object freezable)
+    {
+        var interceptor = AsFreezable(freezable);
+        if (interceptor == null)
+            throw new NotFreezableObjectException();
+        interceptor.Freeze();
+    }
 
     public static TFreezable MakeFreezable<TFreezable>() where TFreezable : class, new()
     {
         var freezableInterceptor = new FreezableInterceptor();
-        var proxy = Generator.CreateClassProxy<TFreezable>(new CallLoggingInterceptor(), freezableInterceptor);
-        InstanceMap.Add(proxy, freezableInterceptor);
+        var options = new ProxyGenerationOptions(new FreezableProxyGenerationHook());
+        var proxy = Generator.CreateClassProxy<TFreezable>(options, new CallLoggingInterceptor(), freezableInterceptor);
         return proxy;
     }
 }
