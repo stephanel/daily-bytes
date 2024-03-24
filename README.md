@@ -37,7 +37,7 @@ mkdir newdir
 cd newdir
 
 dotnet new sln -n solution_name
-dotnet new console -o /path/to/project/folder -n project_name
-dotnet sln add /path/to/project/folder
-dotnet add /path/to/project/folder package package_name
+dotnet new console -o ./path/to/project/folder -n project_name
+dotnet sln add ./path/to/project/folder
+dotnet add ./path/to/project/folder package package_name
 ```
