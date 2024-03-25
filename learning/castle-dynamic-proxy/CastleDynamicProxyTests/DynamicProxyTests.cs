@@ -131,6 +131,23 @@ public class DynamicProxyTests
         freezeCount.Should().Be(0);
     }
 
+    [Fact]
+    public void Freezable_should_freeze_classes_with_nonVirtual_methods()
+    {
+        var pet = Freezable.MakeFreezable<WithNonVirtualMethod>();
+        pet.Name = "Rex";
+        pet.NonVirtualMethod();
+    }
+
+    [Fact]
+    public void Freezable_should_throw_when_trying_to_freeze_classes_with_nonVirtual_setters()
+    {
+        Action act = () => Freezable.MakeFreezable<WithNonVirtualSetter>();
+        act.Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage("Property NonVirtualProperty is not virtual. Can't freeze classes with non-virtual properties.");
+    }
+
     private int GetInterceptedMethodsCountFor<T>(object freezable) where T : IHasCount
     {
         Assert.True(Freezable.IsFreezable(freezable));

@@ -11,3 +11,16 @@ public class Pet
         return $"Name: {Name}, Age: {Age}, Deceased: {Deceased}";
     }
 }
+
+public class WithNonVirtualMethod : Pet
+{
+    public void NonVirtualMethod()
+    {
+        // do nothing
+    }
+}
+
+public class WithNonVirtualSetter : Pet
+{
+    public string NonVirtualProperty { get; set; } = null!;
+}
