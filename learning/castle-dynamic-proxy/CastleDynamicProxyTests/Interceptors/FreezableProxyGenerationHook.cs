@@ -16,5 +16,12 @@ internal class FreezableProxyGenerationHook : IProxyGenerationHook
     }
 
     public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-        => methodInfo.Name.StartsWith("set_", StringComparison.OrdinalIgnoreCase);
+        => methodInfo.IsSpecialName
+        && (IsGetter(methodInfo) || IsSetter(methodInfo));
+
+    private bool IsGetter(MethodInfo method)
+        => method.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase);
+
+    private bool IsSetter(MethodInfo method)
+        => method.Name.StartsWith("set_", StringComparison.OrdinalIgnoreCase);
 }

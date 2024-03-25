@@ -67,13 +67,15 @@ public class DynamicProxyTests
     }
 
     [Fact]
-    public void Freezable_should_not_intercept_property_getters()
+    public void Freezable_should_intercept_property_getters()
     {
         var pet = Freezable.MakeFreezable<Pet>();
         Freezable.Freeze(pet);
-        var notUsed = pet.Age; //should not intercept
-        var interceptedMethodsCount = GetInterceptedMethodsCountFor(pet);
-        interceptedMethodsCount.Should().Be(0);
+        var notUsed = pet.Age; //should intercept
+        int logsCount = GetInterceptedMethodsCountFor<CallLoggingInterceptor>(pet);
+        int freezeCount = GetInterceptedMethodsCountFor<FreezableInterceptor>(pet);
+        logsCount.Should().Be(1);
+        freezeCount.Should().Be(0);
     }
 
     [Fact]
@@ -104,17 +106,42 @@ public class DynamicProxyTests
         petWeakReference.IsAlive.Should().BeFalse(); // Object should have been collected
     }
 
-    private int GetInterceptedMethodsCountFor(object freezable)
+    [Fact]
+    public void Freezable_should_log_getters_and_setters()
+    {
+        var pet = Freezable.MakeFreezable<Pet>();
+        pet.Age = 4;
+        var age = pet.Age;
+        int logsCount = GetInterceptedMethodsCountFor<CallLoggingInterceptor>(pet);
+        int freezeCount = GetInterceptedMethodsCountFor<FreezableInterceptor>(pet);
+        logsCount.Should().Be(2);
+        freezeCount.Should().Be(1);
+    }
+
+    [Fact]
+    public void Freezable_should_not_intercept_methods()
+    {
+        var pet = Freezable.MakeFreezable<Pet>();
+        pet.ToString(); // can be intercepted because it is overriden
+        int logsCount = GetInterceptedMethodsCountFor<CallLoggingInterceptor>(pet);
+        int freezeCount = GetInterceptedMethodsCountFor<FreezableInterceptor>(pet);
+        // base implementation of ToString calls each property getter, that we intercept
+        // so there will be 3 calls if method is not intercepter, otherwise 4.
+        logsCount.Should().Be(3);
+        freezeCount.Should().Be(0);
+    }
+
+    private int GetInterceptedMethodsCountFor<T>(object freezable) where T : IHasCount
     {
         Assert.True(Freezable.IsFreezable(freezable));
 
         var hack = freezable as IProxyTargetAccessor;
         Assert.NotNull(hack);
-        var loggingInterceptor = hack
+        var interceptor = (T)hack
             .GetInterceptors()
-            .Where(i => i is CallLoggingInterceptor)
-            .Single() as CallLoggingInterceptor;
-        loggingInterceptor.Should().NotBeNull();
-        return loggingInterceptor!.Count;
+            .Where(i => i is T )
+            .Single();
+        interceptor.Should().NotBeNull();
+        return interceptor!.Count;
     }
 }

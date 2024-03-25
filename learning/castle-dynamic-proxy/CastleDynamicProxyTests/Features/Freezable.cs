@@ -6,7 +6,9 @@ namespace CastleDynamicProxyTests.Features;
 
 class Freezable
 {
-    private static readonly ProxyGenerator Generator = new ProxyGenerator();
+    private static readonly ProxyGenerator _generator = new ProxyGenerator();
+
+    private static readonly IInterceptorSelector _interceptorSelector = new FreezableInterceptorSelector();
 
     public static bool IsFreezable(object obj) => AsFreezable(obj) != null;
 
@@ -37,8 +39,11 @@ class Freezable
     public static TFreezable MakeFreezable<TFreezable>() where TFreezable : class, new()
     {
         var freezableInterceptor = new FreezableInterceptor();
-        var options = new ProxyGenerationOptions(new FreezableProxyGenerationHook());
-        var proxy = Generator.CreateClassProxy<TFreezable>(options, new CallLoggingInterceptor(), freezableInterceptor);
+        var options = new ProxyGenerationOptions(new FreezableProxyGenerationHook())
+        {
+            Selector = _interceptorSelector
+        };
+        var proxy = _generator.CreateClassProxy<TFreezable>(options, new CallLoggingInterceptor(), freezableInterceptor);
         return proxy;
     }
 }

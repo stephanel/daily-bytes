@@ -1,8 +1,9 @@
 ﻿using Castle.DynamicProxy;
+using CastleDynamicProxyTests.Features;
 
 namespace CastleDynamicProxyTests.Interceptors;
 
-class CallLoggingInterceptor : IInterceptor
+internal class CallLoggingInterceptor : IInterceptor, IHasCount
 {
     public int Count { get; private set; }
 
