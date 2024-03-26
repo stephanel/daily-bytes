@@ -46,21 +46,13 @@ public class ValidPalindromeSpec
 
     private bool ValidateUsingAsciiCodeLinq(string input)
     {
-        var cleaned = input
-            .ToLower()
-            .Where(c => (short)c >= 97 && (short)c <= 122)
-            ;
-
-        var reverted = cleaned.Reverse();
-        return Enumerable.SequenceEqual(cleaned, reverted);
+        var cleaned = CleanInput(input);
+        return Enumerable.SequenceEqual(cleaned, cleaned.Reverse());
     }
 
     private bool ValidateUsingAsciiCodeForLoop(string input)
     {
-        var cleaned = input
-            .ToLower()
-            .Where(c => (short)c >= 97 && (short)c <= 122)
-            .ToArray();
+        var cleaned = CleanInput(input);
 
         var midLength = (cleaned.Length - 1) / 2;
         for (int i = 0; i <= midLength; i++)
@@ -72,5 +64,29 @@ public class ValidPalindromeSpec
             }
         }
         return true;
+    }
+
+    [Fact]
+    public void ConvertToLower_Returns_LowerCharacter()
+    {         
+        ConvertToLower('A').Should().Be('a');
+        ConvertToLower('d').Should().Be('d');
+        ConvertToLower('H').Should().Be('h');
+        ConvertToLower('Z').Should().Be('z');
+    }
+
+    private char[] CleanInput(string input)
+        => input
+        .Where(char.IsAsciiLetter)
+        .Select(ConvertToLower)
+        .ToArray();
+
+    private char ConvertToLower(char c)
+    {
+        if ((short)c >= 65 && (short)c <= 90)   // c in [A..Z]
+        {
+            return (char)((short)c + 32);   // tolower
+        }
+        return c;
     }
 }
