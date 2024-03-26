@@ -2,6 +2,10 @@
 
 My learning daily bytes using various tech/languages.
 
+## Learnings
+
+- [Aspire Application](./aspire/)
+
 ## Code Kata
 
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
