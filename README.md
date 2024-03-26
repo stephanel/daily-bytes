@@ -6,16 +6,16 @@ My learning daily bytes using various tech/languages.
 
 - [Aspire Application](./aspire/)
 
-## Code Kata
+## Code Katas
 
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
-- [Valid Palindrome - C#](https://github.com/stephanel/daily-bytes/tree/master/valid-palindrome/csharp)
+- [Valid Palindrome - C#](./valid-palindrome/csharp)
 - [Vacuum Cleaner Route - C#](https://github.com/stephanel/daily-bytes/tree/master/vaccum-cleaner-route/csharp)
 - [Correct Capitalization - C#](https://github.com/stephanel/daily-bytes/tree/master/correct-capitalization/csharp)
 
 ## Benchmarks
 
-- [Count number of occurences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
+- [Count number of occurrences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
 
 ## Observability
 
@@ -23,7 +23,7 @@ My learning daily bytes using various tech/languages.
 
 ## Run the .NET Tests using GitHub Actions
 
-A workflow for running the .NET tests manually is available in `Github Actions`. When running it, You will be asked for the input `Folder of the .NET app` which should be the relative path of the directoy of the .NET code.
+A workflow for running the .NET tests manually is available in `Github Actions`. When running it, You will be asked for the input `Folder of the .NET app` which should be the relative path of the directory of the .NET code.
 
 Example: to run the tests of the project `ReverseString`, enter `reverse-string/csharp`.
 

@@ -154,6 +154,7 @@ coverage*.info
 # NCrunch
 _NCrunch_*
 nCrunchTemp_*
+*ncrunch*
 
 # MightyMoose
 *.mm.*

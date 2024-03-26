@@ -1,11 +1,12 @@
-using FluentAssertions;
-using System.Text.RegularExpressions;
-using Xunit.Sdk;
+using ValidPalindrome.Application;
+using ValidPalindrome.Benchmarks;
 
 namespace ValidPalindrome.Tests;
 
 public class ValidPalindromeSpec
 {
+    private readonly Palindrome _palindrome = new();
+
     [Theory]
     [InlineData("level", true)]
     [InlineData("algorithm", false)]
@@ -13,7 +14,7 @@ public class ValidPalindromeSpec
     [InlineData("ABCD;!*$dcba.", true)]
     public void ShouldValidatePalindromeAsciiCodeLinq(string input, bool expected)
     {
-        ValidateUsingAsciiCodeLinq(input).Should().Be(expected);
+        _palindrome.ValidateUsingAsciiCodeLinq(input).Should().Be(expected);
     }
 
     [Theory]
@@ -23,7 +24,7 @@ public class ValidPalindromeSpec
     [InlineData("ABCD;!*$dcba.", true)]
     public void ShouldValidatePalindromeAsciiCodeForLoop(string input, bool expected)
     {
-        ValidateUsingAsciiCodeForLoop(input).Should().Be(expected);
+        _palindrome.ValidateUsingAsciiCodeForLoop(input).Should().Be(expected);
     }
 
     [Theory]
@@ -33,44 +34,39 @@ public class ValidPalindromeSpec
     [InlineData("ABCD;!*$dcba.", true)]
     public void ShouldValidatePalindromeRegexForLoop(string input, bool expected)
     {
-        ValidateUsingRegexForLoop(input).Should().Be(expected);
+        _palindrome.ValidateUsingRegexForLoop(input).Should().Be(expected);
     }
 
-    static Regex rgx = new Regex("[^a-zA-Z-]"); // to remove all except alpha characters
-    private object ValidateUsingRegexForLoop(string input)
+
+    [Theory]
+    [InlineData("level", true)]
+    [InlineData("algorithm", false)]
+    [InlineData("A man, a plan, a canal: Panama.", true)]
+    [InlineData("ABCD;!*$dcba.", true)]
+    public void ShouldValidateUsingAsciiCodeForLoopAlternativeLogic(string input, bool expected)
     {
-        var cleaned = rgx.Replace(input, string.Empty).ToLower();
-        var reverted = cleaned.Reverse();
-        return Enumerable.SequenceEqual(cleaned, reverted);
+        _palindrome.ValidateUsingAsciiCodeForLoopAlternativeLogic(input).Should().Be(expected);
     }
 
-    private bool ValidateUsingAsciiCodeLinq(string input)
+
+    [Fact]
+    public void ConvertToLower_Returns_LowerCharacter()
+    {         
+        ConvertToLower('A').Should().Be('a');
+        ConvertToLower('d').Should().Be('d');
+        ConvertToLower('H').Should().Be('h');
+        ConvertToLower('Z').Should().Be('z');
+    }
+
+    [Fact]
+    public void PalindromeGeneratorShouldGenerate()
     {
-        var cleaned = input
-            .ToLower()
-            .Where(c => (short)c >= 97 && (short)c <= 122)
-            ;
-
-        var reverted = cleaned.Reverse();
-        return Enumerable.SequenceEqual(cleaned, reverted);
+        var input = new PalindromeGenerator().GenerateRandomPalindrome(10);
+        _palindrome.ValidateUsingAsciiCodeLinq(input).Should().BeTrue();
+        _palindrome.ValidateUsingAsciiCodeForLoop(input).Should().BeTrue();
+        _palindrome.ValidateUsingRegexForLoop(input).Should().BeTrue();
+        _palindrome.ValidateUsingAsciiCodeForLoopAlternativeLogic(input).Should().BeTrue();
     }
 
-    private bool ValidateUsingAsciiCodeForLoop(string input)
-    {
-        var cleaned = input
-            .ToLower()
-            .Where(c => (short)c >= 97 && (short)c <= 122)
-            .ToArray();
-
-        var midLength = (cleaned.Length - 1) / 2;
-        for (int i = 0; i <= midLength; i++)
-        {
-            var j = cleaned.Length - 1 - i;
-            if (cleaned[i] != cleaned[j])
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    private object ConvertToLower(char v) => _palindrome.ConvertToLower(v);
 }

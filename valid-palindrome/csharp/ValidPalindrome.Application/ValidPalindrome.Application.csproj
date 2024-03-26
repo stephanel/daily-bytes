@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="ValidPalindrome.Tests" />
+		<InternalsVisibleTo Include="ValidPalindrome.Benchmarks" />
+	</ItemGroup>
+
+</Project>

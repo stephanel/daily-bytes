@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);NU1507;S1135;S125;S6602;S6605;CA1041</NoWarn>
+  </PropertyGroup>
+</Project>
