@@ -7,6 +7,10 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "RopFSharp", "RopFSharp\RopF
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "RopFSharp.Tests", "RopFSharp.Tests\RopFSharp.Tests.fsproj", "{D7C975C6-5891-4D23-84FC-457C786DD4E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RopCSharp.Tests", "RopCSharp.Tests\RopCSharp.Tests.csproj", "{2848E439-284D-430A-8D21-6F8CB427F41B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RopCSharp", "RopCSharp\RopCSharp.csproj", "{A5F5B8BD-37C6-4067-A7DD-9A987FA58334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D7C975C6-5891-4D23-84FC-457C786DD4E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7C975C6-5891-4D23-84FC-457C786DD4E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7C975C6-5891-4D23-84FC-457C786DD4E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2848E439-284D-430A-8D21-6F8CB427F41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2848E439-284D-430A-8D21-6F8CB427F41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2848E439-284D-430A-8D21-6F8CB427F41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2848E439-284D-430A-8D21-6F8CB427F41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F5B8BD-37C6-4067-A7DD-9A987FA58334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F5B8BD-37C6-4067-A7DD-9A987FA58334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F5B8BD-37C6-4067-A7DD-9A987FA58334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F5B8BD-37C6-4067-A7DD-9A987FA58334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
