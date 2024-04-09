@@ -11,7 +11,7 @@ public class UseCasesTests
         Input input = new(Name: "Bob", Email: "email");
         var result = new UseCase(_validation, _emailFormatter).Handle(input);
         result.Should().BeEquivalentTo(
-            (Result<Input, Error>.Success)Result.Success(input));
+            (Result<Input, Error>)input);
 
     }
 }

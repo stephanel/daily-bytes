@@ -1,4 +1,6 @@
-﻿namespace RopCSharp;
+﻿using Microsoft.Extensions.Logging;
+
+namespace RopCSharp;
 
 internal class UseCase
 {
@@ -15,36 +17,10 @@ internal class UseCase
 
     public Result<Input, Error> Handle(Input input)
     {
-        var inputResult = new Result<Input, Error>.Success(input);
-
-        Result<Input, Error> result = inputResult
-            .OnSuccess(_validation.NameIsNotEmpty)
-            .OnSuccess(_validation.EmailIsNotEmpty)
-            .OnSuccess(_validation.EmailDoesNotExceedMaxLength)
-            .OnSuccess(_emailFormatter.CanonicalizeEmail)
-            ;
-
-        return result;
-    }
-
-    //private Result<Input, Error> NameIsNotEmpty(Input input)
-    //    => string.IsNullOrWhiteSpace(input.Name)
-    //        ? Success(input)
-    //        : Failure(Domain.Errors.Name.IsEmpty);
-
-    //private Result<Input, Error> EmailIsNotEmpty(Input input)
-    //    => string.IsNullOrWhiteSpace(input.Email)
-    //        ? Success(input)
-    //        : Failure(Domain.Errors.Email.IsEmpty);
-
-    //private Result<Input, Error> EmailDoesNotExceedMaxLength(Input input)
-    //    => input.Email.Length <= 50
-    //        ? Success(input)
-    //        : Failure(Domain.Errors.Email.TooLong);
-
-    private Result<Input, Error> CanonicalizeEmail(Input input)
-    {
-        return _emailFormatter.CanonicalizeEmail(input);
-        //return input with { Email = input.Email.Trim().ToLower() });
+        return ((Result<Input, Error>)input)
+            .Match(_validation.NameIsNotEmpty, e => e)
+            .Match(_validation.EmailIsNotEmpty, e => e)
+            .Match(_validation.EmailDoesNotExceedMaxLength, e => e)
+            .Match(_emailFormatter.CanonicalizeEmail, e => e);
     }
 }

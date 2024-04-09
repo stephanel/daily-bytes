@@ -1,73 +1,58 @@
 ﻿namespace RopCSharp.Rop;
 
-internal abstract class Result<TSuccess, TFailure>
+internal class Result<TValue, TError>
 {
-    private Result() { }
+    public readonly TValue? Value = default;
+    public readonly TError? Error = default;
 
-    public abstract Result<TNextSuccess, TFailure> OnSuccess<TNextSuccess>(Func<TSuccess, Result<TNextSuccess, TFailure>> onSuccess);
+    public bool IsSuccess { get; private set; }
 
-    public abstract TReturn Handle<TReturn>(Func<TSuccess, TReturn> onSuccess, Func<TFailure, TReturn> onFailure);
-
-    public sealed class Success : Result<TSuccess, TFailure>
+    private Result(TValue value)
     {
-        public TSuccess Value { get; private init; }
-
-        public Success(TSuccess value) => Value = value;
-
-        public override Result<TNextSuccess, TFailure> OnSuccess<TNextSuccess>(Func<TSuccess, Result<TNextSuccess, TFailure>> onSuccess)
-            => onSuccess(Value);
-
-        public override TReturn Handle<TReturn>(Func<TSuccess, TReturn> onSuccess, Func<TFailure, TReturn> onFailure)
-            => onSuccess(Value);
-            }
-
-    public sealed class Failure : Result<TSuccess, TFailure>
-    {
-        public TFailure Value { get; private init; }
-
-        public Failure(TFailure value) => Value = value;
-
-        public override Result<TNextSuccess, TFailure> OnSuccess<TNextSuccess>(Func<TSuccess, Result<TNextSuccess, TFailure>> onSuccess)
-            => Result.Failure(Value);
-
-        public override TReturn Handle<TReturn>(Func<TSuccess, TReturn> onSuccess, Func<TFailure, TReturn> onFailure)
-            => onFailure(Value);
+        Value = value;
+        IsSuccess = true;
     }
 
-    public static implicit operator Result<TSuccess, TFailure>(Result.GenericSuccess<TSuccess> ok)
-        => new Success(ok.Value);
+    private Result(TError error)
+    {
+        Error = error;
+    }
 
-    public static implicit operator Result<TSuccess, TFailure>(Result.GenericFailure<TFailure> error)
-        => new Failure(error.Value);
+    public static implicit operator Result<TValue, TError>(TValue value)
+        => new Result<TValue, TError>(value);
+
+    public static implicit operator Result<TValue, TError>(TError error)
+        => new Result<TValue, TError>(error);
 }
 
-internal static class Result
+
+internal static class ResultExtensions
 {
-    public static Result<TSuccess, TFailure> Success<TSuccess, TFailure>(TSuccess ok) => Success(ok);
-
-    public static GenericSuccess<TSuccess> Success<TSuccess>(TSuccess ok) => new(ok);
-
-    public static Result<TSuccess, TFailure> Failure<TSuccess, TFailure>(TFailure error) => Result.Failure(error);
-
-    public static GenericFailure<TFailure> Failure<TFailure>(TFailure error) => new(error);
-
-    public readonly struct GenericSuccess<T>
+    internal static Result<TValue, TError> OnSuccess<TValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, Result<TValue, TError>> onSuccess)
     {
-        public T Value { get; }
-
-        public GenericSuccess(T value)
+        if (result.IsSuccess)
         {
-            Value = value;
+            onSuccess(result.Value!);
         }
+        return result;
     }
 
-    public readonly struct GenericFailure<T>
+    internal static Result<TValue, TError> OnFailure<TValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TError, Result<TValue, TError>> onFailure)
     {
-        public T Value { get; }
-
-        public GenericFailure(T value)
+        if (!result.IsSuccess)
         {
-            Value = value;
+            onFailure(result.Error!);
         }
+        return result;
     }
+
+    internal static Result<TValue, TError> Match<TValue, TError>(
+        this Result<TValue, TError> result,
+        Func<TValue, Result<TValue, TError>> success,
+        Func<TError, Result<TValue, TError>> error)
+        => result.IsSuccess ? success(result.Value!) : error(result.Error!);
 }

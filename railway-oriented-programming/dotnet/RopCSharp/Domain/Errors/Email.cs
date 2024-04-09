@@ -1,6 +1,6 @@
 ﻿namespace RopCSharp.Domain.Errors;
 
-internal class Email
+internal static class Email
 {
     public static readonly Error IsEmpty = new Error("EMAIL_IS_EMPTY", "Email must not be empty.");
 

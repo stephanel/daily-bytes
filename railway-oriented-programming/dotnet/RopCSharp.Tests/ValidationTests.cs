@@ -8,7 +8,7 @@ public class ValidationTests
         Input input = new(Name: "", Email: "");
         Result<Input, Error> result = new Validation().NameIsNotEmpty(input);
         result.Should().BeEquivalentTo(
-            (Result<Input, Error>.Failure)Result.Failure(Domain.Errors.Name.IsEmpty));
+            (Result<Input, Error>)Name.IsEmpty);
     }
 
     [Fact]
@@ -17,7 +17,7 @@ public class ValidationTests
         Input input = new(Name: "Bob", Email: "");
         Result<Input, Error> result = new Validation().EmailIsNotEmpty(input);
         result.Should().BeEquivalentTo(
-            (Result<Input, Error>.Failure)Result.Failure(Domain.Errors.Email.IsEmpty));
+            (Result<Input, Error>)Email.IsEmpty);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class ValidationTests
         Input input = new(Name: "Bob", Email: string.Concat(Enumerable.Repeat("email", 11)));
         Result<Input, Error> result = new Validation().EmailDoesNotExceedMaxLength(input);
         result.Should().BeEquivalentTo(
-            (Result<Input, Error>.Failure)Result.Failure(Domain.Errors.Email.TooLong));
+            (Result<Input, Error>)Email.TooLong);
     }
 
     [Fact]
@@ -35,6 +35,6 @@ public class ValidationTests
         Input input = new(Name: "Bob", Email: "email");
         Result<Input, Error> result = new Validation().CombineValidation(input);
 
-        result.Should().BeOfType<Result<Input, Error>.Success>();
+        result.IsSuccess.Should().BeTrue();
     }
 }

@@ -14,7 +14,6 @@ public class EmailFormatterTests
     {
         var result = new EmailFormatter().CanonicalizeEmail(input);
         var expected = new Input(Name: "Bob", Email: "email");
-        result.Should().BeEquivalentTo(
-            (Result<Input, Error>.Success)Result.Success(expected));
+        result.Should().BeEquivalentTo((Result<Input, Error>)expected);
     }
 }
