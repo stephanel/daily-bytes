@@ -1,10 +1,12 @@
-﻿namespace Modules.Communication.Tests.Asynchronous;
+﻿using Modules.Communication.Tests.Asynchronous.Events;
+using Modules.Communication.Tests.Asynchronous.UsingRxDotNet.Shared;
 
-public record ModuleA()
+namespace Modules.Communication.Tests.Asynchronous;
+
+internal record ModuleA(IEventPublisher eventPublisher)
 {
-    internal void Do()
+    internal void DoAndPublish(string data)
     {
-        // synchronous call to ModuleB's public API
-        moduleB.Do();
+        eventPublisher.Publish(new CustomEvent(data));
     }
 }
