@@ -1,7 +1,7 @@
 ﻿using Modules.Communication.Tests.Asynchronous.Events;
 using Modules.Communication.Tests.Asynchronous.UsingRxDotNet.Shared;
 
-namespace Modules.Communication.Tests.Asynchronous;
+namespace Modules.Communication.Tests.Asynchronous.UsingRxDotNet;
 
 internal record ModuleA(IEventPublisher eventPublisher)
 {

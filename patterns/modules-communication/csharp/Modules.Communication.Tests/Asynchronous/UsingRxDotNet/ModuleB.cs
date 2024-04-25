@@ -1,11 +1,11 @@
 ﻿using Modules.Communication.Tests.Asynchronous.Events;
 using Modules.Communication.Tests.Asynchronous.UsingRxDotNet.Shared;
 
-namespace Modules.Communication.Tests.Asynchronous;
+namespace Modules.Communication.Tests.Asynchronous.UsingRxDotNet;
 
 internal class ModuleB : Subscriber<CustomEvent>
 {
-    public ModuleB(IObservable<CustomEvent> events) 
+    public ModuleB(IObservable<CustomEvent> events)
         : base(events)
     { }
 

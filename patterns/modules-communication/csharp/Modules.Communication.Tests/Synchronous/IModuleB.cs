@@ -1,6 +1,4 @@
-﻿
-
-namespace Modules.Communication.Tests.Synchronous;
+﻿namespace Modules.Communication.Tests.Synchronous;
 
 public interface IModuleB
 {
