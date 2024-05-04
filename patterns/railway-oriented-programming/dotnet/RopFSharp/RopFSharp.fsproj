@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Rop.fs" />
+    <Compile Include="Input.fs" />
+    <Compile Include="Validation.fs" />
+    <Compile Include="Email.fs" />
+    <Compile Include="UseCases.fs" />
+  </ItemGroup>
+
+</Project>

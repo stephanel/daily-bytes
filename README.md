@@ -11,6 +11,7 @@ My learning daily bytes using various tech/languages.
 ## Design Patterns
 
 - [Chain of Responsibility - C#](./patterns/chain-of-responsibility/csharp/)
+- [Railway Oriented Programming - C#/F#](./patterns/railway-oriented-programming/dotnet)
 - [Synchronous/Asynchronous Modules Communication - C#/Rx.Net](./patterns/modules-communication/csharp/)
 
 ## Code Kata
