@@ -19,11 +19,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
-      - name: Test
+
+      - name: Run Test
         run: dotnet test --logger trx --collect:"XPlat Code Coverage" --results-directory ${{ github.workspace }}
         working-directory: ${{ inputs.dotnetAppPath }}
 
@@ -31,7 +33,7 @@ jobs:
         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
         with:
           reports: "**/*.cobertura.xml"
-          targetdir: "${{ github.workspace }}"
+          targetdir: ${{ inputs.dotnetAppPath }}/TestResults
           reporttypes: "Cobertura"
           verbosity: "Info"
           title: "Code Coverage"
@@ -43,14 +45,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage
-          path: ${{ github.workspace }}/Cobertura.xml
+          path: ${{ inputs.dotnetAppPath }}/TestResults/Cobertura.xml
           retention-days: 5
 
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-test-results
-          path: ${{ github.workspace }}/TestResults
+          path: ${{ inputs.dotnetAppPath }}/TestResults
           retention-days: 5
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
@@ -72,4 +74,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2.16.1
         if: always()
         with:
-          trx_files: "${{ github.workspace }}/**/*.trx"
+          trx_files: "${{ inputs.dotnetAppPath }}/TestResults/**/*.trx"
