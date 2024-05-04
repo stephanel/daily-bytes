@@ -22,15 +22,7 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddConsoleExporter()
-            .AddOtlpExporter())
-    //.WithMetrics(metricsProviderBuilder =>
-    //    metricsProviderBuilder
-    //        .ConfigureResource(resource => resource
-    //            .AddService(DiagnosticsConfig.ServiceName))
-    //        .AddAspNetCoreInstrumentation()
-    //        .AddConsoleExporter()
-    //        .AddOtlpExporter())
-    ;
+            .AddOtlpExporter());
 
 var app = builder.Build();
 
