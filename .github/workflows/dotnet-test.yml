@@ -26,7 +26,7 @@ jobs:
           dotnet-version: 8.x
 
       - name: Run Test
-        run: dotnet test --logger trx --collect:"XPlat Code Coverage" --results-directory ${{ github.workspace }}
+        run: dotnet test --logger trx --collect:"XPlat Code Coverage" --results-directory ${{ inputs.dotnetAppPath }}/TestResults
         working-directory: ${{ inputs.dotnetAppPath }}
 
       - name: Combine Coverage Reports # combine reports per produced projects
@@ -34,19 +34,20 @@ jobs:
         with:
           reports: "**/*.cobertura.xml"
           targetdir: ${{ inputs.dotnetAppPath }}/TestResults
-          reporttypes: "Cobertura"
+          sourcedirs: ${{ inputs.dotnetAppPath }}
+          reporttypes: "HtmlInline;Cobertura" # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, OpenCover, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, Html_BlueRed_Summary, JsonSummary, CodeClimate, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, SvgChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
           verbosity: "Info"
           title: "Code Coverage"
           tag: "${{ github.run_number }}_${{ github.run_id }}"
           customSettings: ""
           toolpath: "reportgeneratortool"
 
-      - name: Upload Combined Coverage XML
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage
-          path: ${{ inputs.dotnetAppPath }}/TestResults/Cobertura.xml
-          retention-days: 5
+      # - name: Upload Combined Coverage XML
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: coverage
+      #     path: ${{ inputs.dotnetAppPath }}/TestResults/Cobertura.xml
+      #     retention-days: 5
 
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v4
