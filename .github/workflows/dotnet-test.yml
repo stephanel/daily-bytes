@@ -31,6 +31,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-test-results
-          path: ${{ inputs.dotnetAppPath }}/test-results.trx
+          path: ${{ inputs.dotnetAppPath }}/TestResults/test-results.trx
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
