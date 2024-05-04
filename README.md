@@ -12,7 +12,6 @@ My learning daily bytes using various tech/languages.
 
 - [Chain of Responsibility - C#](./patterns/chain-of-responsibility/csharp/)
 - [Synchronous/Asynchronous Modules Communication - C#/Rx.Net](./patterns/modules-communication/csharp/)
-- [Railway Oriented Progammming - C#/F#](./patterns/railway-oriented-programming/dotnet)
 
 ## Code Kata
 
