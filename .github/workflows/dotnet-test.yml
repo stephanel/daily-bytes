@@ -18,11 +18,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
       - name: Test
         run: dotnet test --logger "trx;LogFileName=test-results.trx"
         working-directory: ${{ inputs.dotnetAppPath }}
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: DotNET Tests
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
