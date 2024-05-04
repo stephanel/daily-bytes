@@ -15,15 +15,7 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddConsoleExporter()
-            .AddOtlpExporter())
-    //.WithMetrics(metricsProviderBuilder =>
-    //    metricsProviderBuilder
-    //        .ConfigureResource(resource => resource
-    //            .AddService(DiagnosticsConfig.ServiceName))
-    //        .AddAspNetCoreInstrumentation()
-    //        .AddConsoleExporter()
-    //        .AddOtlpExporter())
-    ;
+            .AddOtlpExporter());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
