@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:1.57
+    container_name: otel-demo-jaeger-ui
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 16686:16686 # ui
+      - 4317:4317
+      - 4318:4318

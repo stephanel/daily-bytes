@@ -1,13 +1,13 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: 'dotnet test'
+name: "dotnet test"
 
 on:
   workflow_dispatch:
     inputs:
       dotnetAppPath:
-        description: 'Folder of the .NET app'
+        description: "Folder of the .NET app"
         type: string
         required: true
 
@@ -15,15 +15,37 @@ run-name: .NET Run Tests - ${{ github.ref }} - ${{ inputs.dotnetAppPath }}
 
 jobs:
   Run-Tests:
-
     runs-on: ubuntu-latest
 
+    permissions:
+      checks: write
+      # pull-requests: write
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.x
-    - name: Test
-      run: dotnet test -l "console;verbosity=normal"
-      working-directory: ${{ inputs.dotnetAppPath }}
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Run Test
+        run: dotnet test --logger trx --collect:"XPlat Code Coverage" --results-directory TestResults
+        working-directory: ${{ inputs.dotnetAppPath }}
+
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-test-results
+          path: ${{ inputs.dotnetAppPath }}/TestResults
+          retention-days: 5
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+        if: always()
+        with:
+          comment_mode: off
+          check_run: false
+          trx_files: "${{ inputs.dotnetAppPath }}/TestResults/**/*.trx"

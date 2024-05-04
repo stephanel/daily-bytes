@@ -4,22 +4,25 @@ My learning daily bytes using various tech/languages.
 
 ## Learnings
 
-- [Aspire Application](./aspire/)
+- [Aspire Application - C#](./learning/aspire)
+- [Castle Dynamic Proxy - C#](./learning/castle-dynamic-proxy)
+- [Code Instrumentation using OpenTelemetry - C#](./learning/opentelemetry)
 
-## Code Katas
+## Design Patterns
 
-- [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
-- [Valid Palindrome - C#](./valid-palindrome/csharp)
-- [Vacuum Cleaner Route - C#](https://github.com/stephanel/daily-bytes/tree/master/vaccum-cleaner-route/csharp)
-- [Correct Capitalization - C#](https://github.com/stephanel/daily-bytes/tree/master/correct-capitalization/csharp)
+- [Chain of Responsibility - C#](./patterns/chain-of-responsibility/csharp/)
+- [Synchronous/Asynchronous Modules Communication - C#/Rx.Net](./patterns/modules-communication/csharp/)
+
+## Code Kata
+
+- [Reverse String - C#](./kata/reverse-string/csharp)
+- [Valid Palindrome - C#](./kata/valid-palindrome/csharp)
+- [Vacuum Cleaner Route - C#](./kata/vaccum-cleaner-route/csharp)
+- [Correct Capitalization - C#](./kata/correct-capitalization/csharp)
 
 ## Benchmarks
 
-- [Count number of occurrences in string - C#](https://github.com/stephanel/daily-bytes/tree/master/benchmarks/Benchmarks.CountOccurencesInString)
-
-## Observability
-
-- [Code Instrumentation using OpenTelemetry](https://github.com/stephanel/daily-bytes/tree/master/opentelemetry/csharp)
+- [Count number of occurrences in string - C#](./benchmarks/Benchmarks.CountOccurencesInString)
 
 ## Run the .NET Tests using GitHub Actions
 
