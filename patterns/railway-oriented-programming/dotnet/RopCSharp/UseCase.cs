@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace RopCSharp;
+﻿namespace RopCSharp;
 
 internal class UseCase
 {
