@@ -1,13 +1,13 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: 'dotnet test'
+name: "dotnet test"
 
 on:
   workflow_dispatch:
     inputs:
       dotnetAppPath:
-        description: 'Folder of the .NET app'
+        description: "Folder of the .NET app"
         type: string
         required: true
 
@@ -15,15 +15,14 @@ run-name: .NET Run Tests - ${{ github.ref }} - ${{ inputs.dotnetAppPath }}
 
 jobs:
   Run-Tests:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.x
-    - name: Test
-      run: dotnet test -l "console;verbosity=normal"
-      working-directory: ${{ inputs.dotnetAppPath }}
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.x
+      - name: Test
+        run: dotnet test --logger "trx;LogFileName=test-results.trx"
+        working-directory: ${{ inputs.dotnetAppPath }}
