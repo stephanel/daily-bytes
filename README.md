@@ -4,9 +4,10 @@ My learning daily bytes using various tech/languages.
 
 ## Learnings
 
-- [Aspire Application](./aspire/)
+- [Aspire Application](./learning/aspire/)
+- [Railway Oriented Progamming - C#/F#](./railway-oriented-programming/dotnet)
 
-## Code Katas
+## Code Kata
 
 - [Reverse String - C#](https://github.com/stephanel/daily-bytes/tree/master/reverse-string/csharp)
 - [Valid Palindrome - C#](./valid-palindrome/csharp)
