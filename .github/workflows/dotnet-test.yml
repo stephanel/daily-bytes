@@ -27,11 +27,10 @@ jobs:
         run: dotnet test --logger "trx;LogFileName=test-results.trx"
         working-directory: ${{ inputs.dotnetAppPath }}
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: always()
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v4
         with:
-          name: DotNET Tests
-          path: "**/test-results.trx"
-          reporter: dotnet-trx
-          fail-on-error: true
+          name: dotnet-test-results
+          path: ${{ inputs.dotnetAppPath }}/test-results.trx
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
