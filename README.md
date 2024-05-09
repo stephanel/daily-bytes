@@ -24,6 +24,7 @@ My learning daily bytes using various tech/languages.
 ## Benchmarks
 
 - [Count number of occurrences in string - C#](./benchmarks/Benchmarks.CountOccurencesInString)
+- [Loop through collections - C#](./benchmarks/Benchmarks.ForEachLoops)
 
 ## Run the .NET Tests using GitHub Actions
 
