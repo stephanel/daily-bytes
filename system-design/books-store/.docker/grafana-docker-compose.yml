@@ -1,5 +1,8 @@
 version: "3.9"
 
+networks:
+  books_store_grafana_network:
+
 services:
   prometheus:
     image: prom/prometheus
@@ -10,18 +13,47 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus:/etc/prometheus
-      - prom_data:/prometheus
+      - ./docker_volumes/prometheus:/prometheus
+    networks:
+      - books_store_grafana_network
+
+  loki:
+    container_name: loki
+    image: grafana/loki:2.9.2
+    command: -config.file=/etc/loki/config.yml
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki:/etc/loki
+    networks:
+      - books_store_grafana_network
+
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:2.9.2
+    command: -config.file=/etc/promtail/config.yml
+    volumes:
+      - ./docker_volumes/promtail/var/log:/var/log
+      - ./promtail:/etc/promtail
+    networks:
+      - books_store_grafana_network
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:latest
     container_name: grafana
+    user: ":"    # required due to mounted volumes - https://community.grafana.com/t/new-docker-install-with-persistent-storage-permission-problem/10896/17
+    environment:
+      # - GF_SECURITY_ADMIN_USER=admin
+      # - GF_SECURITY_ADMIN_PASSWORD=grafana
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     ports:
       - 3000:3000
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
-      - ./grafana:/etc/grafana/provisioning/datasources
-
-volumes:
-  prom_data:
+      - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/ds.yaml
+      - ./docker_volumes/grafana:/var/lib/grafana
+    networks:
+      - books_store_grafana_network
+    depends_on:
+      - loki
