@@ -4,10 +4,13 @@ Personal project to put new technologies or models into practice.
 
 ## Content
 
-- [Folder Structure](#folder-structure)
-- [Technologies](#technologies)
-- [Architecture](#architecture)
-- [Learning Resources](#learning-resources)
+- [Books Store](#books-store)
+  - [Content](#content)
+  - [Folder Structure](#folder-structure)
+  - [Technologies](#technologies)
+  - [Features](#features)
+  - [Architecture](#architecture)
+  - [Learning Resources](#learning-resources)
 
 ## Folder Structure
 
@@ -62,3 +65,4 @@ See [System Design Documentation](./docs/system-design.md)
 ## Learning Resources
 
 - [C4 Models](https://c4model.com/)
+- [CQRS](https://martinfowler.com/bliki/CQRS.html)
