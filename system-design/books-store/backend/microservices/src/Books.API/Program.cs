@@ -1,34 +1,46 @@
 using BookStore.Common.Extensions;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace BookStore.Books.API;
 
-builder.Services.RegisterApiServices();
-
-var app = builder.Build();
-
-app.ConfigureApi(app.Environment.IsDevelopment());
-
-var summaries = new[]
+public class Program
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    protected Program() { }
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    public static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-app.Run();
+        builder.Services.RegisterApiServices();
+
+        var app = builder.Build();
+
+        app.ConfigureApi(app.Environment.IsDevelopment());
+
+        var summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+        app.MapGet("/weatherforecast", () =>
+        {
+            var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecast
+                (
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+
+            return forecast;
+        })
+        .WithName("GetWeatherForecast")
+        .WithOpenApi();
+
+        await app.RunAsync();
+    }
+}
+
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

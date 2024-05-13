@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
 	  <RootNamespace>BookStore.Books.API</RootNamespace>
@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<InternalsVisibleTo Include="$(AssemblyName).IntegrationTests" />
+	<InternalsVisibleTo Include="$(AssemblyName).UnitTests" />
   </ItemGroup>
 
 </Project>

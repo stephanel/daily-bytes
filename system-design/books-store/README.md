@@ -11,9 +11,8 @@ Personal project to put new technologies or models into practice.
   - [Features](#features)
   - [Architecture](#architecture)
   - [Solutions](#solutions)
-    - [Backend](#backend)
-      - [Microservices](#microservices)
-      - [Monolith](#monolith)
+    - [Backend - Microservices](#backend---microservices)
+    - [Backend - Monolith](#backend---monolith)
   - [Local Setup](#local-setup)
   - [Learning Resources](#learning-resources)
 
@@ -69,21 +68,29 @@ See [System Design Documentation](./docs/system-design.md)
 
 ## Solutions
 
-### Backend
+### Backend - Microservices
 
-#### Microservices
+- Root folder - `backend`: backend/
+- Microservices source folder - `src`: {backend}/microservices/src/
+- Microservices tests folder - `tests`: {backend}/microservices/tests/
+
 
 | Project | Assembly | Folder |
 | ------------- | ------------- | ------------- |
-| ApiGateway | BookStore.ApiGateway | backend/ApiGateway |
-| Common.Extensions | BookStore.Common.Extensions | backend/Common/CommonExtensions |
-| Books.API | BookStore.Books.API | backend/Microservices/src/Books.API |
-| OrdersHistory.API | BookStore.OrdersHistory.API | backend/Microservices/src/OrdersHistory.API |
-| UserAccounts.API | BookStore.UserAccounts.API | backend/Microservices/src/UserAccounts.API |
-| Subscriptions.API | BookStore.Subscriptions.API | backend/Microservices/src/Subscriptions.API |
-| OrderManagement.Service | BookStore.OrderManagement.Service | backend/Microservices/src/OrderManagement.Service |
+| ApiGateway | BookStore.ApiGateway | {backend}/ApiGateway |
+| Common.Extensions | BookStore.Common.Extensions | {backend}/Common/CommonExtensions |
+| Books.API | BookStore.Books.API | {src}/Books.API |
+| OrdersHistory.API | BookStore.OrdersHistory.API | {src}/OrdersHistory.API |
+| UserAccounts.API | BookStore.UserAccounts.API | {src}/UserAccounts.API |
+| Subscriptions.API | BookStore.Subscriptions.API | {src}/Subscriptions.API |
+| OrderManagement.Service | BookStore.OrderManagement.Service | {src}/OrderManagement.Service |
+| Books.API.IntegrationTests | BookStore.Books.API.IntegrationTests | {tests}/Books.API.IntegrationTests |
+| OrdersHistory.API.IntegrationTests | BookStore.OrdersHistory.API.IntegrationTests | {tests}/OrdersHistory.API.IntegrationTests |
+| UserAccounts.API.IntegrationTests | BookStore.UserAccounts.API.IntegrationTests | {tests}/UserAccounts.API.IntegrationTests |
+| Subscriptions.API.IntegrationTests | BookStore.Subscriptions.API.IntegrationTests | {tests}/Subscriptions.API.IntegrationTests |
+| OrderManagement.Service.IntegrationTests | BookStore.OrderManagement.Service.IntegrationTests | {tests}/OrderManagement.Service.IntegrationTests |
 
-#### Monolith
+### Backend - Monolith
 
 TBA
 

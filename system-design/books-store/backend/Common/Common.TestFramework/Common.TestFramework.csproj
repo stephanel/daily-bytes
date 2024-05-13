@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>BookStore.Common.TestFramework</RootNamespace>
+		<AssemblyName>BookStore.Common.TestFramework</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="Serilog.Extensions.Logging" />
+		<PackageReference Include="Serilog.Sinks.XUnit" />
+		<PackageReference Include="xunit" />
+		<PackageReference Include="xunit.assert" />
+		<PackageReference Include="xunit.extensibility.core" />
+		<PackageReference Include="xunit.extensibility.execution" />
+	</ItemGroup>
+
+</Project>
