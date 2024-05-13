@@ -10,6 +10,9 @@ Personal project to put new technologies or models into practice.
   - [Technologies](#technologies)
   - [Features](#features)
   - [Architecture](#architecture)
+  - [Solutions](#solutions)
+    - [Backend](#backend)
+      - [Microservices](#microservices)
   - [Local Setup](#local-setup)
   - [Learning Resources](#learning-resources)
 
@@ -62,6 +65,23 @@ Personal project to put new technologies or models into practice.
 ## Architecture
 
 See [System Design Documentation](./docs/system-design.md)
+
+## Solutions
+
+### Backend
+
+#### Microservices
+
+| Project | Assembly |
+| ------------- | ------------- |
+| ApiGateway | BookStore.ApiGateway |
+| Common.Extensions | BookStore.Common.Extensions |
+| Books.API | BookStore.Books.API |
+| OrdersHistory.API | BookStore.OrdersHistory.API |
+| UserAccounts.API | BookStore.UserAccounts.API |
+| Subscriptions.API | BookStore.Subscriptions.API |
+| OrderManagement.Service | BookStore.OrderManagement.Service |
+
 
 ## Local Setup
 
