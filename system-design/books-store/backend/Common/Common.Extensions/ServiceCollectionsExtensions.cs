@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookStore.Common.Extensions;
@@ -7,11 +8,17 @@ public static class ServiceCollectionsExtensions
 {
     public static IServiceCollection RegisterApiServices(this IServiceCollection services)
     {
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        services.AddEndpointsApiExplorer();
-        services.AddAuthorization();
-        services.AddFastEndpoints();
-        services.AddSwaggerGen();
+        services.AddEndpointsApiExplorer()
+            .AddAuthorization()
+            .AddFastEndpoints()
+            .AddSwagger();
+
+        return services;
+    }
+
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.SwaggerDocument();
         return services;
     }
 }

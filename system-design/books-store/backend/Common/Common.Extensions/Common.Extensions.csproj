@@ -15,7 +15,6 @@
 		<PackageReference Include="Serilog.Enrichers.Thread" />
 		<PackageReference Include="Serilog.Formatting.Elasticsearch" />
 		<PackageReference Include="Serilog.Sinks.Async" />
-		<PackageReference Include="Swashbuckle.AspNetCore" />
 	</ItemGroup>
 
 </Project>

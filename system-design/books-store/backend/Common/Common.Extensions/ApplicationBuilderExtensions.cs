@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -17,8 +18,7 @@ public static class ApplicationBuilderExtensions
                c.Serializer.Options.Converters.Add(new JsonStringEnumConverter());
                c.Serializer.Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
            })
-           .UseSwagger()
-           .UseSwaggerUi();
+           .UseSwaggerGen();
 
         return app;
     }
