@@ -13,6 +13,7 @@ Personal project to put new technologies or models into practice.
   - [Solutions](#solutions)
     - [Backend](#backend)
       - [Microservices](#microservices)
+      - [Monolith](#monolith)
   - [Local Setup](#local-setup)
   - [Learning Resources](#learning-resources)
 
@@ -72,16 +73,19 @@ See [System Design Documentation](./docs/system-design.md)
 
 #### Microservices
 
-| Project | Assembly |
-| ------------- | ------------- |
-| ApiGateway | BookStore.ApiGateway |
-| Common.Extensions | BookStore.Common.Extensions |
-| Books.API | BookStore.Books.API |
-| OrdersHistory.API | BookStore.OrdersHistory.API |
-| UserAccounts.API | BookStore.UserAccounts.API |
-| Subscriptions.API | BookStore.Subscriptions.API |
-| OrderManagement.Service | BookStore.OrderManagement.Service |
+| Project | Assembly | Folder |
+| ------------- | ------------- | ------------- |
+| ApiGateway | BookStore.ApiGateway | backend/ApiGateway |
+| Common.Extensions | BookStore.Common.Extensions | backend/Common/CommonExtensions |
+| Books.API | BookStore.Books.API | backend/Microservices/src/Books.API |
+| OrdersHistory.API | BookStore.OrdersHistory.API | backend/Microservices/src/OrdersHistory.API |
+| UserAccounts.API | BookStore.UserAccounts.API | backend/Microservices/src/UserAccounts.API |
+| Subscriptions.API | BookStore.Subscriptions.API | backend/Microservices/src/Subscriptions.API |
+| OrderManagement.Service | BookStore.OrderManagement.Service | backend/Microservices/src/OrderManagement.Service |
 
+#### Monolith
+
+TBA
 
 ## Local Setup
 
