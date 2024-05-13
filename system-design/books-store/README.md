@@ -10,6 +10,7 @@ Personal project to put new technologies or models into practice.
   - [Technologies](#technologies)
   - [Features](#features)
   - [Architecture](#architecture)
+  - [Local Setup](#local-setup)
   - [Learning Resources](#learning-resources)
 
 ## Folder Structure
@@ -61,6 +62,19 @@ Personal project to put new technologies or models into practice.
 ## Architecture
 
 See [System Design Documentation](./docs/system-design.md)
+
+## Local Setup
+
+Start the required resources by running the following commands:
+
+```bash
+cd .docker
+docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f grafana-docker-compose.yml up
+```
+Then navigate to:
+- [RabbitMQ Management UI](http://localhost:15672)
+- [Grafana](http://localhost:3000)
+
 
 ## Learning Resources
 
