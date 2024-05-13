@@ -13,7 +13,7 @@ Personal project to put new technologies or models into practice.
   - [Solutions](#solutions)
     - [Backend - Microservices](#backend---microservices)
     - [Backend - Monolith](#backend---monolith)
-  - [Local Setup](#local-setup)
+  - [Start applications](#start-applications)
   - [Learning Resources](#learning-resources)
 
 ## Folder Structure
@@ -94,7 +94,7 @@ See [System Design Documentation](./docs/system-design.md)
 
 TBA
 
-## Local Setup
+## Start applications
 
 Start the required resources by running the following commands:
 
@@ -105,7 +105,7 @@ docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f 
 Then navigate to:
 - [RabbitMQ Management UI](http://localhost:15672)
 - [Grafana](http://localhost:3000)
-
+- Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
 
 ## Learning Resources
 
