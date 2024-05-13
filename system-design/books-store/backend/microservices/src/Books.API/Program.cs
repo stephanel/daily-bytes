@@ -14,7 +14,7 @@ public class Program
 
         var app = builder.Build();
 
-        app.ConfigureApi(app.Environment.IsDevelopment());
+        app.ConfigureApi();
 
         var summaries = new[]
         {
