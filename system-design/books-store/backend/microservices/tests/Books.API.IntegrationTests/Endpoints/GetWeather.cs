@@ -13,6 +13,7 @@ public sealed class GetWeather : IClassFixture<BookApiFixture>
     }
 
     [Fact]
+    [Trait("Category", "IntegrationTests")]
     public async Task Get_Weather_Forecast_Should_Return_Ok()
     {
         // Arrange

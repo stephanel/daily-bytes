@@ -14,6 +14,7 @@ public class GetBooks : IClassFixture<BookApiFixture>
     }
 
     [Fact]
+    [Trait("Category", "IntegrationTests")]
     public async Task Get_Books_Should_Return_Ok()
     {
         // Arrange
