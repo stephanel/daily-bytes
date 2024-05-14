@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Books.Domain.Books;
 
-public record Book(string Title, string ISBN, Author[] Authors, Language Language);
+public record Book(string Title, ISBN ISBN, Author[] Authors, Language Language);
 
 public record Author(string FirstName, string LastName);
 
