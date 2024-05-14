@@ -1,7 +1,9 @@
 ﻿using BookStore.Books.API.Endpoints.GetBooks;
+using BookStore.Common.TestFramework.TestMetadata.Traits;
 
 namespace BookStore.Books.API.IntegrationTests.Endpoints;
 
+[IntegrationTests]
 public class GetBooks : IClassFixture<BookApiFixture>
 {
 
@@ -14,7 +16,6 @@ public class GetBooks : IClassFixture<BookApiFixture>
     }
 
     [Fact]
-    [Trait("Category", "IntegrationTests")]
     public async Task Get_Books_Should_Return_Ok()
     {
         // Arrange

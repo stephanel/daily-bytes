@@ -1,7 +1,8 @@
-﻿using BookStore.Books.API.IntegrationTests.TestFramework.Fixtures;
+﻿using BookStore.Common.TestFramework.TestMetadata.Traits;
 
 namespace BookStore.Books.API.IntegrationTests.Endpoints;
 
+[IntegrationTests]
 public sealed class GetWeather : IClassFixture<BookApiFixture>
 {
     private readonly BookApiFixture _fixture;
@@ -13,7 +14,6 @@ public sealed class GetWeather : IClassFixture<BookApiFixture>
     }
 
     [Fact]
-    [Trait("Category", "IntegrationTests")]
     public async Task Get_Weather_Forecast_Should_Return_Ok()
     {
         // Arrange
