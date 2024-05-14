@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
+    <ProjectReference Include="..\Books.Application\Books.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

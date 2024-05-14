@@ -1,4 +1,5 @@
-﻿using BookStore.Common.TestFramework.TestMetadata.Traits;
+﻿using Books.Application.Features.GetBooks;
+using BookStore.Books.Domain.Books;
 
 namespace BookStore.Books.UnitTests.Features;
 
@@ -6,14 +7,31 @@ namespace BookStore.Books.UnitTests.Features;
 public class GetBooks
 {
     [Fact]
-    public void Test()
+    public async Task Test()
     {
-        true.Should().BeTrue();
-    }
+        var results = await new GetBooksHandler().Handle(new(), CancellationToken.None);
 
-    [Fact]
-    public void Test2()
-    {
-        true.Should().BeTrue();
+        results.Should().HaveCount(2);
+
+        results.Should().ContainEquivalentOf(
+            new Book(
+                "Design Patterns: Elements of Reusable Object-Oriented Software",
+                "978-0201633610",
+                [
+                    new("Erich", "Gamma"),
+                    new("Richard", "Helm"),
+                    new("Ralph", "Jonhson"),
+                    new("John", "Vlissides"),
+                ],
+                Language.English));
+
+        results.Should().ContainEquivalentOf(
+            new Book(
+                "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+                "978-0134494166",
+                [
+                    new("Robert", "Martin")
+                ],
+                Language.English));
     }
 }

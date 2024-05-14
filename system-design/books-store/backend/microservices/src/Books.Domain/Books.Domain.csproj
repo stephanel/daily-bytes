@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <RootNamespace>BookStore.Books.Domain</RootNamespace>
+	  <AssemblyName>BookStore.Books.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>

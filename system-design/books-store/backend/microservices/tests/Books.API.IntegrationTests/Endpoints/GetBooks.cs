@@ -1,5 +1,4 @@
 ﻿using BookStore.Books.API.Endpoints.GetBooks;
-using BookStore.Common.TestFramework.TestMetadata.Traits;
 
 namespace BookStore.Books.API.IntegrationTests.Endpoints;
 
@@ -26,9 +25,9 @@ public class GetBooks : IClassFixture<BookApiFixture>
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var results = await response.Content.ReadFromJsonAsync<Book[]>();
+        var results = await response.Content.ReadFromJsonAsync<BookDto[]>();
         results.Should().ContainEquivalentOf(
-            new Book(
+            new BookDto(
                 "Design Patterns: Elements of Reusable Object-Oriented Software",
                 "978-0201633610",
                 [
@@ -37,14 +36,14 @@ public class GetBooks : IClassFixture<BookApiFixture>
                     new("Ralph", "Jonhson"),
                     new("John", "Vlissides"),
                 ],
-                Language.English));
+                LanguageDto.English));
         results.Should().ContainEquivalentOf(
-            new Book(
+            new BookDto(
                 "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
                 "978-0134494166",
                 [
                     new("Robert", "Martin")
                 ],
-                Language.English));
+                LanguageDto.English));
     }
 }

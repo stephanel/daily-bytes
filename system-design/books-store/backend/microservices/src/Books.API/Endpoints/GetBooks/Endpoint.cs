@@ -1,9 +1,17 @@
-﻿using FastEndpoints;
+﻿using Books.Application.Features.GetBooks;
+using BookStore.Books.Domain.Books;
 
 namespace BookStore.Books.API.Endpoints.GetBooks;
 
-internal class Endpoint : EndpointWithoutRequest
+internal sealed class Endpoint : EndpointWithoutRequest
 {
+    private readonly IMediator _mediator;
+
+    public Endpoint(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
     public override void Configure()
     {
         Get("api/books");
@@ -12,35 +20,60 @@ internal class Endpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        Book[] books = [
-            new Book(
-                "Design Patterns: Elements of Reusable Object-Oriented Software",
-                "978-0201633610",
-                [
-                    new("Erich", "Gamma"),
-                    new("Richard", "Helm"),
-                    new("Ralph", "Jonhson"),
-                    new("John", "Vlissides"),
-                ],
-                Language.English),
-            new Book(
-                "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                "978-0134494166",
-                [
-                    new("Robert", "Martin")
-                ],
-                Language.English)
-            ];
-
-        await SendAsync(books, 200, ct);
+        var books = await _mediator.Send(new GetBooksRequest(), ct);
+        await SendAsync(Map(books), 200, ct);
     }
+
+    private BookDto[] Map(Book[] books)
+        => books.Select(Map).ToArray();
+
+    private BookDto Map(Book book) => new(book.Title, book.ISBN, Map(book.Authors), Map(book.Language));
+
+    private AuthorDto[] Map(Author[] authors)
+        => authors.Select(Map).ToArray();
+
+    private AuthorDto Map(Author author)
+        => new(author.FirstName, author.LastName);
+
+    private LanguageDto Map(Language language)
+        => language switch
+        {
+            Language.English => LanguageDto.English,
+            Language.Spanish => LanguageDto.Spanish,
+            Language.French => LanguageDto.French,
+            _ => throw new NotSupportedException()
+        };
 }
 
-internal record Book(string Title, string ISBN, Author[] Authors, Language Language);
+internal record BookDto(string Title, string ISBN, AuthorDto[] Authors, LanguageDto Language);
+//{
+//    internal BookDto(Book book)
+//         : this(book.Title, Map(book.Authors), book.Language.As<LanguageDto>())
+//    { }
 
-internal record Author(string FirstName, string LastName);
+//    private AuthorDto[] Map(Author[] author) => author.Select(Map).ToArray();
 
-enum Language
+//    private AuthorDto Map(Author author) => new(author);
+
+//    private LanguageDto Map(Language language)
+//        => language switch
+//        {
+//            0 => LanguageDto.English,
+//            //Language.English => LanguageDto.English,
+//            //Language.Spanish => LanguageDto.Spanish,
+//            //Language.French => LanguageDto.French,
+//            _ => throw new NotSupportedException()
+//        };
+//}
+
+internal record AuthorDto(string FirstName, string LastName);
+//{
+//    internal AuthorDto(Author author)
+//        : this(author.FirstName, author.LastName)
+//    { }
+//}
+
+internal enum LanguageDto
 {
     English,
     Spanish,

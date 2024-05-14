@@ -1,3 +1,4 @@
+using BookStore.Books.Application;
 using BookStore.Common.Extensions;
 
 namespace BookStore.Books.API;
@@ -10,7 +11,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.RegisterApiServices();
+        builder.Services
+            .RegisterApplicationServices()
+            .RegisterApiServices();
 
         var app = builder.Build();
 

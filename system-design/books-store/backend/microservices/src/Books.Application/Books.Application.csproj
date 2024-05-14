@@ -1,12 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <RootNamespace>BookStore.Books.Application</RootNamespace>
+	  <AssemblyName>BookStore.Books.Application</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-	<InternalsVisibleTo Include="Books.UnitTests" />
+    <PackageReference Include="Mediator.Abstractions" />
+    <PackageReference Include="Mediator.SourceGenerator">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+	 <InternalsVisibleTo Include="BookStore.Books.UnitTests" />
+   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Books.Domain\Books.Domain.csproj" />
   </ItemGroup>
 </Project>

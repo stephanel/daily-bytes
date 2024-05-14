@@ -1,6 +1,4 @@
-﻿using BookStore.Common.TestFramework.TestMetadata.Traits;
-
-namespace BookStore.Books.API.IntegrationTests.Endpoints;
+﻿namespace BookStore.Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
 public sealed class GetWeather : IClassFixture<BookApiFixture>
