@@ -89,6 +89,7 @@ See [System Design Documentation](./docs/system-design.md)
 | UserAccounts.API.IntegrationTests | BookStore.UserAccounts.API.IntegrationTests | {tests}/UserAccounts.API.IntegrationTests |
 | Subscriptions.API.IntegrationTests | BookStore.Subscriptions.API.IntegrationTests | {tests}/Subscriptions.API.IntegrationTests |
 | OrderManagement.Service.IntegrationTests | BookStore.OrderManagement.Service.IntegrationTests | {tests}/OrderManagement.Service.IntegrationTests |
+| Books.UnitTests | BookStore.Books.UnitTests | {tests}/Books.UnitTests |
 
 ### Backend - Monolith
 
