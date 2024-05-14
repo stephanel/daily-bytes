@@ -4,7 +4,7 @@ namespace BookStore.Common.TestFramework.TestMetadata.Traits;
 
 public class IntegrationTestsCategoryDiscoverer : ITraitDiscoverer
 {
-    public const string VALUE = "IntegrationTest";
+    public const string VALUE = "IntegrationTests";
 
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
@@ -14,5 +14,10 @@ public class IntegrationTestsCategoryDiscoverer : ITraitDiscoverer
 
 [TraitDiscoverer("BookStore.Common.TestFramework.TestMetadata.Traits.IntegrationTestsCategoryDiscoverer",
     "BookStore.Common.TestFramework")]
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+public class IntegrationTestAttribute : Attribute, ITraitAttribute;
+
+[TraitDiscoverer("BookStore.Common.TestFramework.TestMetadata.Traits.IntegrationTestsCategoryDiscoverer",
+    "BookStore.Common.TestFramework")]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class IntegrationTestsAttribute : Attribute, ITraitAttribute;

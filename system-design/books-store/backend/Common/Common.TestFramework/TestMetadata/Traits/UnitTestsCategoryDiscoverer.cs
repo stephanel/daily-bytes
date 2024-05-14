@@ -14,5 +14,11 @@ public class UnitTestsCategoryDiscoverer : ITraitDiscoverer
 
 [TraitDiscoverer("BookStore.Common.TestFramework.TestMetadata.Traits.UnitTestsCategoryDiscoverer",
     "BookStore.Common.TestFramework")]
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+public class UnitTestAttribute() : Attribute, ITraitAttribute;
+
+
+[TraitDiscoverer("BookStore.Common.TestFramework.TestMetadata.Traits.UnitTestsCategoryDiscoverer",
+    "BookStore.Common.TestFramework")]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class UnitTestsAttribute() : Attribute, ITraitAttribute;
