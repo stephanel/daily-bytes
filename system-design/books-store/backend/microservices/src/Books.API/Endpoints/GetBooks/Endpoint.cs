@@ -1,16 +1,12 @@
 ﻿using Books.Application.Features.GetBooks;
+using BookStore.Books.API.Mappers;
 using BookStore.Books.Domain.Books;
 
 namespace BookStore.Books.API.Endpoints.GetBooks;
 
-internal sealed class Endpoint : EndpointWithoutRequest
+internal sealed class Endpoint(IMediator mediator) : EndpointWithoutRequest
 {
-    private readonly IMediator _mediator;
-
-    public Endpoint(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    readonly IMediator _mediator = mediator;
 
     public override void Configure()
     {
@@ -24,54 +20,40 @@ internal sealed class Endpoint : EndpointWithoutRequest
         await SendAsync(Map(books), 200, ct);
     }
 
-    private BookDto[] Map(Book[] books)
-        => books.Select(Map).ToArray();
-
-    private BookDto Map(Book book) => new(book.Title, book.ISBN, Map(book.Authors), Map(book.Language));
-
-    private AuthorDto[] Map(Author[] authors)
-        => authors.Select(Map).ToArray();
-
-    private AuthorDto Map(Author author)
-        => new(author.FirstName, author.LastName);
-
-    private LanguageDto Map(Language language)
-        => language switch
-        {
-            Language.English => LanguageDto.English,
-            Language.Spanish => LanguageDto.Spanish,
-            Language.French => LanguageDto.French,
-            _ => throw new NotSupportedException()
-        };
+    BookDto[] Map(Book[] books) => books.Select(ObjectMapper.Map<Book, BookDto>).ToArray();
 }
 
-internal record BookDto(string Title, string ISBN, AuthorDto[] Authors, LanguageDto Language);
-//{
-//    internal BookDto(Book book)
-//         : this(book.Title, Map(book.Authors), book.Language.As<LanguageDto>())
-//    { }
+internal record BookDto
+{
+    public BookDto() { }
 
-//    private AuthorDto[] Map(Author[] author) => author.Select(Map).ToArray();
+    public BookDto(Book book) 
+    {
+        Title = book.Title;
+        ISBN = book.ISBN;
+        Authors = book.Authors.Select(ObjectMapper.Map<Author, AuthorDto>).ToArray();
+        Language = book.Language.Map<Language, LanguageDto>();
+    }
 
-//    private AuthorDto Map(Author author) => new(author);
+    public string? Title { get; init; }
+    public string? ISBN { get; init; }
+    public AuthorDto[] Authors { get; init; } = [];
+    public LanguageDto? Language { get; init; }
+}
 
-//    private LanguageDto Map(Language language)
-//        => language switch
-//        {
-//            0 => LanguageDto.English,
-//            //Language.English => LanguageDto.English,
-//            //Language.Spanish => LanguageDto.Spanish,
-//            //Language.French => LanguageDto.French,
-//            _ => throw new NotSupportedException()
-//        };
-//}
+internal record AuthorDto
+{
+    public AuthorDto() { }
 
-internal record AuthorDto(string FirstName, string LastName);
-//{
-//    internal AuthorDto(Author author)
-//        : this(author.FirstName, author.LastName)
-//    { }
-//}
+    public AuthorDto(Author author)
+    {
+        FirstName = author.FirstName;
+        LastName = author.LastName;
+    }
+
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
+}
 
 internal enum LanguageDto
 {

@@ -5,7 +5,6 @@ namespace BookStore.Books.API.IntegrationTests.Endpoints;
 [IntegrationTests]
 public class GetBooks : IClassFixture<BookApiFixture>
 {
-
     private readonly BookApiFixture _fixture;
 
     public GetBooks(BookApiFixture fixture, ITestOutputHelper testOutput)
@@ -25,25 +24,41 @@ public class GetBooks : IClassFixture<BookApiFixture>
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        var results = await response.Content.ReadFromJsonAsync<BookDto[]>();
-        results.Should().ContainEquivalentOf(
-            new BookDto(
-                "Design Patterns: Elements of Reusable Object-Oriented Software",
-                "978-0201633610",
-                [
-                    new("Erich", "Gamma"),
-                    new("Richard", "Helm"),
-                    new("Ralph", "Jonhson"),
-                    new("John", "Vlissides"),
+
+        var options = new JsonSerializerOptions()
+        {
+            Converters = { new JsonStringEnumConverter() },
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
+        var results = await response.Content.ReadFromJsonAsync<BookDto[]>(options);
+        results.Should().ContainEquivalentOf(ExpectedBooks.DesignPatterns);        
+        results.Should().ContainEquivalentOf(ExpectedBooks.CleanArchitecture);
+    }
+
+    static class ExpectedBooks
+    {
+        internal static readonly BookDto DesignPatterns = new()
+        {
+            Title = "Design Patterns: Elements of Reusable Object-Oriented Software",
+            ISBN = "978-0201633610",
+            Authors = [
+                    new() { FirstName = "Erich", LastName = "Gamma" },
+                    new() { FirstName = "Richard", LastName = "Helm" },
+                    new() { FirstName = "Ralph", LastName = "Jonhson" },
+                    new() { FirstName = "John", LastName = "Vlissides" },
                 ],
-                LanguageDto.English));
-        results.Should().ContainEquivalentOf(
-            new BookDto(
-                "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                "978-0134494166",
-                [
-                    new("Robert", "Martin")
+            Language = LanguageDto.English
+        };
+
+        internal static readonly BookDto CleanArchitecture = new()
+        {
+            Title = "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+            ISBN = "978-0134494166",
+            Authors = [
+                        new() { FirstName = "Robert", LastName = "Martin" },
                 ],
-                LanguageDto.English));
+            Language = LanguageDto.English
+        };
     }
 }
