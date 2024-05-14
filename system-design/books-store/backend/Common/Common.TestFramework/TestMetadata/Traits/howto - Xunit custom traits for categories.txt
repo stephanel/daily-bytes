@@ -1,0 +1,2 @@
+﻿//https://kenbonny.net/creating-a-custom-xunit-trait
+// https://mac-blog.org.ua/xunit-category-trait/
