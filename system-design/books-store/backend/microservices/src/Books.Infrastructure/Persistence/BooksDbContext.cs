@@ -7,7 +7,8 @@ namespace Books.Infrastructure.Persistence;
 
 internal class BooksDbContext : DbContext
 {
-    private const string ApplicationName = "Books,API";
+    private const string ApplicationName = "Books.API";
+    private const string DbSchema = "books";
     private const string BooksDatabaseConnectionString = "BooksDatabaseConnectionString";
 
     private readonly string _connectionString = null!;
@@ -37,6 +38,7 @@ internal class BooksDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
+            .HasDefaultSchema(DbSchema)
             .HasPostgresExtension("uuid-ossp")
             .ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(BooksDbContext))!);
     }

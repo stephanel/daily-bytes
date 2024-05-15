@@ -12,6 +12,8 @@
 (A) Init Books unit tests project #important #backend {cm:2024-05-14}
 
 (A) Add Books.Infrastructure layer {due:2024-05-14} #backend {cm:2024-05-15}
+
+(A) Setup dev databases
 (A) Create first migration and update integration tests
 (A) Init Angular UI #frontend #important
 
