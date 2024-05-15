@@ -10,7 +10,7 @@ public static class DependencyInjection
     public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services)
     {
         return services
-            .AddDbContext<BooksDataContext>()
+            .AddDbContext<BooksDbContext>()
             .AddSingleton<IGetBooksRepository, BooksRepository>();
     }
 }

@@ -5,14 +5,14 @@ using System.Reflection;
 
 namespace Books.Infrastructure.Persistence;
 
-internal class BooksDataContext : DbContext
+internal class BooksDbContext : DbContext
 {
     private const string ApplicationName = "Books,API";
     private const string BooksDatabaseConnectionString = "BooksDatabaseConnectionString";
 
     private readonly string _connectionString = null!;
 
-    public BooksDataContext(IConfiguration configuration)
+    public BooksDbContext(IConfiguration configuration)
     {
         var originalConnectionString = configuration.GetConnectionString(BooksDatabaseConnectionString)
             ?? throw new ArgumentNullException(nameof(configuration), "${nameof(BooksDatabaseConnectionString)} is null");
@@ -38,6 +38,6 @@ internal class BooksDataContext : DbContext
     {
         modelBuilder
             .HasPostgresExtension("uuid-ossp")
-            .ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(BooksDataContext))!);
+            .ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(BooksDbContext))!);
     }
 }
