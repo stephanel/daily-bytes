@@ -13,8 +13,8 @@
 
 (A) Add Books.Infrastructure layer {due:2024-05-14} #backend {cm:2024-05-15}
 
-(A) Setup dev databases
-(A) Create first migration and update integration tests
+(A) Setup dev databases {cm:2024-05-15}
+(A) Create first migration and update integration tests {due:2024-05-15} {cm:2024-05-15}
 (A) Init Angular UI #frontend #important
 
 (B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
