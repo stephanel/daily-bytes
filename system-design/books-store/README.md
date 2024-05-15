@@ -18,8 +18,8 @@ Personal project to put new technologies or models into practice.
     - [Backend - Monolith](#backend---monolith)
   - [Start applications](#start-applications)
     - [Start the required services](#start-the-required-services)
-    - [Update the database](#update-the-database)
       - [How to add a new migration](#how-to-add-a-new-migration)
+    - [Update the database](#update-the-database)
   - [Learning Resources](#learning-resources)
 
 ## Folder Structure
@@ -139,12 +139,24 @@ Then navigate to:
 - [Grafana](http://localhost:3000)
 - Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
 
-### Update the database
+
+#### How to add a new migration
 
 Before using migrations add the dotnet ef core tools
+
 ```bash
 dotnet tool install --global dotnet-ef
 ```
+
+Run the following command replacing MyMigration with your migration name:
+```bash
+cd ./system-design/books-store/backend/microservices/src
+
+dotnet ef migrations add Create_Initial -p Books.Infrastructure -s Books.API -c BooksDbContext -o Persistence/Migrations -v
+```
+
+### Update the database
+
 
 Run the following to update your local database:
 ```bash
@@ -152,14 +164,6 @@ cd ./books-store/backend/microservices/src
 
 # Books API
 dotnet ef database update -p Books.Infrastructure -s Books.API -c BooksDbContext -v
-```
-
-#### How to add a new migration
-Run the following command replacing MyMigration with your migration name:
-```bash
-cd ./books-store/backend/microservices/src
-
-dotnet ef migrations add Create_Initial -p Books.Infrastructure -s Books.API -c BooksDbContext -o Persistence/Migrations -v
 ```
 
 
