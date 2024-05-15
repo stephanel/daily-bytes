@@ -12,7 +12,11 @@
 (A) Init Books unit tests project #important #backend {cm:2024-05-14}
 
 (A) Add Books.Infrastructure layer {due:2024-05-14} #backend
+(A) Create first migration and update integration tests
 (A) Init Angular UI #frontend #important
+
+(B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
+
 
 (A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-17}
 (B) Write logs to grafana, or alt. #important #observability

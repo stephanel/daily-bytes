@@ -2,7 +2,7 @@
 using FastEndpoints.Swagger;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Common.Extensions;
+namespace Common.Extensions.DependencyInjection;
 
 public static class ServiceCollectionsExtensions
 {

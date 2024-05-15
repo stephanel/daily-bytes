@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Common.Extensions;
+namespace Common.Extensions.DependencyInjection;
 
 public static class ApplicationBuilderExtensions
 {

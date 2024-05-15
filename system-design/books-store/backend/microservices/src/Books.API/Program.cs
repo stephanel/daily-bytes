@@ -1,5 +1,5 @@
-using Books.Application;
-using Common.Extensions;
+using Books.DependencyInjection;
+using Common.Extensions.DependencyInjection;
 
 namespace Books.API;
 
@@ -13,6 +13,7 @@ public class Program
 
         builder.Services
             .RegisterApplicationServices()
+            .RegisterInfrastructureServices()
             .RegisterApiServices();
 
         var app = builder.Build();
