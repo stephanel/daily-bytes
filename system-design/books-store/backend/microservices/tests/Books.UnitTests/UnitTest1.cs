@@ -1,4 +1,4 @@
-using BookStore.Common.TestFramework.TestMetadata.Traits;
+using Common.TestFramework.TestMetadata.Traits;
 
 namespace Books.UnitTests;
 

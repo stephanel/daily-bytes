@@ -1,6 +1,6 @@
 ﻿using Xunit.Sdk;
 
-namespace BookStore.Common.TestFramework.TestMetadata.Traits;
+namespace Common.TestFramework.TestMetadata.Traits;
 
 public class CategoryDiscoverer : ITraitDiscoverer
 {
@@ -14,8 +14,8 @@ public class CategoryDiscoverer : ITraitDiscoverer
 }
 
 //NOTICE: Take a note that you must provide appropriate namespace here
-[TraitDiscoverer("BookStore.Common.TestFramework.TestMetadata.Traits.CategoryDiscoverer",
-    "BookStore.Common.TestFramework")]
+[TraitDiscoverer("Common.TestFramework.TestMetadata.Traits.CategoryDiscoverer",
+    "Common.TestFramework")]
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public class CategoryAttribute : Attribute, ITraitAttribute
 {

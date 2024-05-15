@@ -1,4 +1,4 @@
-﻿namespace BookStore.Books.Domain.Books;
+﻿namespace Books.Domain.Books;
 
 public record struct ISBN(string value)
 {

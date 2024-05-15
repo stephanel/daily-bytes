@@ -1,8 +1,8 @@
-﻿using Books.Application.Features.GetBooks;
-using BookStore.Books.API.Mappers;
-using BookStore.Books.Domain.Books;
+﻿using Books.Application.UseCases.GetBooks;
+using Books.API.Mappers;
+using Books.Domain.Books;
 
-namespace BookStore.Books.API.Endpoints.GetBooks;
+namespace Books.API.Endpoints.GetBooks;
 
 internal sealed class Endpoint(IMediator mediator) : EndpointWithoutRequest
 {

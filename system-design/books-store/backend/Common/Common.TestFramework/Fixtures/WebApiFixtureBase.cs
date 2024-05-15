@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace BookStore.Common.TestFramework.Fixtures;
+namespace Common.TestFramework.Fixtures;
 
 public class WebApiFixtureBase<TProgram> : WebApplicationFactory<TProgram>
      where TProgram : class

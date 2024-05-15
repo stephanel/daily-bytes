@@ -1,4 +1,4 @@
-﻿namespace BookStore.Books.API.Mappers;
+﻿namespace Books.API.Mappers;
 
 internal static class ObjectMapper
 {

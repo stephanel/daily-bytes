@@ -1,6 +1,6 @@
-﻿using BookStore.Books.Domain.Books;
+﻿using Books.Domain.Books;
 
-namespace BookStore.Books.UnitTests.Domain;
+namespace Books.UnitTests.Domain;
 
 [UnitTests]
 public class ISBNTests

@@ -2,7 +2,7 @@
 using FastEndpoints.Swagger;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookStore.Common.Extensions;
+namespace Common.Extensions;
 
 public static class ServiceCollectionsExtensions
 {

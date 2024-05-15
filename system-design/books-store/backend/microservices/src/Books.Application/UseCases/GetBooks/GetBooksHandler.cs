@@ -1,6 +1,6 @@
-﻿using BookStore.Books.Domain.Books;
+﻿using Books.Domain.Books;
 
-namespace Books.Application.Features.GetBooks;
+namespace Books.Application.UseCases.GetBooks;
 
 internal sealed class GetBooksHandler : IRequestHandler<GetBooksRequest, Book[]>
 {

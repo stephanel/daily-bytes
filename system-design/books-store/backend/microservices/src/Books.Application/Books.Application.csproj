@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <RootNamespace>BookStore.Books.Application</RootNamespace>
-	  <AssemblyName>BookStore.Books.Application</AssemblyName>
+	  <RootNamespace>Books.Application</RootNamespace>
+	  <AssemblyName>Books.Application</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	 <InternalsVisibleTo Include="BookStore.Books.UnitTests" />
+	 <InternalsVisibleTo Include="Books.UnitTests" />
    </ItemGroup>
 
   <ItemGroup>

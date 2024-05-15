@@ -1,7 +1,7 @@
-﻿using Books.Application.Features.GetBooks;
-using BookStore.Books.Domain.Books;
+﻿using Books.Application.UseCases.GetBooks;
+using Books.Domain.Books;
 
-namespace BookStore.Books.UnitTests.Features;
+namespace Books.UnitTests.UseCases;
 
 [UnitTests]
 public class GetBooks

@@ -1,6 +1,6 @@
-﻿using BookStore.Books.API.Endpoints.GetBooks;
+﻿using Books.API.Endpoints.GetBooks;
 
-namespace BookStore.Books.API.IntegrationTests.Endpoints;
+namespace Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
 public class GetBooks : IClassFixture<BookApiFixture>

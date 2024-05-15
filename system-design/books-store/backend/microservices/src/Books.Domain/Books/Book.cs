@@ -1,4 +1,4 @@
-﻿namespace BookStore.Books.Domain.Books;
+﻿namespace Books.Domain.Books;
 
 public record Book(string Title, ISBN ISBN, Author[] Authors, Language Language);
 

@@ -1,4 +1,4 @@
-﻿namespace BookStore.Books.API.IntegrationTests.Endpoints;
+﻿namespace Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
 public sealed class GetWeather : IClassFixture<BookApiFixture>

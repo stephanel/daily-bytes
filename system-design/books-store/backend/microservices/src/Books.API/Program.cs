@@ -1,7 +1,7 @@
-using BookStore.Books.Application;
-using BookStore.Common.Extensions;
+using Books.Application;
+using Common.Extensions;
 
-namespace BookStore.Books.API;
+namespace Books.API;
 
 public class Program
 {

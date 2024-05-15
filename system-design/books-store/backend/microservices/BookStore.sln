@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.UnitTests", "tests\Bo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Application", "src\Books.Application\Books.Application.csproj", "{E50C3BE6-4EBC-4072-9599-F514D76A72DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Domain", "src\Books.Domain\Books.Domain.csproj", "{54987C5E-A66F-4C9A-9F6E-9386472A4DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Domain", "src\Books.Domain\Books.Domain.csproj", "{54987C5E-A66F-4C9A-9F6E-9386472A4DF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

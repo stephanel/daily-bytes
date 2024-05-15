@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<RootNamespace>BookStore.Common.TestFramework</RootNamespace>
-		<AssemblyName>BookStore.Common.TestFramework</AssemblyName>
+		<RootNamespace>Common.TestFramework</RootNamespace>
+		<AssemblyName>Common.TestFramework</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
