@@ -10,18 +10,18 @@
 (A) Init Books integration tests project #important {cm:2024-05-13} #backend
 (B) Create Books API project {cm:2024-05-13} #backend
 (A) Init Books unit tests project #important #backend {cm:2024-05-14}
-
 (A) Add Books.Infrastructure layer {due:2024-05-14} #backend {cm:2024-05-15}
-
 (A) Setup dev databases {cm:2024-05-15}
 (A) Create first migration and update integration tests {due:2024-05-15} {cm:2024-05-15}
+(A) Setup Serilog. #important #observability {due:2024-05-16} {cm:2024-05-16}
+
 (A) Init Angular UI #frontend #important
+(A) Write logs to grafana, or alt. #important #observability
 
 (B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
 
 
 (A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-17}
-(B) Write logs to grafana, or alt. #important #observability
 (B) send traces to grafana, or alt. #important #observability
 
 (A) Init React UI #frontend #important
