@@ -43,6 +43,8 @@ Personal project to put new technologies or models into practice.
   - [Serilog](https://github.com/serilog/serilog)
 - Frontend
   - [Angular](https://angular.io/)
+  - React - Upcoming!
+  - Vue.js - Upcoming!
 - Infrastructure
   - PostgreSQL
   - TBD - RabbitMQ, Kafka
