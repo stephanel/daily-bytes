@@ -1,1 +1,13 @@
-<p>user-account works!</p>
+<h2>Hi, {{ user?.firstName }} {{ user?.lastName }}</h2>
+
+<div class="contact-details">
+    <h3>Your contact details</h3>
+    <p>Email: {{ user?.email }}</p>
+    <p>Phone: {{ user?.phone }}</p>
+</div>
+
+<div class="subscription">
+    <h3>Your subscription</h3>
+    <p>{{ user?.subscription }}</p>
+    <p *ngIf="user?.subscriptionExpiration != null">Expire on: {{ user?.subscriptionExpiration }}</p>
+</div>

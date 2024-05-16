@@ -7,6 +7,6 @@ import { UserOrdersHistoryComponent } from './user-orders-history/user-orders-hi
 export const appRoutes: Route[] = [
     { path: '', component: BooksListComponent },
     { path: 'book/:id', component: BookDetailsComponent },
-    { path: 'user/account', component: UserAccountComponent },
-    { path: 'user/order-history', component: UserOrdersHistoryComponent },
+    { path: 'user/:id', component: UserAccountComponent },
+    { path: 'user/:id/order-history', component: UserOrdersHistoryComponent },
 ];
