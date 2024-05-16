@@ -1,1 +1,10 @@
-<p>Book 12 vDetails</p>
+<p>ID: {{ bookDetails?.id }}</p>
+<p>ISBN: {{ bookDetails?.isbn }}</p>
+<p>Title: {{ bookDetails?.title }}</p>
+<p>Language: {{ bookDetails?.language }}</p>
+<p>Authors:</p>
+<ul>
+    <li *ngFor="let author of bookDetails?.authors">
+        {{ author?.firstName }} {{ author?.lastName }}
+    </li>
+</ul>
