@@ -1,11 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { Book } from "../models/book.model";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/local";
 
 @Injectable({
     providedIn: 'root'
 })
 export class BookService {
+
+    baseUrl = `${environment.baseUrl}/books`
+
+    constructor(private httpClient: HttpClient) 
+    { }
 
     get(id: number): Observable<Book> {
         return of<Book>(
@@ -21,5 +28,9 @@ export class BookService {
             ],
             language: 'English'
         });
+    }
+
+    getAll(): Observable<Book[]> {
+        return this.httpClient.get<Book[]>(this.baseUrl);
     }
 }
