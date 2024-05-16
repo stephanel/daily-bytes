@@ -1,4 +1,5 @@
 using Books.DependencyInjection;
+using Common.Extensions.Configuration;
 using Common.Extensions.DependencyInjection;
 
 namespace Books.API;
@@ -11,15 +12,17 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        CORSConfiguration corsConfiguration = new("localhostPolicy", ["http://localhost:4200"]);
+
         builder.Host.ConfigureLogging();
         builder.Services
             .RegisterApplicationServices()
             .RegisterInfrastructureServices()
-            .RegisterApiServices();
+            .RegisterApiServices(corsConfiguration);
 
         var app = builder.Build();
 
-        app.ConfigureApi();
+        app.ConfigureApi(corsConfiguration);
 
         var summaries = new[]
         {
