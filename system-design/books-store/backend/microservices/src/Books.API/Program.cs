@@ -11,6 +11,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Host.ConfigureLogging();
         builder.Services
             .RegisterApplicationServices()
             .RegisterInfrastructureServices()
