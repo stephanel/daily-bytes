@@ -26,7 +26,8 @@ export class BookService {
                 { firstName: 'Ralph', lastName: 'Johnson', knownFor: 'Gang of Four' },
                 { firstName: 'John', lastName: 'Vlissides', knownFor: 'Gang of Four' }
             ],
-            language: 'English'
+            language: 'English',
+            thumbnailUrl: 'https://images-na.ssl-images-amazon.com/images/I/41tWJh6D6YL._SX258_BO1,204,203,200_.jpg'
         });
     }
 

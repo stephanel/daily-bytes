@@ -1,9 +1,33 @@
-<h2>Our books</h2>
+<h2>Welcome to the Book Store</h2>
 <ul>
     <li *ngFor="let book of books">
-        <div>
-            <p>{{ book?.title }}</p>
-            <!-- <a [routerLink]="['/book', book?.id]">{{ book.title }}</a> -->
-        </div>
+        <a routerLink="['/book', book?.id]">
+            <div class="card mb-3 border-white" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img class="img-fluid rounded-start" [src]="book?.thumbnailUrl" alt="{{ book?.title }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book?.title }}</h5>
+                            <p class="card-text"><b>Authors: </b>{{ book?.authors | formatAuthor }}</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+
+        <!-- <div>
+            <a routerLink="['/book', book?.id]">
+                <span>
+                    <img class="thumbnail" [src]="book?.thumbnailUrl" alt="{{ book?.title }}" />
+                </span>
+                <span>
+                    <p>{{ book?.title }}</p>
+                </span>
+            </a>
+        </div> -->
     </li>
 </ul>

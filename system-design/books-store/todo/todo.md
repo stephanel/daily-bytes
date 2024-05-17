@@ -18,6 +18,7 @@
 (A) Init Angular UI #frontend #important
 (A) Write logs to grafana, or alt. #important #observability
 
+(B)Add VerifyTests to Integration Tests
 (B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
 
 

@@ -69,6 +69,7 @@ Personal project to put new technologies or models into practice.
 - The user can view and edit his contact info
 - The user can view the status of his subscription
 - The user can view his orders history
+- make UI multilingual?
 
 ## Architecture
 

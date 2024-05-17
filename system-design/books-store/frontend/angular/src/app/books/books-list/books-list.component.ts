@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Book } from 'src/app/books/book.model';
+import { Author, Book } from 'src/app/books/book.model';
 import { BookService } from 'src/app/books/book.service';
 
 @Component({
@@ -20,4 +20,11 @@ export class BooksListComponent implements OnInit {
       this.books = books;
     });
   }
+
+  formatAuthor(author: Author): string
+  {
+      return `${author.firstName} ${author.lastName}`;
+  
+  }
+
 }

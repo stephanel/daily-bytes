@@ -4,7 +4,7 @@ export interface Book {
     title: string;
     authors: Author[],
     language: string;
-
+    thumbnailUrl: string;
 }
 
 export interface Author

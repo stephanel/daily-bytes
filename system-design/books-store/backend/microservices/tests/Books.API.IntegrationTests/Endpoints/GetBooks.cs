@@ -40,25 +40,29 @@ public class GetBooks : IClassFixture<BookApiFixture>
     {
         internal static readonly BookDto DesignPatterns = new()
         {
+            Id = 10001,
             Title = "Design Patterns: Elements of Reusable Object-Oriented Software",
             ISBN = "978-0201633610",
             Authors = [
-                    new() { FirstName = "Erich", LastName = "Gamma" },
-                    new() { FirstName = "Richard", LastName = "Helm" },
-                    new() { FirstName = "Ralph", LastName = "Jonhson" },
-                    new() { FirstName = "John", LastName = "Vlissides" },
+                    new() { FirstName = "Erich", LastName = "Gamma", KnownFor = "Gang of Four" },
+                    new() { FirstName = "Richard", LastName = "Helm", KnownFor = "Gang of Four" },
+                    new() { FirstName = "Ralph", LastName = "Jonhson", KnownFor = "Gang of Four" },
+                    new() { FirstName = "John", LastName = "Vlissides", KnownFor = "Gang of Four" },
                 ],
-            Language = LanguageDto.English
+            Language = LanguageDto.English,
+            ThumbnailUrl = "https://covers.openlibrary.org/b/id/1754351-M.jpg"
         };
 
         internal static readonly BookDto CleanArchitecture = new()
         {
+            Id = 10002,
             Title = "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
             ISBN = "978-0134494166",
             Authors = [
-                        new() { FirstName = "Robert", LastName = "Martin" },
+                        new() { FirstName = "Robert", LastName = "Martin", KnownFor = "Clean Code, Agile, Software Craftsmanship" },
                 ],
-            Language = LanguageDto.English
+            Language = LanguageDto.English,
+            ThumbnailUrl = "https://covers.openlibrary.org/b/id/8510059-M.jpg"
         };
     }
 }

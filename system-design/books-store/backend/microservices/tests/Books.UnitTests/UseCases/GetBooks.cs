@@ -30,23 +30,27 @@ public class GetBooks
         public static Book[] GetAll() => [DesignPattern, CleanArchitecture];
 
         public static readonly Book DesignPattern = new(
+            Id: 10001,
             "Design Patterns: Elements of Reusable Object-Oriented Software",
             "978-0201633610",
             [
-                new("Erich", "Gamma"),
-                new("Richard", "Helm"),
-                new("Ralph", "Jonhson"),
-                new("John", "Vlissides"),
+                new("Erich", "Gamma", "Gang of Four"),
+                new("Richard", "Helm", "Gang of Four"),
+                new("Ralph", "Jonhson", "Gang of Four"),
+                new("John", "Vlissides", "Gang of Four"),
             ],
-            Language.English);
+            Language.English,
+            ThumbnailUrl: "https://covers.openlibrary.org/b/id/1754351-M.jpg");
 
         public static readonly Book CleanArchitecture = new(
+            Id: 10002,
             "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
             "978-0134494166",
             [
-                new("Robert", "Martin")
+                new("Robert", "Martin", "Clean Code, Agile, Software Craftsmanship")
             ],
-            Language.English);
+            Language.English,
+            ThumbnailUrl: "https://covers.openlibrary.org/b/id/8510059-M.jpg");
     }
 }
 
