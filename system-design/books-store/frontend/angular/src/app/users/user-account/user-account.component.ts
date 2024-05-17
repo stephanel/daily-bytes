@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.service';
+import { User } from 'src/app/users/user.model';
+import { UserService } from 'src/app/users/user.service';
 
 @Component({
   selector: 'app-user-account',

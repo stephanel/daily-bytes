@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BooksListComponent } from './books-list/books-list.component';
+import { BooksListComponent } from 'src/app/books/books-list/books-list.component';
 
 @Component({
   standalone: true,
