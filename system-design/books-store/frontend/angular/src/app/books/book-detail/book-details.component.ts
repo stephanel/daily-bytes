@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/books/book.model';
 import { BookService } from 'src/app/books/book.service';
+import { AuthorConcatenationPipe } from '../authors-concatenation.pipe';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AuthorConcatenationPipe],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css',
 })
@@ -24,5 +25,4 @@ export class BookDetailsComponent implements OnInit {
       this.bookService.get(bookId).subscribe(book => this.bookDetails = book);
     });
   }
-
 }

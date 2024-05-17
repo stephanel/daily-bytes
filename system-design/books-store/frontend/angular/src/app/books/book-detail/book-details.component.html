@@ -1,10 +1,27 @@
-<p>ID: {{ bookDetails?.id }}</p>
-<p>ISBN: {{ bookDetails?.isbn }}</p>
-<p>Title: {{ bookDetails?.title }}</p>
-<p>Language: {{ bookDetails?.language }}</p>
-<p>Authors:</p>
-<ul>
-    <li *ngFor="let author of bookDetails?.authors">
-        {{ author?.firstName }} {{ author?.lastName }}
-    </li>
-</ul>
+<div class="card mb-3 border-white" style="max-width: 680px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img class="img-fluid rounded-start" [src]="bookDetails?.thumbnailUrl" alt="{{ bookDetails?.title }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ bookDetails?.title }}
+                </h5>
+                <div class="card-text">
+                    ISBN: {{ bookDetails?.isbn }}
+                </div>
+                <div class="card-text">
+                    Authors: {{ bookDetails?.authors| authorsConcatenation }}
+                </div>
+
+                <p class="card-text">
+                    <small class="text-muted">
+                        Last updated 3 mins ago
+                    </small>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>

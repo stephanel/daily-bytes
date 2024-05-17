@@ -10,5 +10,5 @@ import { BooksListComponent } from 'src/app/books/books-list/books-list.componen
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Book Store';
+  title = 'Best Book';
 }
