@@ -15,14 +15,23 @@
 (A) Create first migration and update integration tests {due:2024-05-15} {cm:2024-05-15}
 (A) Setup Serilog. #important #observability {due:2024-05-16} {cm:2024-05-16}
 
-(A) Init Angular UI #frontend #important
+(A) Init Angular UI #frontend #important {due:2024-05-16} {cm:2024-05-17}
+(A) GetBooks API implementation #backend #important {due:2024-05-16} {cm:2024-05-16}
+(A) GetBooks API integration #frontend #important {due:2024-05-16} {cm:2024-05-16}
+(A) GetBook API implementation #backend #important {due:2024-05-17} {cm:2024-05-17}
+(A) GetBook API integration #frontend #important {due:2024-05-17} {cm:2024-05-17}
+
 (A) Write logs to grafana, or alt. #important #observability
+
+(B) books: add publisher, publish date, number of pages, subjects
+
+(B)Make author clickable in books list #enhancement #frontend
 
 (B)Add VerifyTests to Integration Tests
 (B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
 
 
-(A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-17}
+(A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-19}
 (B) send traces to grafana, or alt. #important #observability
 
 (A) Init React UI #frontend #important
