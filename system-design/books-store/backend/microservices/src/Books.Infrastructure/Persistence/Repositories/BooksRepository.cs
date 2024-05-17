@@ -1,11 +1,14 @@
-﻿using Books.Application.UseCases.GetBooks;
+﻿using Books.Application.UseCases.GetBook;
+using Books.Application.UseCases.GetBooks;
 using Books.Domain.Books;
+using Common.Extensions;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Immutable;
 
 namespace Books.Infrastructure.Persistence.Repositories;
 
-internal class BooksRepository : IGetBooksRepository
+internal class BooksRepository : IGetBooksRepository, IGetBookByIdRepository
 {
     private readonly IServiceScopeFactory scopeFactory;
 
@@ -19,7 +22,23 @@ internal class BooksRepository : IGetBooksRepository
         //var db = scope.ServiceProvider.GetRequiredService<BooksDataContext>();
         //return db.Books.ToListAsync(cancellationToken);
 
-        Book[] books = [
+        Book[] books = _books.ToArray();
+        return Task.FromResult((IImmutableList<Book>)books.ToImmutableList());
+    }
+
+    public Task<Result<Book, Error>> GetAsync(BookId bookId, CancellationToken cancellationToken)
+    {
+        // FIXME: abstract the resolution of scoped dbcontext
+        //using var scope = scopeFactory.CreateScope();
+        //var db = scope.ServiceProvider.GetRequiredService<BooksDataContext>();
+        //return db.Books.FindAsync(bookId, cancellationToken);
+
+        Book? book = _books.Find(x => x.Id == bookId);
+        Result<Book, Error> result = book is null ? new Error("Book not found") : book!;
+        return Task.FromResult(result);
+    }
+
+    private readonly List<Book> _books = [
            new Book(
                100001,
                 "Design Patterns: Elements of Reusable Object-Oriented Software",
@@ -51,7 +70,4 @@ internal class BooksRepository : IGetBooksRepository
                 Language.English,
                 ThumbnailUrl: "https://ia800505.us.archive.org/view_archive.php?archive=/5/items/m_covers_0012/m_covers_0012_38.zip&file=0012381947-M.jpg")
            ];
-
-        return Task.FromResult((IImmutableList<Book>)books.ToImmutableList());
-    }
 }

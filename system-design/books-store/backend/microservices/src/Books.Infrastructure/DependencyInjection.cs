@@ -1,4 +1,5 @@
-﻿using Books.Application.UseCases.GetBooks;
+﻿using Books.Application.UseCases.GetBook;
+using Books.Application.UseCases.GetBooks;
 using Books.Infrastructure.Persistence;
 using Books.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ public static class DependencyInjection
     {
         return services
             .AddDbContext<BooksDbContext>()
-            .AddSingleton<IGetBooksRepository, BooksRepository>();
+            .AddSingleton<IGetBooksRepository, BooksRepository>()
+            .AddSingleton<IGetBookByIdRepository, BooksRepository>();
     }
 }

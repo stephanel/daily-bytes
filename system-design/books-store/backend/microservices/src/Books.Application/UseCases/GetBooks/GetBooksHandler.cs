@@ -14,3 +14,5 @@ internal sealed class GetBooksHandler : IRequestHandler<GetBooksRequest, Book[]>
     public async ValueTask<Book[]> Handle(GetBooksRequest request, CancellationToken cancellationToken)
         => (await _booksRepository.GetAsync(cancellationToken)).ToArray();
 }
+
+public record GetBooksRequest : IRequest<Book[]>;

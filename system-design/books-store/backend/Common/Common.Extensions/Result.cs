@@ -1,0 +1,32 @@
+﻿namespace Common.Extensions;
+
+public record Result<TValue, TError>
+{
+    public readonly TValue? Value = default;
+    public readonly TError? Error = default;
+
+    public bool IsSuccess { get; private set; }
+
+    private Result(TValue value)
+    {
+        Value = value;
+        IsSuccess = true;
+    }
+
+    private Result(TError error)
+    {
+        Error = error;
+    }
+
+    public static implicit operator Result<TValue, TError>(TValue value) => new Result<TValue, TError>(value);
+    public static implicit operator TValue(Result<TValue, TError> result) => result.Value!;
+
+    public static implicit operator Result<TValue, TError>(TError error) => new Result<TValue, TError>(error);
+    public static implicit operator TError(Result<TValue, TError> result) => result.Error!;
+}
+
+public sealed record Error(string Code, string? Desccription = null)
+{
+    public static readonly Error None = new Error(string.Empty);
+    public static readonly Error NullValue = new Error("NULL_VALUE", "Null reference.");
+}

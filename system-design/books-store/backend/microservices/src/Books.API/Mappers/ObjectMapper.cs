@@ -6,4 +6,8 @@ internal static class ObjectMapper
         where TIn : class
         where TOut : class
         => (TOut)Activator.CreateInstance(typeof(TOut), obj)!;
+
+    internal static TOut Map<TOut>(this object obj)
+        where TOut : class
+        => (TOut)Activator.CreateInstance(typeof(TOut), obj)!;
 }
