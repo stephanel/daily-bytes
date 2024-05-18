@@ -20,7 +20,9 @@ exporters:
     loglevel: info
 
   prometheus:
-    endpoint: 0.0.0.0:8889
+    endpoint: "0.0.0.0:8889"
+    const_labels:
+      product_id: BookStore
 
   # jaeger:
   #   endpoint: jaeger:14250
