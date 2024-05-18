@@ -1,6 +1,6 @@
 ﻿using Books.Application.UseCases.GetBook;
 using Books.Domain.Books;
-using Common.Extensions;
+using Common.Extensions.Rop;
 
 namespace Books.UnitTests.UseCases;
 

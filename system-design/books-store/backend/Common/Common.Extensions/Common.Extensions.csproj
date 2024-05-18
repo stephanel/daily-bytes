@@ -5,27 +5,4 @@
 		<AssemblyName>Common.Extensions</AssemblyName>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="FastEndpoints" />
-		<PackageReference Include="FastEndpoints.Swagger" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
-		<PackageReference Include="Serilog.AspNetCore" />
-		<PackageReference Include="Serilog.Enrichers.Environment" />
-		<PackageReference Include="Serilog.Enrichers.Span" />
-		<PackageReference Include="Serilog.Enrichers.Thread" />
-		<PackageReference Include="Serilog.Formatting.Elasticsearch" />
-		<PackageReference Include="Serilog.Sinks.Async" />
-
-		<!--<PackageReference Include="Serilog" />
-	<PackageReference Include="Serilog.AspNetCore" />
-	<PackageReference Include="Serilog.Enrichers.ActivityTags" />
-	<PackageReference Include="Serilog.Enrichers.Span" />
-	<PackageReference Include="Serilog.Exceptions" />
-	<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
-	<PackageReference Include="Serilog.Extensions.Logging" />
-	<PackageReference Include="Serilog.Formatting.Elasticsearch" />
-	<PackageReference Include="Serilog.Sinks.Console" />-->
-
-	</ItemGroup>
-
 </Project>

@@ -1,8 +1,7 @@
 ﻿using Books.Application.UseCases.GetBook;
 using Books.Application.UseCases.GetBooks;
 using Books.Domain.Books;
-using Common.Extensions;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Common.Extensions.Rop;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Immutable;
 
