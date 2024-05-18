@@ -21,10 +21,17 @@
 (A) GetBook API integration #frontend #important {due:2024-05-17} {cm:2024-05-17}
 (A) Refactor Common.Extensions - split and Common.Extensions.API #backend #important {due:2024-05-18} {cm:2024-05-18}
 
-(A) Add VerifyTests to Integration Tests {due:2024-05-18}
+(A) Add VerifyTests to Integration Tests {due:2024-05-18} {cm:2024-05-18}
+
+(A) Configure backend tracing #important #observability {due:2024-05-18} {cm:2024-05-18}
+(A) Configure backend metrics #important #observability {due:2024-05-18} {cm:2024-05-18}
+(A) Configure logs forwarding to grafana #important #observability {due:2024-05-18} {cm:2024-05-18}
+(A) Write logs to grafana, or alt. #important #observability {cm:2024-05-18}
+
+(A) Add books to database (db migration) #important #observability {due:2024-05-18}
+
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 
-(A) Write logs to grafana, or alt. #important #observability
 
 (B) books: add publisher, publish date, number of pages, subjects
 
@@ -45,3 +52,5 @@
 
 
 (Z) Init solution for monolith implementation
+
+(Z) customize labels in Loki

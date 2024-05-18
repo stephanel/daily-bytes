@@ -17,7 +17,8 @@ Personal project to put new technologies or models into practice.
       - [Test Projects](#test-projects)
     - [Backend - Monolith](#backend---monolith)
   - [Local Setup](#local-setup)
-    - [Regarding Verify](#regarding-verify)
+    - [OpenTelemetry Configuration](#opentelemetry-configuration)
+    - [Verify](#verify)
     - [Add a new database migration](#add-a-new-database-migration)
     - [Update the database](#update-the-database)
   - [Run applications](#run-applications)
@@ -43,7 +44,7 @@ Personal project to put new technologies or models into practice.
   - [Mediator](https://github.com/martinothamar/Mediator)
   - [MassTransit](https://github.com/MassTransit/MassTransit)
   - [Serilog](https://github.com/serilog/serilog)
-  - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
+  - [OpenTelemetry .Net Instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
   - [Xunit](https://xunit.net/)
   - [Verify](https://github.com/VerifyTests/Verify)
 - Frontend
@@ -53,7 +54,7 @@ Personal project to put new technologies or models into practice.
 - Infrastructure
   - PostgreSQL
   - TBD - RabbitMQ, Kafka
-  - TBD - Grafana, Aspire, Jaeger/Seq
+  - Grafana, Loki (logs), Prometheus (metrics), Aspire
 - DevOps
   - TBD - CI/CD Pipelines
   - TBD - Quality Gate
@@ -92,6 +93,7 @@ Source folder: `backend/common/`
 | ------------- | ------------- |
 | ApiGateway | Common/ApiGateway/ |
 | Common.Extensions | Common/CommonExtensions/ |
+| Common.Extensions.API | Common/CommonExtensions.API/ |
 | Common.TestFramework | Common.TestFramework/ |
 
 ### Backend - Microservices
@@ -134,7 +136,22 @@ TBA
 
 ## Local Setup
 
-### Regarding Verify
+### OpenTelemetry Configuration
+
+- [Get Started with Prometheus and Grafana](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/docs/metrics/getting-started-prometheus-grafana/README.md)
+- [OpenTelemetry.Extensions.Hosting Usage](https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Extensions.Hosting/README.md)
+- Configure instrumentation:
+  - [AspNetCore](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.AspNetCore)
+  - [HttpClient](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Http)
+  - [EFCore](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/blob/main/src/OpenTelemetry.Instrumentation.EntityFrameworkCore/README.md)
+  - [Npgsql](https://www.npgsql.org/doc/diagnostics/tracing.html)
+  - [MassTransit](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.MassTransit)
+- Configure exporters:
+  - [Console Exporter](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Exporter.Console) 
+  - [Prometheus Exporter](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Exporter.Prometheus.AspNetCore)
+  - [Serilog.Sinks.OpenTelemetry](https://github.com/serilog/serilog-sinks-opentelemetry)
+
+### Verify
 
 Check [Verify GitHub Repository](https://github.com/VerifyTests/Verify?tab=readme-ov-file) and [Getting started wizard](https://github.com/VerifyTests/Verify/blob/main/docs/wiz/readme.md) for local setup.
 
@@ -176,11 +193,12 @@ Start the required resources by running the following commands:
 
 ```bash
 cd .docker
-docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f grafana-docker-compose.yml up
+docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f observability-docker-compose.yml up
 ```
 Then navigate to:
 - [RabbitMQ Management UI](http://localhost:15672)
 - [Grafana](http://localhost:3000)
+- [Prometheus](http://localhost:8080/)
 - Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
 
 
