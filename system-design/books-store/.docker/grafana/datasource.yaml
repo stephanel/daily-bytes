@@ -10,9 +10,19 @@ datasources:
   isDefault: true
   version: 1
   editable: false
+  apiVersion: 1
+  # jsonData:
+  #   - datasourceUid: otlp
+  #     matcherRegex: (?:"traceid"):"(\w+)"
+  #     name: TraceID
+  #     url: $${__value.raw}
 - name: Prometheus
   type: prometheus
   url: http://prometheus:9090
   isDefault: false
   access: proxy
   editable: true
+  basicAuth: false
+  version: 1
+  jsonData:
+    tlsSkipVerify: true

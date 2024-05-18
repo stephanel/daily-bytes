@@ -2,24 +2,29 @@ global:
   scrape_interval: 15s
   scrape_timeout: 10s
   evaluation_interval: 15s
+
 alerting:
-  alertmanagers:
-    - static_configs:
-        - targets: []
-      scheme: http
-      timeout: 10s
-      api_version: v1
+  # alertmanagers:
+  #   - static_configs:
+  #       - targets: []
+  #     scheme: http
+  #     timeout: 10s
+  #     api_version: v1
+
 scrape_configs:
-  - job_name: prometheus
+  - job_name: 'BookStoreMetrics'
+    # basic_auth:
+    #   username: grafana_user
+    #   password: grafana_user
     honor_timestamps: true
     scrape_interval: 15s
-    scrape_timeout: 10s
+    scrape_timeout: 1s
     metrics_path: /metrics
+    # metrics_path: '/actuator/prometheus'
     scheme: http
+    follow_redirects: true
     static_configs:
-      - targets:
-          - localhost:9090
-  - job_name: otel-collector
-    static_configs:
-    - targets:
-      - 'otelcol:8888'
+      - targets: ['http://prometheus:9090']
+        labels:
+          system: 'BooksStore'
+          group: otel-collector
