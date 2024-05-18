@@ -1,0 +1,88 @@
+﻿{
+  "response": {
+    "Version": "1.1",
+    "Content": {
+      "Headers": [
+        {
+          "Content-Type": [
+            "application/json"
+          ]
+        }
+      ]
+    },
+    "StatusCode": "OK",
+    "ReasonPhrase": "OK",
+    "Headers": [],
+    "TrailingHeaders": [],
+    "RequestMessage": {
+      "Version": "1.1",
+      "VersionPolicy": "RequestVersionOrLower",
+      "Method": {
+        "Method": "GET"
+      },
+      "RequestUri": "http://localhost/api/books",
+      "Headers": [],
+      "Options": {}
+    },
+    "IsSuccessStatusCode": true
+  },
+  "results": [
+    {
+      "Id": 100001,
+      "Title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "ISBN": "978-0201633610",
+      "Authors": [
+        {
+          "FirstName": "Erich",
+          "LastName": "Gamma",
+          "KnownFor": "Gang of Four"
+        },
+        {
+          "FirstName": "Richard",
+          "LastName": "Helm",
+          "KnownFor": "Gang of Four"
+        },
+        {
+          "FirstName": "Ralph",
+          "LastName": "Jonhson",
+          "KnownFor": "Gang of Four"
+        },
+        {
+          "FirstName": "John",
+          "LastName": "Vlissides",
+          "KnownFor": "Gang of Four"
+        }
+      ],
+      "Language": "English",
+      "ThumbnailUrl": "https://covers.openlibrary.org/b/id/1754351-M.jpg"
+    },
+    {
+      "Id": 100002,
+      "Title": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+      "ISBN": "978-0134494166",
+      "Authors": [
+        {
+          "FirstName": "Robert",
+          "LastName": "Martin",
+          "KnownFor": "Clean Code, Agile, Software Craftsmanship"
+        }
+      ],
+      "Language": "English",
+      "ThumbnailUrl": "https://ia903000.us.archive.org/view_archive.php?archive=/3/items/m_covers_0008/m_covers_0008_51.tar&file=0008510059-M.jpg"
+    },
+    {
+      "Id": 100003,
+      "Title": "Test-driven development, by example",
+      "ISBN": "978-0321146533",
+      "Authors": [
+        {
+          "FirstName": "Kent",
+          "LastName": "Beck",
+          "KnownFor": "Extreme Programming (XP), TDD"
+        }
+      ],
+      "Language": "English",
+      "ThumbnailUrl": "https://ia800505.us.archive.org/view_archive.php?archive=/5/items/m_covers_0012/m_covers_0012_38.zip&file=0012381947-M.jpg"
+    }
+  ]
+}

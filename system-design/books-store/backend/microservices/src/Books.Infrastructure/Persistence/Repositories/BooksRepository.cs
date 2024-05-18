@@ -38,35 +38,35 @@ internal class BooksRepository : IGetBooksRepository, IGetBookByIdRepository
     }
 
     private readonly List<Book> _books = [
-           new Book(
-               100001,
-                "Design Patterns: Elements of Reusable Object-Oriented Software",
-                "978-0201633610",
-                [
-                    new("Erich", "Gamma", KnownFor: "Gang of Four"),
-                    new("Richard", "Helm", KnownFor: "Gang of Four"),
-                    new("Ralph", "Jonhson", KnownFor: "Gang of Four"),
-                    new("John", "Vlissides", KnownFor: "Gang of Four"),
-                ],
-                Language.English,
-                ThumbnailUrl: "https://covers.openlibrary.org/b/id/1754351-M.jpg"),
-            new Book(
-               100002,
-                "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
-                "978-0134494166",
-                [
-                    new("Robert", "Martin", KnownFor: "Clean Code, Agile, Software Craftsmanship")
-                ],
-                Language.English,
-                ThumbnailUrl: "https://ia903000.us.archive.org/view_archive.php?archive=/3/items/m_covers_0008/m_covers_0008_51.tar&file=0008510059-M.jpg"),
-            new Book(
-                100003,
-               "Test-driven development, by example",
-                "978-0321146533",
-                [
-                    new("Kent", "Beck", KnownFor: "Extreme Programming (XP), TDD")
-                ],
-                Language.English,
-                ThumbnailUrl: "https://ia800505.us.archive.org/view_archive.php?archive=/5/items/m_covers_0012/m_covers_0012_38.zip&file=0012381947-M.jpg")
-           ];
+        new Book(
+            100001,
+            "Design Patterns: Elements of Reusable Object-Oriented Software",
+            "978-0201633610",
+            [
+                new("Erich", "Gamma", KnownFor: "Gang of Four"),
+                new("Richard", "Helm", KnownFor: "Gang of Four"),
+                new("Ralph", "Jonhson", KnownFor: "Gang of Four"),
+                new("John", "Vlissides", KnownFor: "Gang of Four"),
+            ],
+            Language.English,
+            ThumbnailUrl: "https://covers.openlibrary.org/b/id/1754351-M.jpg"),
+        new Book(
+            100002,
+            "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+            "978-0134494166",
+            [
+                new("Robert", "Martin", KnownFor: "Clean Code, Agile, Software Craftsmanship")
+            ],
+            Language.English,
+            ThumbnailUrl: "https://ia903000.us.archive.org/view_archive.php?archive=/3/items/m_covers_0008/m_covers_0008_51.tar&file=0008510059-M.jpg"),
+        new Book(
+            100003,
+            "Test-driven development, by example",
+            "978-0321146533",
+            [
+                new("Kent", "Beck", KnownFor: "Extreme Programming (XP), TDD")
+            ],
+            Language.English,
+            ThumbnailUrl: "https://ia800505.us.archive.org/view_archive.php?archive=/5/items/m_covers_0012/m_covers_0012_38.zip&file=0012381947-M.jpg")
+        ];
 }

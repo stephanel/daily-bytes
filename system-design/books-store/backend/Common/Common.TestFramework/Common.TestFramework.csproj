@@ -12,6 +12,8 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 		<PackageReference Include="Serilog.Extensions.Logging" />
 		<PackageReference Include="Serilog.Sinks.XUnit" />
+		<PackageReference Include="Verify.DiffPlex" />
+		<PackageReference Include="Verify.Xunit" />
 		<PackageReference Include="xunit" />
 		<PackageReference Include="xunit.assert" />
 		<PackageReference Include="xunit.extensibility.core" />

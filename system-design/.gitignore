@@ -1,2 +1,9 @@
+# Docker
 **/docker_volumes
+
+# NCrunch
 *ncrunch*
+
+# Verify
+*.received.*
+*.bak
