@@ -16,10 +16,12 @@ Personal project to put new technologies or models into practice.
       - [Source Projects](#source-projects)
       - [Test Projects](#test-projects)
     - [Backend - Monolith](#backend---monolith)
-  - [Start applications](#start-applications)
-    - [Start the required services](#start-the-required-services)
-      - [How to add a new migration](#how-to-add-a-new-migration)
+  - [Local Setup](#local-setup)
+    - [Regarding Verify](#regarding-verify)
+    - [Add a new database migration](#add-a-new-database-migration)
     - [Update the database](#update-the-database)
+  - [Run applications](#run-applications)
+    - [Start the required services](#start-the-required-services)
   - [Learning Resources](#learning-resources)
 
 ## Folder Structure
@@ -37,10 +39,13 @@ Personal project to put new technologies or models into practice.
 
 - Backend
   - [.NET](https://dotnet.microsoft.com/en-us/)
-  - [MassTransit](https://github.com/MassTransit/MassTransit)
+  - [FastEndpoints](https://fast-endpoints.com/)
   - [Mediator](https://github.com/martinothamar/Mediator)
-  - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
+  - [MassTransit](https://github.com/MassTransit/MassTransit)
   - [Serilog](https://github.com/serilog/serilog)
+  - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
+  - [Xunit](https://xunit.net/)
+  - [Verify](https://github.com/VerifyTests/Verify)
 - Frontend
   - [Angular](https://angular.io/)
   - React - Upcoming!
@@ -127,23 +132,17 @@ FIXME: :warning: Should we merge integration tests projects into a single one?
 
 TBA
 
-## Start applications
+## Local Setup
 
-### Start the required services
+### Regarding Verify
 
-Start the required resources by running the following commands:
+Check [Verify GitHub Repository](https://github.com/VerifyTests/Verify?tab=readme-ov-file) and [Getting started wizard](https://github.com/VerifyTests/Verify/blob/main/docs/wiz/readme.md) for local setup.
 
-```bash
-cd .docker
-docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f grafana-docker-compose.yml up
-```
-Then navigate to:
-- [RabbitMQ Management UI](http://localhost:15672)
-- [Grafana](http://localhost:3000)
-- Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
+:warning: Windows setup may require  [Windows Long Paths Support](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell) enabled since `Verify` can generates long file names (see [`Verify`  section](#verify) below).
 
 
-#### How to add a new migration
+
+### Add a new database migration
 
 Before using migrations add the dotnet ef core tools
 
@@ -168,6 +167,21 @@ cd ./books-store/backend/microservices/src
 # Books API
 dotnet ef database update -p Books.Infrastructure -s Books.API -c BooksDbContext -v
 ```
+
+## Run applications
+
+### Start the required services
+
+Start the required resources by running the following commands:
+
+```bash
+cd .docker
+docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f grafana-docker-compose.yml up
+```
+Then navigate to:
+- [RabbitMQ Management UI](http://localhost:15672)
+- [Grafana](http://localhost:3000)
+- Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
 
 
 ## Learning Resources
