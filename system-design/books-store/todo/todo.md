@@ -1,4 +1,4 @@
-# TODO list
+# TODO
 # https://marketplace.visualstudio.com/items?itemName=usernamehw.todo-md
 
 (A) Update in README file #important

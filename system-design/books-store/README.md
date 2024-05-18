@@ -16,6 +16,9 @@ Personal project to put new technologies or models into practice.
       - [Source Projects](#source-projects)
       - [Test Projects](#test-projects)
     - [Backend - Monolith](#backend---monolith)
+    - [Frontend - Angular](#frontend---angular)
+    - [Frontend - React - Upcoming!](#frontend---react---upcoming)
+    - [Frontend - Vue.js - Upcoming!](#frontend---vuejs---upcoming)
   - [Local Setup](#local-setup)
     - [OpenTelemetry Configuration](#opentelemetry-configuration)
     - [Verify](#verify)
@@ -134,6 +137,15 @@ FIXME: :warning: Should we merge integration tests projects into a single one?
 
 TBA
 
+### Frontend - Angular
+TBA
+
+### Frontend - React - Upcoming!
+Upcoming
+
+### Frontend - Vue.js - Upcoming!
+Upcoming
+
 ## Local Setup
 
 ### OpenTelemetry Configuration
@@ -194,13 +206,16 @@ Start the required resources by running the following commands:
 ```bash
 cd .docker
 docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f observability-docker-compose.yml up
+
+# 📝 replace `observability-docker-compose.yml` 
+# by `aspire-dashboard-docker-compose.yml`
+# to use Aspire Dashboard instead of Grafana
 ```
 Then navigate to:
 - [RabbitMQ Management UI](http://localhost:15672)
-- [Grafana](http://localhost:3000)
+- [Grafana](http://localhost:3000), or [Aspire Dashboard](http://localhost:18888/)
 - [Prometheus](http://localhost:8080/)
 - Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
-
 
 ## Learning Resources
 
