@@ -8,7 +8,9 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5270;https://localhost:5271",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "OTEL_EXPORTER_OTPL_ENDPOINT": "http://localhost:4317",
+        "OTEL_SERVICE_NAME": "Books.API"
       }
     }
   }

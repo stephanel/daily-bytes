@@ -2,6 +2,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Common.Extensions.DependencyInjection;
 
@@ -9,12 +10,16 @@ public static class ServiceCollectionsExtensions
 {
     public static IServiceCollection RegisterApiServices(this IServiceCollection services, CORSConfiguration? corsConfiguration)
     {
+        services.AddHealthChecks().AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
+
         services.AddEndpointsApiExplorer()
             .AddAuthorization()
+            //.AddProblemDetails()
             .AddFastEndpoints()
-            .AddSwagger();
+            .AddSwagger()
+            ;
 
-        if(corsConfiguration is not null)
+        if (corsConfiguration is not null)
         {
             services.ConfigursCORSPolicies(corsConfiguration!);
         }

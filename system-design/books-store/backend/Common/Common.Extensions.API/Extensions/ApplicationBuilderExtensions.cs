@@ -2,7 +2,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,15 +12,18 @@ public static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder ConfigureApi(this IApplicationBuilder app, CORSConfiguration corsConfiguration)
     {
+        MapHealthChecks(app as WebApplication);
+
         app.UseHttpsRedirection()
-           .UseAuthorization()
-           .UseFastEndpoints(c =>
-           {
-               c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-               c.Serializer.Options.Converters.Add(new JsonStringEnumConverter());
-               c.Serializer.Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
-           })
-           .UseSwaggerGen();
+            //.UseExceptionHandler()
+            .UseAuthorization()
+            .UseFastEndpoints(c =>
+            {
+                c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                c.Serializer.Options.Converters.Add(new JsonStringEnumConverter());
+                c.Serializer.Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+            })
+            .UseSwaggerGen();
 
         if(corsConfiguration is not null)
         {
@@ -28,5 +31,17 @@ public static class ApplicationBuilderExtensions
         }
 
         return app;
+    }
+
+    public static void MapHealthChecks(WebApplication? app)
+    {
+        if(app is not null)
+        {
+            app!.MapHealthChecks("/health");
+            app.MapHealthChecks("/alive", new HealthCheckOptions
+            {
+                Predicate = r => r.Tags.Contains("live")
+            });
+        }
     }
 }

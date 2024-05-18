@@ -1,0 +1,18 @@
+version: '3.9'
+
+networks:
+  books_store_otel_network:
+
+services:
+  aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0-preview
+    container_name: aspire-dashboard
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - 18888:18888
+      - 4317:18889
+    volumes:
+      - ./docker_volumes/aspire-dashboard:/aspire-dashboard
+    networks:
+      - books_store_otel_network

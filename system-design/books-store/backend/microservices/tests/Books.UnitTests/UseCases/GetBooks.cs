@@ -1,5 +1,6 @@
 ﻿using Books.Application.UseCases.GetBooks;
 using Books.Domain.Books;
+using Common.TestFramework.Fakes;
 using System.Collections.Immutable;
 
 namespace Books.UnitTests.UseCases;
@@ -8,9 +9,11 @@ namespace Books.UnitTests.UseCases;
 public class GetBooks
 {
     private readonly FakeBooksRepository _booksRepository = new FakeBooksRepository();
+    private readonly FakeLogger<GetBooksHandler> _logger = new();
+
     private readonly GetBooksHandler _handler;
 
-    public GetBooks() => _handler = new GetBooksHandler(_booksRepository);
+    public GetBooks() => _handler = new GetBooksHandler(_booksRepository, _logger);
 
     [Fact]
     public async Task Should_Return_All_Persisted_Books()

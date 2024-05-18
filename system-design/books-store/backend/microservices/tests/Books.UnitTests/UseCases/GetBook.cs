@@ -1,6 +1,8 @@
 ﻿using Books.Application.UseCases.GetBook;
 using Books.Domain.Books;
 using Common.Extensions.Rop;
+using Common.TestFramework.Fakes;
+using Microsoft.Extensions.Logging;
 
 namespace Books.UnitTests.UseCases;
 
@@ -8,9 +10,11 @@ namespace Books.UnitTests.UseCases;
 public class GetBook
 {
     private readonly FakeBookRepository _booksRepository = new FakeBookRepository();
+    private readonly FakeLogger<GetBookByIdHandler> _logger = new();
+
     private readonly GetBookByIdHandler _handler;
 
-    public GetBook() => _handler = new GetBookByIdHandler(_booksRepository);
+    public GetBook() => _handler = new GetBookByIdHandler(_booksRepository, _logger);
 
     [Fact]
     public async Task Should_Return_All_Persisted_Books()

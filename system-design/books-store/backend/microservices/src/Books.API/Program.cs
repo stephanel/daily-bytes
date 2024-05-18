@@ -14,7 +14,8 @@ public class Program
 
         CORSConfiguration corsConfiguration = new("localhostPolicy", ["http://localhost:4200"]);
 
-        builder.Host.ConfigureLogging();
+        builder.ConfigureObservability();
+
         builder.Services
             .RegisterApplicationServices()
             .RegisterInfrastructureServices()
