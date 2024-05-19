@@ -25,7 +25,7 @@
 
 (A) Configure backend tracing #important #observability {due:2024-05-18} {cm:2024-05-18}
 (A) Configure backend metrics #important #observability {due:2024-05-18} {cm:2024-05-18}
-(A) Configure logs forwarding to grafana #important #observability {due:2024-05-18} {cm:2024-05-18}
+(A) Configure logs/trace/metrics forwarding to grafana #important #observability {due:2024-05-18} {cm:2024-05-19}
 (A) Write logs to grafana, or alt. #important #observability {cm:2024-05-18}
 
 (A) Add books to database (db migration) #important #observability {due:2024-05-18}
