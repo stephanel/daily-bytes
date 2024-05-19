@@ -29,13 +29,16 @@
 (A) Write logs to grafana, or alt. #important #observability {cm:2024-05-18}
 
 (A) Add books to database (db migration) #important #observability {due:2024-05-18}
+(A) Update integration tests - add DB fixture {due:2024-05-20}
+
+(A) Make logs/traces/metrics configurable.
 
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 
 
 (B) books: add publisher, publish date, number of pages, subjects
 
-(B) Make author clickable in books list #enhancement #frontend
+(B) Make author clickable in books list and show details page for selected author with the list of written books #enhancement #frontend
 
 (B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
 

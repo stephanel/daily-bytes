@@ -1,24 +1,26 @@
-﻿using Books.Domain.Books;
+﻿using Books.Infrastructure.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Books.Infrastructure.Persistence.Configurations;
 
-internal class BookEntityConfiguration : IEntityTypeConfiguration<Book>
+internal class BookEntityConfiguration : IEntityTypeConfiguration<BookDb>
 {
-    public void Configure(EntityTypeBuilder<Book> builder)
+    public void Configure(EntityTypeBuilder<BookDb> builder)
     {
+        builder.ToTable("Books");
+
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Language).HasConversion<string>();
-        builder.OwnsOne(c => c.Authors, d =>
+
+        builder.OwnsOne(c => c.Payload, d =>
         {
             d.ToJson();
+            d.OwnsMany(x => x.Authors);
         });
 
         // indexes
         builder.HasIndex(x => x.Title);
-        builder.HasIndex(x => x.ISBN).IsUnique();
-        builder.HasIndex(x => x.Language);
-        // no index on Authors for now
     }
+
+   
 }

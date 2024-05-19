@@ -1,4 +1,5 @@
 using Books.DependencyInjection;
+using Common.Extensions.API.Observability;
 using Common.Extensions.Configuration;
 using Common.Extensions.DependencyInjection;
 

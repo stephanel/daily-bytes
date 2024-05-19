@@ -1,6 +1,6 @@
 ﻿namespace Books.Domain.Books;
 
-public record Book(BookId Id, string Title, ISBN ISBN, Author[] Authors, Language Language, string? ThumbnailUrl = null);
+public record Book(BookId Id, string Title, ISBN ISBN, List<Author> Authors, Language Language, string? ThumbnailUrl = null);
 
 public record Author(string FirstName, string LastName, string? KnownFor = null);
 

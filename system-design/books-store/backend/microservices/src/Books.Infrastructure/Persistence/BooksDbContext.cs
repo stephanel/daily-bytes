@@ -1,4 +1,4 @@
-﻿using Books.Domain.Books;
+﻿using Books.Infrastructure.Persistence.Models;
 using Common.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +10,8 @@ internal class BooksDbContext : DbContextBase
 {
     protected override string ApplicationName => "Books.API";
     protected override string DatabaseConnectionString => "BooksDatabaseConnectionString";
-    protected override string DbSchema => "Books";
 
-    public DbSet<Book> Books => Set<Book>();
+    public DbSet<BookDb> Books => Set<BookDb>();
 
     public BooksDbContext(IConfiguration configuration) : base(configuration)
     { }

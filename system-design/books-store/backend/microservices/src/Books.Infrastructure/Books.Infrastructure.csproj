@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
+    <None Remove="Persistence\Migrations\Scripts\SeedBooks.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Migrations\Scripts\SeedBooks.sql" />
   </ItemGroup>
 
   <ItemGroup>

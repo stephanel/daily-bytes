@@ -11,8 +11,6 @@ public abstract class DbContextBase : DbContext
 
     protected abstract string ApplicationName { get; }
     protected abstract string DatabaseConnectionString { get; }
-    protected abstract string DbSchema { get; }
-
     protected DbContextBase(IConfiguration configuration)
     {
         _configuration = configuration;
@@ -45,8 +43,6 @@ public abstract class DbContextBase : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .HasDefaultSchema(DbSchema)
-            .HasPostgresExtension("uuid-ossp");
+        modelBuilder.HasPostgresExtension("uuid-ossp");
     }
 }

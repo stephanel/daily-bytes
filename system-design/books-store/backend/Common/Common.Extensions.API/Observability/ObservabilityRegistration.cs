@@ -15,7 +15,7 @@ using Serilog.Sinks.OpenTelemetry;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace Common.Extensions.DependencyInjection;
+namespace Common.Extensions.API.Observability;
 
 public static class ObservabilityRegistration
 {
@@ -30,7 +30,7 @@ public static class ObservabilityRegistration
             ["System"] = LogLevel.Warning
         }.AsReadOnly();
 
-    private static Func<string> GetOtelServiceName = () 
+    private static Func<string> GetOtelServiceName = ()
         => Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME") ?? DefaultServiceName;
 
     private static Func<string?> GetOtelEndpoint = ()
@@ -135,7 +135,7 @@ public static class ObservabilityRegistration
             //config.WriteTo.Seq("http://localhost:5341");
 
             var otelBaseEndpoint = GetOtelEndpoint();
-            if(otelBaseEndpoint is not null)
+            if (otelBaseEndpoint is not null)
             {
                 config.WriteTo.OpenTelemetry(opt =>
                 {
@@ -171,7 +171,7 @@ public static class ObservabilityRegistration
     }
 
     private static void ConfigureLogLevels(
-        List<string> logSources, 
+        List<string> logSources,
         LoggerConfiguration config,
         ReadOnlyDictionary<string, LogLevel?>? logLevels)
     {
