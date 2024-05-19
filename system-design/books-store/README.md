@@ -217,6 +217,16 @@ Then navigate to:
 - [Prometheus](http://localhost:8080/)
 - Books API - [Swagger UI](https://localhost:7141/swagger/index.html) - [OAS](https://localhost:7141/swagger/v1/swagger.json)
 
+:warning: When using `observability-docker-compose.yml` the following folder structure needs to be created manually for the docker containers to start properly the first time.
+
+```
+- books-store
+  |--.docker
+      |--docker_volumes
+          |--prometheus
+              |--data
+```
+
 ## Learning Resources
 
 - [C4 Models](https://c4model.com/)

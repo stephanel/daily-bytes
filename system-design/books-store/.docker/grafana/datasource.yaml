@@ -16,6 +16,13 @@ datasources:
   #     matcherRegex: (?:"traceid"):"(\w+)"
   #     name: TraceID
   #     url: $${__value.raw}
+  # jsonData:
+  #   derivedFields:
+  #   - datasourceName: Tempo
+  #     datasourceUid: tempo
+  #     matcherRegex: trace_id=(\w+)
+  #     name: TraceID
+  #     url: '$${__value.raw}'
 - name: Prometheus
   type: prometheus
   url: http://prometheus:8080
@@ -26,3 +33,18 @@ datasources:
   version: 1
   jsonData:
     tlsSkipVerify: true
+- name: Tempo
+  type: tempo
+  access: proxy
+  orgId: 1
+  url: http://tempo:3200
+  basicAuth: false
+  isDefault: false
+  version: 1
+  editable: true
+  apiVersion: 1
+  uid: tempo
+  jsonData:
+    httpMethod: GET
+    serviceMap:
+      datasourceUid: prometheus

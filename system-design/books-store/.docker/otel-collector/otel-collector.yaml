@@ -5,7 +5,7 @@ receivers:
         endpoint: 0.0.0.0:4318
       grpc:
         endpoint: 0.0.0.0:4317
-        
+
 processors:
   batch:
     timeout: 1s
@@ -24,14 +24,10 @@ exporters:
     const_labels:
       product_id: BookStore
 
-  # jaeger:
-  #   endpoint: jaeger:14250
-  #   tls:
-  #     insecure: true
-
-  # zipkin:
-  #   endpoint: "http://zipkin:9411/api/v2/spans"
-  #   format: proto
+  otlp:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
 
   loki:
     endpoint: http://loki:3100/loki/api/v1/push
@@ -56,7 +52,7 @@ service:
       receivers: [otlp]
       # processors: [batch, resource]
       processors: [batch]
-      exporters: [logging]
+      exporters: [logging, otlp]
 
     metrics:
       receivers: [otlp]

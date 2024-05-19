@@ -5,6 +5,25 @@ networks:
 
 services:
 
+  tempo:
+    container_name: tempo
+    # image: *tempoImage
+    image: grafana/tempo:2.3.1
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo/tempo.yml:/etc/tempo.yaml
+      - ./docker_volumes/tempo:/var/tempo
+    ports:
+      # - "14268"  # jaeger ingest
+      - "3200"   # tempo
+      - "4317"  # otlp grpc
+      - "4318"  # otlp http
+      # - "9411"   # zipkin
+    # depends_on:
+    #   - tempo-init
+    networks:
+      - books_store_observability_network
+
   prometheus:
     container_name: prometheus
     image: prom/prometheus
@@ -51,6 +70,7 @@ services:
     depends_on:
       - loki
       - prometheus
+      - tempo
     networks:
       - books_store_observability_network 
 
@@ -75,4 +95,5 @@ services:
     depends_on:
       - loki
       - prometheus
+      - tempo
       - otel-collector
