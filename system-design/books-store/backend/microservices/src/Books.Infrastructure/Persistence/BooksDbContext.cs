@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using Common.Infrastructure.Persistence;
-using Books.Domain.Books;
 
 namespace Books.Infrastructure.Persistence;
 
@@ -10,6 +9,7 @@ internal class BooksDbContext : DbContextBase
 {
     protected override string ApplicationName => "Books.API";
     protected override string DatabaseConnectionString => "BooksDatabaseConnectionString";
+    protected override string DbSchema => "Books";
 
     //public DbSet<Book> Books => Set<Book>();
 
