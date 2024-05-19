@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Infrastructure", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extensions.API", "..\Common\Common.Extensions.API\Common.Extensions.API.csproj", "{6750CF58-E1E4-467D-BC48-18175557101C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Infrastructure", "..\Common\Common.Infrastructure\Common.Infrastructure.csproj", "{C00B871B-2E34-46F6-859F-B7CD081CBC14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..\Common\Common.Infrastructure\Common.Infrastructure.csproj", "{C00B871B-2E34-46F6-859F-B7CD081CBC14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
