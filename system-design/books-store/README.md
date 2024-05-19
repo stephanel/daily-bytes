@@ -26,6 +26,7 @@ Personal project to put new technologies or models into practice.
     - [Update the database](#update-the-database)
   - [Run applications](#run-applications)
     - [Start the required services](#start-the-required-services)
+    - [Application Settings](#application-settings)
   - [Learning Resources](#learning-resources)
 
 ## Folder Structure
@@ -226,6 +227,10 @@ Then navigate to:
           |--prometheus
               |--data
 ```
+
+### Application Settings
+
+- **Database connection strings**: use the database, the users and the password respectively assigned to the environment variables `POSTGRES_MULTIPLE_DATABASES` and `POSTGRES_PASSWORD` in docker compose file `.docker/postgres-docker-compose.yml`.
 
 ## Learning Resources
 
