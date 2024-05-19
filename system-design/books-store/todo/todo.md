@@ -28,7 +28,7 @@
 (A) Configure logs/trace/metrics forwarding to grafana #important #observability {due:2024-05-18} {cm:2024-05-19}
 (A) Write logs to grafana, or alt. #important #observability {cm:2024-05-18}
 
-(A) Add books to database (db migration) #important #observability {due:2024-05-18}
+(A) Add books to database (db migration) #important #observability {due:2024-05-18} {cm:2024-05-19}
 (A) Update integration tests - add DB fixture {due:2024-05-20}
 
 (A) Make logs/traces/metrics configurable.
