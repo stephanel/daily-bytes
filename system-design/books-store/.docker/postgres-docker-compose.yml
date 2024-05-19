@@ -11,10 +11,15 @@ services:
     ports:
       - 5433:5432
     volumes:
+      - ./postgres:/docker-entrypoint-initdb.d      
       - ./docker_volumes/postgres:/var/lib/postgresql/data
     environment:
+      - POSTGRES_MULTIPLE_DATABASES=books,books_user; orders,orders_user; users,users_user; subscriptions,subscriptions_user
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=books_store
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - books_store_postgres_network
