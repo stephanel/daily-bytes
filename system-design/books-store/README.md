@@ -29,17 +29,6 @@ Personal project to put new technologies or models into practice.
     - [Application Settings](#application-settings)
   - [Learning Resources](#learning-resources)
 
-## Folder Structure
-
-- [Docker Compose Files](./.docker)
-- [Backend](./backend)
-  - [Microservices Architecture](./backend/microservices)
-  - [Monolithic Architecture](./backend/monolithic) - Upcoming
-- [Frontend](./frontend) - Upcoming
-  - [Angular](./frontend/angular) - Upcoming
-  - [React](./frontend/react) - Upcoming
-  - [Vue.js](./frontend/vuejs) - Upcoming
-
 ## Technologies
 
 - Backend
@@ -51,6 +40,7 @@ Personal project to put new technologies or models into practice.
   - [OpenTelemetry .Net Instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
   - [Xunit](https://xunit.net/)
   - [Verify](https://github.com/VerifyTests/Verify)
+  - Docker
 - Frontend
   - [Angular](https://angular.io/)
   - React - Upcoming!
@@ -62,28 +52,40 @@ Personal project to put new technologies or models into practice.
 - DevOps
   - TBD - CI/CD Pipelines
   - TBD - Quality Gate
+- Deployment - TBD
 - Performances
   - [k6](https://k6.io/)
 
 ## Features
 
-- The user can view the catalog of books
-- The user can search for books
-- The user can view the details of a book
-- The user can order books: 3 books limit per order
-- The user can create a free user account
-- The user can subscribe to Premium offer
-  - Increases the books limit per order to 5 books
-  - Gives access to promotions
-- The user can cancel his subscription
-- The user can view and edit his contact info
-- The user can view the status of his subscription
-- The user can view his orders history
+- As a user, I can view the catalog of books
+- As a user, I can search for books
+- As a user, I can view the details of a book
+- As a user, I can order books: 3 books limit per order
+- As an unregistered user, I can order books with the same limitation as a registered user 
+- As a user, I can create a free user account
+- As a user, I can subscribe to the Premium offer, which increases the books limit to 5 per order, and gives access to promotions
+- As a user, I can cancel my subscription at any moment
+- As a registered user, I can view and edit my contact info
+- As a registered user, I can view the status my his subscription
+- As a registered user, I can view my orders history
 - make UI multilingual?
 
 ## Architecture
 
 See [System Design Documentation](./docs/system-design.md)
+
+## Folder Structure
+
+- [Docker Compose Files](./.docker)
+- [Backend](./backend)
+  - [Common](./backend/Common) 
+  - [Microservices Architecture](./backend/microservices)
+  - [Monolithic Architecture](./backend/monolithic) - Upcoming
+- [Frontend](./frontend) - Upcoming
+  - [Angular](./frontend/angular) - Upcoming
+  - [React](./frontend/react) - Upcoming
+  - [Vue.js](./frontend/vuejs) - Upcoming
 
 ## Solutions
 
@@ -96,8 +98,10 @@ Source folder: `backend/common/`
 | Project | Folder |
 | ------------- | ------------- |
 | ApiGateway | Common/ApiGateway/ |
-| Common.Extensions | Common/CommonExtensions/ |
-| Common.Extensions.API | Common/CommonExtensions.API/ |
+| Auth Service | Common/Auth/ |
+| Common.Extensions | Common/Common.Extensions/ |
+| Common.Extensions.API | Common/Common.Extensions.API/ |
+| Common.Infrastructure | Common/Common.Infrastructure/ |
 | Common.TestFramework | Common.TestFramework/ |
 
 ### Backend - Microservices
