@@ -112,9 +112,9 @@ Each projects is composed of 4 layers: API (or Consumer), Application, Domain, I
 | ------------- | ------------- | ------------- |
 | Books API | Books.[layer] | Web API |
 | OrdersHistory API | OrdersHistory.[layer] | Web API |
+| OrderManagement Service | OrderManagement.[layer] | Web App (Consumer) |
 | UserAccounts API | UserAccounts.[layer] | Web API |
 | Subscriptions API | Subscriptions.[layer] | Web API |
-| OrderManagement Service | OrderManagement.[layer] | Web App (Consumer) |
 
 
 #### Test Projects
