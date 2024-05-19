@@ -29,17 +29,6 @@ Personal project to put new technologies or models into practice.
     - [Application Settings](#application-settings)
   - [Learning Resources](#learning-resources)
 
-## Folder Structure
-
-- [Docker Compose Files](./.docker)
-- [Backend](./backend)
-  - [Microservices Architecture](./backend/microservices)
-  - [Monolithic Architecture](./backend/monolithic) - Upcoming
-- [Frontend](./frontend) - Upcoming
-  - [Angular](./frontend/angular) - Upcoming
-  - [React](./frontend/react) - Upcoming
-  - [Vue.js](./frontend/vuejs) - Upcoming
-
 ## Technologies
 
 - Backend
@@ -51,6 +40,7 @@ Personal project to put new technologies or models into practice.
   - [OpenTelemetry .Net Instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
   - [Xunit](https://xunit.net/)
   - [Verify](https://github.com/VerifyTests/Verify)
+  - Docker
 - Frontend
   - [Angular](https://angular.io/)
   - React - Upcoming!
@@ -85,6 +75,18 @@ Personal project to put new technologies or models into practice.
 
 See [System Design Documentation](./docs/system-design.md)
 
+## Folder Structure
+
+- [Docker Compose Files](./.docker)
+- [Backend](./backend)
+  - [Common](./backend/Common) 
+  - [Microservices Architecture](./backend/microservices)
+  - [Monolithic Architecture](./backend/monolithic) - Upcoming
+- [Frontend](./frontend) - Upcoming
+  - [Angular](./frontend/angular) - Upcoming
+  - [React](./frontend/react) - Upcoming
+  - [Vue.js](./frontend/vuejs) - Upcoming
+
 ## Solutions
 
 ### Common Projects
@@ -96,8 +98,10 @@ Source folder: `backend/common/`
 | Project | Folder |
 | ------------- | ------------- |
 | ApiGateway | Common/ApiGateway/ |
-| Common.Extensions | Common/CommonExtensions/ |
-| Common.Extensions.API | Common/CommonExtensions.API/ |
+| Auth Service | Common/Auth/ |
+| Common.Extensions | Common/Common.Extensions/ |
+| Common.Extensions.API | Common/Common.Extensions.API/ |
+| Common.Infrastructure | Common/Common.Infrastructure/ |
 | Common.TestFramework | Common.TestFramework/ |
 
 ### Backend - Microservices
