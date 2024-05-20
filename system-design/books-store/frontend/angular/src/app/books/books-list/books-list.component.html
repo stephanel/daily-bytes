@@ -14,13 +14,11 @@
                             ISBN: {{ book?.isbn }}
                         </div>
                         <div class="card-text">
+                            Language: {{ book?.language }}
+                        </div>
+                        <div class="card-text">
                             Authors: {{ book.authors | authorsConcatenation }}
                         </div>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                Last updated 3 mins ago
-                            </small>
-                        </p>
                         <a [routerLink]="['/book', book?.id]" routerLinkActive="active" ariaCurrentWhenActive="page">View</a>
                     </div>
                 </div>

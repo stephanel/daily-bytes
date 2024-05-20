@@ -12,15 +12,11 @@
                     ISBN: {{ bookDetails?.isbn }}
                 </div>
                 <div class="card-text">
+                    Language: {{ bookDetails?.language }}
+                </div>
+                <div class="card-text">
                     Authors: {{ bookDetails?.authors| authorsConcatenation }}
                 </div>
-
-                <p class="card-text">
-                    <small class="text-muted">
-                        Last updated 3 mins ago
-                    </small>
-                </p>
-
             </div>
         </div>
     </div>
