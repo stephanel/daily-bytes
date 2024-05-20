@@ -1,0 +1,44 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.0.4",
+  "deps": {
+    "@nx/playwright": "19.0.4",
+    "@nx/vite": "19.0.4",
+    "@nx/vue": "19.0.4",
+    "@nx/workspace": "19.0.4",
+    "nx": "19.0.4"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "@book-store/source": [
+        {
+          "file": ".gitignore",
+          "hash": "16877376182141465221"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "5673190821613406900"
+        },
+        {
+          "file": "README.md",
+          "hash": "3272066787083925838"
+        },
+        {
+          "file": "nx.json",
+          "hash": "7984885312398650396"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "14651338615417572371"
+        },
+        {
+          "file": "package.json",
+          "hash": "17016253862255721560"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}

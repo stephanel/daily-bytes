@@ -6,19 +6,17 @@ Personal project to put new technologies or models into practice.
 
 - [Books Store](#books-store)
   - [Content](#content)
-  - [Folder Structure](#folder-structure)
   - [Technologies](#technologies)
   - [Features](#features)
   - [Architecture](#architecture)
+  - [Folder Structure](#folder-structure)
   - [Solutions](#solutions)
     - [Common Projects](#common-projects)
     - [Backend - Microservices](#backend---microservices)
       - [Source Projects](#source-projects)
       - [Test Projects](#test-projects)
     - [Backend - Monolith](#backend---monolith)
-    - [Frontend - Angular](#frontend---angular)
-    - [Frontend - React - Upcoming!](#frontend---react---upcoming)
-    - [Frontend - Vue.js - Upcoming!](#frontend---vuejs---upcoming)
+    - [Frontend](#frontend)
   - [Local Setup](#local-setup)
     - [OpenTelemetry Configuration](#opentelemetry-configuration)
     - [Verify](#verify)
@@ -83,9 +81,9 @@ See [System Design Documentation](./docs/system-design.md)
   - [Microservices Architecture](./backend/microservices)
   - [Monolithic Architecture](./backend/monolithic) - Upcoming
 - [Frontend](./frontend) - Upcoming
-  - [Angular](./frontend/angular) - Upcoming
-  - [React](./frontend/react) - Upcoming
-  - [Vue.js](./frontend/vuejs) - Upcoming
+  - [Angular](./frontend/angular) - In Progress
+  - [React](./frontend/react) - In Progress
+  - [Vue.js](./frontend/vuejs) - In Progress
 
 ## Solutions
 
@@ -142,14 +140,8 @@ FIXME: :warning: Should we merge integration tests projects into a single one?
 
 TBA
 
-### Frontend - Angular
+### Frontend
 TBA
-
-### Frontend - React - Upcoming!
-Upcoming
-
-### Frontend - Vue.js - Upcoming!
-Upcoming
 
 ## Local Setup
 
