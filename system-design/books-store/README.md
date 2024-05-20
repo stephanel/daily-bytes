@@ -40,15 +40,15 @@ Personal project to put new technologies or models into practice.
   - [Verify](https://github.com/VerifyTests/Verify)
   - Docker
 - Frontend
-  - [Angular](https://angular.io/)
-  - React - Upcoming!
-  - Vue.js - Upcoming!
+  - [Angular](https://angular.io/docs)
+  - [React](https://react.dev/learn)
+  - [Vue.js](https://vuejs.org/guide/introduction.html)
 - Infrastructure
   - PostgreSQL
   - TBD - RabbitMQ, Kafka
   - Grafana, Loki (logs), Prometheus (metrics), Aspire
 - DevOps
-  - TBD - CI/CD Pipelines
+  - TBD - CI/CD
   - TBD - Quality Gate
 - Deployment - TBD
 - Performances
