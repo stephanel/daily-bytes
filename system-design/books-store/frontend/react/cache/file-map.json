@@ -1,0 +1,45 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.0.4",
+  "deps": {
+    "@nx/cypress": "19.0.4",
+    "@nx/jest": "19.0.4",
+    "@nx/react": "19.0.4",
+    "@nx/webpack": "19.0.4",
+    "@nx/workspace": "19.0.4",
+    "nx": "19.0.4"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "@book-store/source": [
+        {
+          "file": ".gitignore",
+          "hash": "16877376182141465221"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "5673190821613406900"
+        },
+        {
+          "file": "README.md",
+          "hash": "3272066787083925838"
+        },
+        {
+          "file": "nx.json",
+          "hash": "7984885312398650396"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "15642014154235560722"
+        },
+        {
+          "file": "package.json",
+          "hash": "5860624221542679397"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}
