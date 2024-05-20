@@ -9,11 +9,11 @@ export interface BooksListProps {
   readonly booksService: BooksService
 }
 
-interface BooksState {
+interface BooksListState {
   readonly books: Book[]
 }
 
-export class BooksList extends React.Component<BooksListProps, BooksState> {
+export class BooksList extends React.Component<BooksListProps, BooksListState> {
 
   constructor(props: BooksListProps) {
     super(props);
@@ -28,7 +28,6 @@ export class BooksList extends React.Component<BooksListProps, BooksState> {
 
   render() {
     const { books } = this.state
-
     
     const booksList = books.map((book) => (
       <li key={book.id}>
@@ -49,7 +48,7 @@ export class BooksList extends React.Component<BooksListProps, BooksState> {
                             Language: {book?.language}
                         </div>
                         <div className="card-text">
-                            Authors: {book.authors.map((author) => `${author?.firstName} ${author?.lastName}`).join(', ')}
+                            Authors: {book?.authors.map((author) => `${author?.firstName} ${author?.lastName}`).join(', ')}
                         </div>
                         <Link to={'/books/' + book?.id}>View</Link>
                     </div>

@@ -6,15 +6,17 @@ import BooksService from './components/books/books.service';
 import Menu from './components/menu/menu';
 import BookDetails from './components/books/book-details/book-details';
 
-// import NxWelcome from './nx-welcome';
-
 export function App() {
+
+  const booksService = new BooksService();
+  
   return (
     <div>
       <Menu title={ 'Book Store' } /> 
       <Routes>
-        <Route path='/' element={<BooksList booksService={new BooksService()} />} />
-        <Route path='/books/:id' element={<BookDetails/>} />
+        <Route path='/' element={<BooksList {...{booksService}} />} />
+        {/* <Route path='/books/:id' element={<BookDetails booksService={new BooksService()} />} /> */}
+        <Route path='/books/:id' element={<BookDetails  {...{booksService}} />} />
       </Routes>
     </div>
   );
