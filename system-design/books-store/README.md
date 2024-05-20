@@ -245,7 +245,10 @@ Navigate to the folder of the the frontend project you would like to run (angula
 npm install # or yarn install
 npx nx serve
 ```
-Then navigate to http://localhost:4200
+Then navigate to:
+- Angular: http://localhost:4200
+- React: http://localhost:4201
+- Vue.js: http://localhost:4202
 
 
 ## Learning Resources

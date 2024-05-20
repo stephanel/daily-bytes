@@ -8,7 +8,7 @@ export default defineConfig({
   cacheDir: './node_modules/.vite/book-store',
 
   server: {
-    port: 4200,
+    port: 4202,
     host: 'localhost',
   },
 
