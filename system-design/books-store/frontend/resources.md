@@ -11,3 +11,7 @@ OTEL - create custom metrics: https://www.mytechramblings.com/posts/getting-star
 
 - Grafana/Loki/Prometheus/Jaeger(or Zipkin)
 https://github.com/kimcuhoang/practical-net-otelcollector/blob/main/local/infra/docker-compose.observability.yaml
+
+
+Nx - useful commands
+npx nx lint
