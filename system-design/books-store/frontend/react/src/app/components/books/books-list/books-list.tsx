@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import BooksService from '../books.service';
 import styles from './books-list.module.css';
 import { Book } from '../book.model';
@@ -50,7 +51,7 @@ export class BooksList extends React.Component<BooksListProps, BooksState> {
                         <div className="card-text">
                             Authors: {book.authors.map((author) => `${author?.firstName} ${author?.lastName}`).join(', ')}
                         </div>
-                        <a href={'/book/' + book?.id}>View</a>
+                        <Link to={'/books/' + book?.id}>View</Link>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import styles from './menu.module.css';
+import { Link } from "react-router-dom";
 
 /* eslint-disable-next-line */
 export interface MenuProps {
@@ -21,8 +22,8 @@ export function Menu({ title } : MenuProps) {
                   Hi, User
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a className="dropdown-item" href="/user/74">User Account</a></li>
-                  <li><a className="dropdown-item" href="/user/74/order-history">User Orders History</a></li>
+                  <li><Link className="dropdown-item" to="/user/74">User Account</Link></li>
+                  <li><Link className="dropdown-item" to="/user/74/order-history">User Orders History</Link></li>
                 </ul>
               </li> 
             </ul>
