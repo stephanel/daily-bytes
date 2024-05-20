@@ -11,7 +11,7 @@ services:
     image: grafana/tempo:2.3.1
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
-      - ./tempo/tempo.yml:/etc/tempo.yaml
+      - ./config/tempo/tempo.yml:/etc/tempo.yaml
       - ./docker_volumes/tempo:/var/tempo
     ports:
       # - "14268"  # jaeger ingest
@@ -36,7 +36,7 @@ services:
       - 9090:9090
       - 8080:8080
     volumes:
-      - ./prometheus:/etc/prometheus
+      - ./config/prometheus:/etc/prometheus
       - ./docker_volumes/prometheus:/prometheus
     networks:
       - books_store_observability_network
@@ -58,7 +58,7 @@ services:
     command: 
       - '--config=/etc/otel-collector.yaml'
     volumes:
-      - ./otel-collector/otel-collector.yaml:/etc/otel-collector.yaml
+      - ./config/otel-collector/otel-collector.yaml:/etc/otel-collector.yaml
     ports:
       # - 1888:1888 # pprof extension
       # - 13133:13133 # health_check extension
@@ -88,7 +88,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/ds.yaml # name needs to be ds.yaml or it won't be properly provisionned with error 'Failed to provision data sources'
+      - ./config//grafana/datasource.yaml:/etc/grafana/provisioning/datasources/ds.yaml # name needs to be ds.yaml or it won't be properly provisionned with error 'Failed to provision data sources'
       - ./docker_volumes/grafana:/var/lib/grafana
     networks:
       - books_store_observability_network
