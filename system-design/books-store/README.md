@@ -33,7 +33,7 @@ Personal project to put new technologies or models into practice.
 ## Technologies
 
 - Backend
-  - [.NET](https://dotnet.microsoft.com/en-us/)
+  - [.NET 8](https://dotnet.microsoft.com/en-us/)
   - [FastEndpoints](https://fast-endpoints.com/)
   - [Mediator](https://github.com/martinothamar/Mediator)
   - [MassTransit](https://github.com/MassTransit/MassTransit)
@@ -41,12 +41,12 @@ Personal project to put new technologies or models into practice.
   - [OpenTelemetry .Net Instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
   - [Xunit](https://xunit.net/)
   - [Verify](https://github.com/VerifyTests/Verify)
-  - Docker
 - Frontend
   - [Angular](https://angular.io/docs)
   - [React](https://react.dev/learn)
   - [Vue.js](https://vuejs.org/guide/introduction.html)
 - Infrastructure
+  - Docker
   - PostgreSQL
   - TBD - RabbitMQ, Kafka
   - Grafana, Loki (logs), Prometheus (metrics), Aspire
@@ -252,3 +252,6 @@ Then navigate to http://localhost:4200
 
 - [C4 Models](https://c4model.com/)
 - [CQRS](https://martinfowler.com/bliki/CQRS.html)
+- [Angular](https://angular.io/docs)
+- [React](https://react.dev/learn)
+- [Vue.js](https://vuejs.org/guide/introduction.html)
