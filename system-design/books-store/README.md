@@ -25,6 +25,9 @@ Personal project to put new technologies or models into practice.
   - [Run applications](#run-applications)
     - [Start the required services](#start-the-required-services)
     - [Application Settings](#application-settings)
+    - [Run Applications](#run-applications-1)
+      - [Backend](#backend)
+      - [Frontend](#frontend-1)
   - [Learning Resources](#learning-resources)
 
 ## Technologies
@@ -227,6 +230,23 @@ Then navigate to:
 ### Application Settings
 
 - **Database connection strings**: use the database, the users and the password respectively assigned to the environment variables `POSTGRES_MULTIPLE_DATABASES` and `POSTGRES_PASSWORD` in docker compose file `.docker/postgres-docker-compose.yml`.
+
+
+### Run Applications
+
+#### Backend
+TBA
+
+#### Frontend
+
+Navigate to the folder of the the frontend project you would like to run (angular, react or vuejs) and run the following commands:
+
+```bash
+npm install # or yarn install
+npx nx serve
+```
+Then navigate to http://localhost:4200
+
 
 ## Learning Resources
 
