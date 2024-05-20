@@ -48,7 +48,7 @@ services:
     ports:
       - 3100:3100
     volumes:
-      - ./loki:/etc/loki
+      - ./config/loki:/etc/loki
     networks:
       - books_store_observability_network
 
