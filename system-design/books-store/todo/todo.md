@@ -20,15 +20,14 @@
 (A) GetBook API implementation #backend #important {due:2024-05-17} {cm:2024-05-17}
 (A) GetBook API integration #frontend #important {due:2024-05-17} {cm:2024-05-17}
 (A) Refactor Common.Extensions - split and Common.Extensions.API #backend #important {due:2024-05-18} {cm:2024-05-18}
-
 (A) Add VerifyTests to Integration Tests {due:2024-05-18} {cm:2024-05-18}
-
 (A) Configure backend tracing #important #observability {due:2024-05-18} {cm:2024-05-18}
 (A) Configure backend metrics #important #observability {due:2024-05-18} {cm:2024-05-18}
 (A) Configure logs/trace/metrics forwarding to grafana #important #observability {due:2024-05-18} {cm:2024-05-19}
 (A) Write logs to grafana, or alt. #important #observability {cm:2024-05-18}
-
 (A) Add books to database (db migration) #important #observability {due:2024-05-18} {cm:2024-05-19}
+(A) Init React UI #frontend #important {cm:2024-05-20}
+
 (A) Update integration tests - add DB fixture {due:2024-05-20}
 
 (A) Make logs/traces/metrics configurable.
@@ -49,7 +48,6 @@
 
 (C) frontend angular - Http call retry/timeout mechanisms #frontend
 
-(A) Init React UI #frontend #important
 
 (C) Init Vue.js UI #frontend
 
