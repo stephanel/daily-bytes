@@ -13,7 +13,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        CORSConfiguration corsConfiguration = new("localhostPolicy", ["http://localhost:4200"]);
+        CORSConfiguration corsConfiguration = new("localhostPolicy", [
+            "http://localhost:4200",
+            "http://localhost:4201",
+            "http://localhost:4202" 
+        ]);
 
         builder.ConfigureObservability();
 

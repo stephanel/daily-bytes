@@ -13,5 +13,7 @@ OTEL - create custom metrics: https://www.mytechramblings.com/posts/getting-star
 https://github.com/kimcuhoang/practical-net-otelcollector/blob/main/local/infra/docker-compose.observability.yaml
 
 
+React: https://legacy.reactjs.org/docs/introducing-jsx.html
+
 Nx - useful commands
 npx nx lint

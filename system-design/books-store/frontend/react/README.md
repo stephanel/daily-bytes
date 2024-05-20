@@ -55,6 +55,14 @@ It will show tasks that you can run with Nx.
 
 - [Learn more about Exploring the Project Graph](https://nx.dev/core-features/explore-graph)
 
+## Memo - Nx Commands
+
+```bash
+# add a new component
+# use flag --dry-run to check the command output without doing any changes
+npx nx g @nx/react:component books-list --directory=src/app/books-list --standalone --dry-run
+```
+
 ## Tutorial - React Standalone
 
 https://nx.dev/getting-started/tutorials/react-standalone-tutorial
