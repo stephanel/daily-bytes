@@ -28,7 +28,7 @@
   },
   "results": [
     {
-      "Id": 100001,
+      "Id": 1,
       "Title": "Design Patterns: Elements of Reusable Object-Oriented Software",
       "ISBN": "978-0201633610",
       "Authors": [
@@ -57,7 +57,7 @@
       "ThumbnailUrl": "https://covers.openlibrary.org/b/id/1754351-M.jpg"
     },
     {
-      "Id": 100002,
+      "Id": 2,
       "Title": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
       "ISBN": "978-0134494166",
       "Authors": [
@@ -71,7 +71,7 @@
       "ThumbnailUrl": "https://ia903000.us.archive.org/view_archive.php?archive=/3/items/m_covers_0008/m_covers_0008_51.tar&file=0008510059-M.jpg"
     },
     {
-      "Id": 100003,
+      "Id": 3,
       "Title": "Test-driven development, by example",
       "ISBN": "978-0321146533",
       "Authors": [

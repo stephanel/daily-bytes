@@ -20,14 +20,14 @@
       "Method": {
         "Method": "GET"
       },
-      "RequestUri": "http://localhost/api/books/100001",
+      "RequestUri": "http://localhost/api/books/1",
       "Headers": [],
       "Options": {}
     },
     "IsSuccessStatusCode": true
   },
   "results": {
-    "Id": 100001,
+    "Id": 1,
     "Title": "Design Patterns: Elements of Reusable Object-Oriented Software",
     "ISBN": "978-0201633610",
     "Authors": [

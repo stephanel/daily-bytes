@@ -6,12 +6,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Fixtures\PostgreSqlTestDatabaseBuilder.cs" />
+	  <Compile Remove="Fixtures\TestWebApplicationFactory.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="FluentAssertions" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 		<PackageReference Include="Serilog.Extensions.Logging" />
 		<PackageReference Include="Serilog.Sinks.XUnit" />
+		<PackageReference Include="Testcontainers" />
+		<PackageReference Include="Testcontainers.PostgreSql" />
 		<PackageReference Include="Verify.DiffPlex" />
 		<PackageReference Include="Verify.Xunit" />
 		<PackageReference Include="xunit" />

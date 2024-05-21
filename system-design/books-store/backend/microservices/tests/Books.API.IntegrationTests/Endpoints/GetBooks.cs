@@ -1,21 +1,20 @@
-﻿namespace Books.API.IntegrationTests.Endpoints;
+﻿using Books.API.IntegrationTests.TestFramework.Context;
+using Common.TestFramework.TestContexts;
+
+namespace Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
-public class GetBooks : VerifyTestContext, IClassFixture<BookApiFixture>
+public class GetBooks : VerifyTestContext, IClassFixture<BooksWebApiFixture>
 {
-    private readonly BookApiFixture _fixture;
-    private readonly HttpClient _client;
+    private readonly BooksWebApiFixture _fixture;
 
-    public GetBooks(BookApiFixture fixture, ITestOutputHelper testOutput)
-        : base(testDirectory: "Endpoints")
+    public GetBooks(BooksWebApiFixture fixture) : base(testOutputDirectory: "../Endpoints")
     {
         _fixture = fixture;
-        _fixture.TestOutput = testOutput;
-        _client = _fixture.CreateClient();
     }
 
     [Fact]
     public async Task Get_Books_Should_Return_Ok()
         => await VerifyHttpResponseMessageAsync<BookDto[]>(
-            await _client.GetAsync("/api/books"));
+            await _fixture.Client.GetAsync("/api/books"));
 }

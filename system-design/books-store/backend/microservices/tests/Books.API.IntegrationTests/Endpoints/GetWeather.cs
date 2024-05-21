@@ -1,26 +1,19 @@
-﻿namespace Books.API.IntegrationTests.Endpoints;
+﻿using Books.API.IntegrationTests.TestFramework.Context;
+
+namespace Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
-public sealed class GetWeather : IClassFixture<BookApiFixture>
+public sealed class GetWeather : IClassFixture<BooksWebApiFixture>
 {
-    private readonly BookApiFixture _fixture;
+    private readonly BooksWebApiFixture _fixture;
 
-    public GetWeather(BookApiFixture fixture, ITestOutputHelper testOutput)
+    public GetWeather(BooksWebApiFixture fixture)
     {
         _fixture = fixture;
-        _fixture.TestOutput = testOutput;
     }
 
     [Fact]
     public async Task Get_Weather_Forecast_Should_Return_Ok()
-    {
-        // Arrange
-        var client = _fixture.CreateClient();
-
-        // Act
-        var response = await client.GetAsync("/weatherforecast");
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-    }
+        => (await _fixture.Client.GetAsync("/weatherforecast"))
+            .StatusCode.Should().Be(HttpStatusCode.OK);
 }

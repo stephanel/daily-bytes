@@ -54,6 +54,8 @@
     <PackageVersion Include="Serilog.Sinks.XUnit" Version="3.0.5" />
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageVersion Include="System.IO.Abstractions" Version="21.0.2" />
+    <PackageVersion Include="Testcontainers" Version="3.8.0" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="3.8.0" />
     <PackageVersion Include="Verify.DiffPlex" Version="3.0.0" />
     <PackageVersion Include="Verify.Xunit" Version="24.2.0" />
     <PackageVersion Include="xunit" Version="2.8.0" />

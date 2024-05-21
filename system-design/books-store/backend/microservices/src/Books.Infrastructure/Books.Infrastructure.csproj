@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Books.Application\Books.Application.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="Books.API.IntegrationTests" />
+	</ItemGroup>
+
 </Project>

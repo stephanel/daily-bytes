@@ -21,7 +21,7 @@ internal class BooksRepository : IGetBooksRepository, IGetBookByIdRepository
         using var scope = scopeFactory.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<BooksDbContext>();
 
-        var booksDb = await db.Books.ToListAsync(cancellationToken);
+        var booksDb = await db.Set<BookDb>().ToListAsync(cancellationToken);
         return booksDb.Select(DbEntitiesExtensions.Map).ToImmutableList();
     }
 
@@ -31,7 +31,7 @@ internal class BooksRepository : IGetBooksRepository, IGetBookByIdRepository
         using var scope = scopeFactory.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<BooksDbContext>();
 
-        var book = await db.Books.SingleOrDefaultAsync(x => x.Id == (long)bookId, cancellationToken);
+        var book = await db.Set<BookDb>().SingleOrDefaultAsync(x => x.Id == (long)bookId, cancellationToken);
         return book is null ? Error.NotFound : book!.Map();
     }
 }

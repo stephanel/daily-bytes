@@ -1,11 +1,5 @@
 global using Books.API.DTOs;
-global using Books.API.IntegrationTests.TestFramework.Fixtures;
-global using Common.TestFramework;
-global using Common.TestFramework.Fixtures;
 global using Common.TestFramework.TestMetadata.Traits;
 global using FluentAssertions;
 global using System.Net;
-global using System.Net.Http.Json;
-global using System.Text.Json;
-global using System.Text.Json.Serialization;
 global using Xunit.Abstractions;

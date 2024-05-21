@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Common\Common.TestFramework\Common.TestFramework.csproj" />
     <ProjectReference Include="..\..\src\Books.API\Books.API.csproj" />
   </ItemGroup>

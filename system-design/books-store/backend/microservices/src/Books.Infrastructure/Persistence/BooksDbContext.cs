@@ -11,8 +11,6 @@ internal class BooksDbContext : DbContextBase
     protected override string ApplicationName => "Books.API";
     protected override string DatabaseConnectionString => "BooksDatabaseConnectionString";
 
-    public DbSet<BookDb> Books => Set<BookDb>();
-
     public BooksDbContext(IConfiguration configuration) : base(configuration)
     { }
 

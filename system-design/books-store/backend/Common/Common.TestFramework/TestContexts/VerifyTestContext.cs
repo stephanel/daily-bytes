@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace Common.TestFramework;
+namespace Common.TestFramework.TestContexts;
 
 public abstract class VerifyTestContext
 {
@@ -10,7 +10,7 @@ public abstract class VerifyTestContext
 
     public VerifySettings VerifySettings => _verifySettings;
 
-    protected VerifyTestContext(string testDirectory)
+    protected VerifyTestContext(string? testOutputDirectory = null)
     {
         _verifySettings.AddExtraSettings(_ =>
         {
@@ -25,7 +25,10 @@ public abstract class VerifyTestContext
         // FIXME: make it better. if UseDirectory is not used, Verify generates
         // ouput files at the root level of the test assembly that own the executed tests
         // It happens since the verify settings were moved to this assembly
-        _verifySettings.UseDirectory(testDirectory!);
+        if (!string.IsNullOrWhiteSpace(testOutputDirectory))
+        {
+            _verifySettings.UseDirectory(testOutputDirectory!);
+        }
     }
 
     protected Task VerifyAsync<T>(T data) => Verify(data, _verifySettings);
