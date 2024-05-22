@@ -28,12 +28,10 @@
 (A) Add books to database (db migration) #important #observability {due:2024-05-18} {cm:2024-05-19}
 (A) Init React UI #frontend #important {cm:2024-05-20}
 
-(A) Update integration tests - add DB fixture {due:2024-05-20}
+(A) Update integration tests - add DB fixture {due:2024-05-20} {cm:2024-05-21}
 
-(A) Make logs/traces/metrics configurable.
 
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
-
 
 (B) books: add publisher, publish date, number of pages, subjects
 
@@ -51,6 +49,7 @@
 
 (C) Init Vue.js UI #frontend
 
+(Z) Make logs/traces/metrics configurable.
 
 (Z) Init solution for monolith implementation
 
