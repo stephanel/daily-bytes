@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "<Pending>", Scope = "type", Target = "~T:Common.Extensions.API.Observability.APICustomMetrics")]
+[assembly: SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>", Scope = "member", Target = "~P:Common.Extensions.DependencyInjection.ServiceCollectionsExtensions.ApiServicesConfiguration.AddSwagger")]

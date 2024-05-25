@@ -6,30 +6,44 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Common.Extensions.DependencyInjection;
 
-public static class ServiceCollectionsExtensions
+public static partial class ServiceCollectionsExtensions
 {
-    public static IServiceCollection RegisterApiServices(this IServiceCollection services, CORSConfiguration? corsConfiguration)
+    public static IServiceCollection RegisterApiServices(this IServiceCollection services, ApiServicesConfiguration apiServicesConfiguration)
     {
         services.AddHealthChecks().AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
 
-        services.AddEndpointsApiExplorer()
-            .AddAuthorization()
-            //.AddProblemDetails()
-            .AddFastEndpoints()
-            .AddSwagger()
-            ;
+        services.AddEndpointsApiExplorer();
 
-        if (corsConfiguration is not null)
+        if (apiServicesConfiguration.AddAuthorization)
         {
-            services.ConfigursCORSPolicies(corsConfiguration!);
+            services.AddAuthorization();
+
         }
 
-        return services;
-    }
+        //.AddProblemDetails()
 
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
-    {
-        services.SwaggerDocument();
+        if (apiServicesConfiguration.AddFastEndpoints)
+        {
+            services.AddFastEndpoints();
+        }
+
+        if (apiServicesConfiguration.AddSwagger)
+        {
+            if(apiServicesConfiguration.AddFastEndpoints)
+            {
+                services.SwaggerDocument();
+            }
+            else
+            {
+                services.AddSwaggerGen();
+            }
+        }
+
+        if (apiServicesConfiguration.CorsConfiguration is not null)
+        {
+            services.ConfigursCORSPolicies(apiServicesConfiguration.CorsConfiguration!);
+        }
+
         return services;
     }
 

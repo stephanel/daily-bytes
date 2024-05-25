@@ -1,0 +1,20 @@
+@locahost = http://localhost:5217
+
+GET {{locahost}}/books-service/books/health
+###
+GET {{locahost}}/books-service/books/alive
+###
+GET {{locahost}}/books-service/books
+Accept: application/json
+###
+GET {{locahost}}/books-service/books/1
+Accept: application/json
+###
+GET {{locahost}}/books-service/books/2
+Accept: application/json
+###
+GET {{locahost}}/books-service/books/3
+Accept: application/json
+###
+GET {{locahost}}/users-service/users/1
+Accept: application/json

@@ -11,6 +11,7 @@ using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Enrichers.Span;
 using Serilog.Events;
+using Serilog.Exceptions;
 using Serilog.Sinks.OpenTelemetry;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -119,6 +120,7 @@ public static class ObservabilityRegistration
         {
             config.ReadFrom.Configuration(ctx.Configuration)
                 .Enrich.FromLogContext()
+                .Enrich.WithExceptionDetails()
                 .Enrich.WithMachineName()
                 .Enrich.WithThreadId()
                 .Enrich.WithSpan()

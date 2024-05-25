@@ -2,6 +2,7 @@ using Books.DependencyInjection;
 using Common.Extensions.API.Observability;
 using Common.Extensions.Configuration;
 using Common.Extensions.DependencyInjection;
+using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 namespace Books.API;
 
@@ -13,22 +14,25 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        CORSConfiguration corsConfiguration = new("localhostPolicy", [
-            "http://localhost:4200",
-            "http://localhost:4201",
-            "http://localhost:4202" 
-        ]);
+        ApiServicesConfiguration apiServicesConfiguration = new()
+        {
+            CorsConfiguration = new("localhostPolicy", [
+               "http://localhost:4200",
+                "http://localhost:4201",
+                "http://localhost:4202"
+           ])
+        };
 
         builder.ConfigureObservability();
 
         builder.Services
             .RegisterApplicationServices()
             .RegisterInfrastructureServices()
-            .RegisterApiServices(corsConfiguration);
+            .RegisterApiServices(apiServicesConfiguration);
 
         var app = builder.Build();
 
-        app.ConfigureApi(corsConfiguration);
+        app.ConfigureApi(apiServicesConfiguration);
 
         var summaries = new[]
         {
