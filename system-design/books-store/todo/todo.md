@@ -30,6 +30,9 @@
 
 (A) Update integration tests - add DB fixture {due:2024-05-20} {cm:2024-05-21}
 
+(A) add an API gateway #backend #important {due:2024-05-25} {cm:2024-05-25}
+
+(A) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}
 
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 

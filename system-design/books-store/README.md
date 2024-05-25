@@ -34,13 +34,13 @@ Personal project to put new technologies or models into practice.
 
 - Backend
   - [.NET 8](https://dotnet.microsoft.com/en-us/)
+  - [YARP](https://microsoft.github.io/reverse-proxy/)
   - [FastEndpoints](https://fast-endpoints.com/)
   - [Mediator](https://github.com/martinothamar/Mediator)
   - [MassTransit](https://github.com/MassTransit/MassTransit)
   - [Serilog](https://github.com/serilog/serilog)
-  - [OpenTelemetry .Net Instrumentation](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
-  - [Xunit](https://xunit.net/)
-  - [Verify](https://github.com/VerifyTests/Verify)
+  - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
+  - [Xunit](https://xunit.net/), [FluentAssertions](https://github.com/fluentassertions/fluentassertions), [Verify](https://github.com/VerifyTests/Verify)
 - Frontend
   - [Angular](https://angular.io/docs)
   - [React](https://react.dev/learn)
@@ -98,7 +98,7 @@ Source folder: `backend/common/`
 
 | Project | Folder |
 | ------------- | ------------- |
-| ApiGateway | Common/ApiGateway/ |
+| API.Gateway | Common/ApiGateway/ |
 | Auth Service | Common/Auth/ |
 | Common.Extensions | Common/Common.Extensions/ |
 | Common.Extensions.API | Common/Common.Extensions.API/ |
@@ -137,7 +137,7 @@ Each service has an integration tests project, and a unit tests project.
 | Subscriptions API | Subscriptions.API.IntegrationTests<br />Subscriptions.UnitTests |
 | OrderManagement Service | OrderManagement.Service.IntegrationTests<br />OrderManagement.UnitTests |
 
-FIXME: :warning: Should we merge integration tests projects into a single one?
+FIXME: :warning: Merge integration tests projects into a single one
 
 ### Backend - Monolith
 
@@ -255,6 +255,7 @@ Then navigate to:
 
 - [C4 Models](https://c4model.com/)
 - [CQRS](https://martinfowler.com/bliki/CQRS.html)
+- [API Gateway using YARP](https://microsoft.github.io/reverse-proxy/articles/getting-started.html)
 - [Angular](https://angular.io/docs)
 - [React](https://react.dev/learn)
 - [Vue.js](https://vuejs.org/guide/introduction.html)
