@@ -1,35 +1,32 @@
-# Books Store
+Books Store - Personal project to put new technologies or models into practice.
 
-Personal project to put new technologies or models into practice.
-
-## Content
-
-- [Books Store](#books-store)
-  - [Content](#content)
-  - [Technologies](#technologies)
-  - [Features](#features)
-  - [Architecture](#architecture)
-  - [Folder Structure](#folder-structure)
-  - [Solutions](#solutions)
-    - [Common Projects](#common-projects)
-    - [Backend - Microservices](#backend---microservices)
-      - [Source Projects](#source-projects)
-      - [Test Projects](#test-projects)
-    - [Backend - Monolith](#backend---monolith)
-    - [Frontend](#frontend)
-  - [Local Setup](#local-setup)
-    - [OpenTelemetry Configuration](#opentelemetry-configuration)
-    - [Verify](#verify)
-    - [Add a new database migration](#add-a-new-database-migration)
-    - [Update the database](#update-the-database)
-  - [Run applications](#run-applications)
-    - [Start the required services](#start-the-required-services)
-    - [Environment Variables](#environment-variables)
-    - [Application Settings](#application-settings)
-    - [Run Applications](#run-applications-1)
-      - [Backend](#backend)
-      - [Frontend](#frontend-1)
-  - [Learning Resources](#learning-resources)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Folder Structure](#folder-structure)
+- [Projects and Solutions](#projects-and-solutions)
+  - [Common Projects](#common-projects)
+  - [Backend - Microservices](#backend---microservices)
+    - [Source Projects](#source-projects)
+    - [Test Projects](#test-projects)
+  - [Backend - Monolith](#backend---monolith)
+  - [Frontend](#frontend)
+  - [Testing Strategy](#testing-strategy)
+    - [Unit Tests](#unit-tests)
+    - [Integration Tests](#integration-tests)
+- [Local Setup](#local-setup)
+  - [OpenTelemetry Configuration](#opentelemetry-configuration)
+  - [Verify](#verify)
+  - [Add a new database migration](#add-a-new-database-migration)
+  - [Update the database](#update-the-database)
+- [Run applications](#run-applications)
+  - [Start the required services](#start-the-required-services)
+  - [Environment Variables](#environment-variables)
+  - [Application Settings](#application-settings)
+  - [Run Applications](#run-applications-1)
+    - [Backend](#backend)
+    - [Frontend](#frontend-1)
+- [Learning Resources](#learning-resources)
 
 ## Technologies
 
@@ -89,7 +86,7 @@ See [System Design Documentation](./docs/system-design.md)
   - [React](./frontend/react) - In Progress
   - [Vue.js](./frontend/vuejs) - In Progress
 
-## Solutions
+## Projects and Solutions
 
 ### Common Projects
 
@@ -126,6 +123,8 @@ Each projects is composed of 4 layers: API (or Consumer), Application, Domain, I
 
 #### Test Projects
 
+See section [Testing Strategy](#testing-strategy) for more details.
+
 Tests folder:  [./backend/microservices/tests/](./backend/microservices/tests/)
 
 Each service has an integration tests project, and a unit tests project. 
@@ -155,6 +154,20 @@ Source folder:  [./frontend](./frontend/)
 | [angular](./frontend/angular/) |
 | [react](./frontend/react/) |
 | [vuejs](./frontend/vuejs/) |
+
+
+### Testing Strategy
+
+#### Unit Tests
+
+Each project should have its own unit tests project.
+
+#### Integration Tests
+
+Each service should have its own integration tests project.
+
+📝:warning: Consider having a single integration tests project where the tests would call through the API Gateway. It would cover both backend implementation, microservices, and modular monolith. 
+
 
 
 ## Local Setup
