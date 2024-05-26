@@ -41,7 +41,7 @@ Personal project to put new technologies or models into practice.
   - [MassTransit](https://github.com/MassTransit/MassTransit)
   - [Serilog](https://github.com/serilog/serilog)
   - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
-  - [Xunit](https://xunit.net/), [FluentAssertions](https://github.com/fluentassertions/fluentassertions), [Verify](https://github.com/VerifyTests/Verify)
+  - [Xunit](https://xunit.net/), [FluentAssertions](https://github.com/fluentassertions/fluentassertions), [Verify](https://github.com/VerifyTests/Verify), [NetArchTest](https://github.com/BenMorris/NetArchTest)
 - Frontend
   - [Angular](https://angular.io/docs)
   - [React](https://react.dev/learn)
@@ -50,7 +50,7 @@ Personal project to put new technologies or models into practice.
   - Docker
   - PostgreSQL
   - TBD - RabbitMQ, Kafka
-  - Grafana, Loki (logs), Prometheus (metrics), Aspire
+  - Grafana, Loki (logs), Prometheus (metrics), Tempo (traces), Aspire
 - DevOps
   - TBD - CI/CD
   - TBD - Quality Gate
@@ -84,7 +84,7 @@ See [System Design Documentation](./docs/system-design.md)
   - [Common](./backend/Common) 
   - [Microservices Architecture](./backend/microservices)
   - [Monolithic Architecture](./backend/monolithic) - Upcoming
-- [Frontend](./frontend) - Upcoming
+- [Frontend](./frontend)
   - [Angular](./frontend/angular) - In Progress
   - [React](./frontend/react) - In Progress
   - [Vue.js](./frontend/vuejs) - In Progress
