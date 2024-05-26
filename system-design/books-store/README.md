@@ -95,7 +95,7 @@ See [System Design Documentation](./docs/system-design.md)
 
 The following projects are common to both microservices and monolithic implementation.
 
-Source folder: `backend/common/`
+Source folder: [./backend/common/](./backend/common/)
 
 | Project | Folder |
 | ------------- | ------------- |
@@ -111,7 +111,7 @@ Source folder: `backend/common/`
 
 #### Source Projects
 
-Source folder: `backend/microservices/src/`
+Source folder: [./backend/microservices/src/](./backend/microservices/src/)
 
 Each projects is composed of 4 layers: API (or Consumer), Application, Domain, Infrastructure. 
 
@@ -126,7 +126,7 @@ Each projects is composed of 4 layers: API (or Consumer), Application, Domain, I
 
 #### Test Projects
 
-Tests folder:  `backend/microservices/tests/`
+Tests folder:  [./backend/microservices/tests/](./backend/microservices/tests/)
 
 Each service has an integration tests project, and a unit tests project. 
 
@@ -145,7 +145,17 @@ FIXME: :warning: Merge integration tests projects into a single one
 TBA
 
 ### Frontend
-TBA
+
+Source folder:  [./frontend](./frontend/)
+
+3 projects were created to build the same using 3 different framework: Angular, React, Vue.js. The tests are stored with the source code files as is the convention in frontend world. 
+
+| Project/Folder |
+| ------------- |
+| [angular](./frontend/angular/) |
+| [react](./frontend/react/) |
+| [vuejs](./frontend/vuejs/) |
+
 
 ## Local Setup
 
