@@ -24,6 +24,7 @@ Personal project to put new technologies or models into practice.
     - [Update the database](#update-the-database)
   - [Run applications](#run-applications)
     - [Start the required services](#start-the-required-services)
+    - [Environment Variables](#environment-variables)
     - [Application Settings](#application-settings)
     - [Run Applications](#run-applications-1)
       - [Backend](#backend)
@@ -227,9 +228,14 @@ Then navigate to:
               |--data
 ```
 
+### Environment Variables
+
+- `OTEL_EXPORTER_OTPL_ENDPOINT`:  endpoint of the OpenTelemetry collector (default value: http://localhost:4317)
+- `OTEL_SERVICE_NAME`: name of the application that sends the collected data. :warning: FIXME: should it be moved to application settings?
+
 ### Application Settings
 
-- **Database connection strings**: use the database, the users and the password respectively assigned to the environment variables `POSTGRES_MULTIPLE_DATABASES` and `POSTGRES_PASSWORD` in docker compose file `.docker/postgres-docker-compose.yml`.
+- `ConnectionStrings:BooksDatabaseConnectionString`: use the database, the users and the password respectively assigned to the environment variables `POSTGRES_MULTIPLE_DATABASES` and `POSTGRES_PASSWORD` in docker compose file `.docker/postgres-docker-compose.yml`.
 
 
 ### Run Applications
