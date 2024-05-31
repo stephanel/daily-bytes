@@ -14,7 +14,7 @@ services:
       - ./config/postgres:/docker-entrypoint-initdb.d      
       - ./docker_volumes/postgres:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=books,books_user; orders,orders_user; users,users_user; subscriptions,subscriptions_user
+      - POSTGRES_MULTIPLE_DATABASES=books,books_user; orders,orders_user; identity,users_user; subscriptions,subscriptions_user
       - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
