@@ -16,19 +16,16 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        //var apiServicesConfiguration = ApiServicesConfiguration.Default with
-        //{
-        //    AddFastEndpoints = false
-        //};
+        var apiServicesConfiguration = ApiServicesConfiguration.Default with
+        {
+            AddAuthentication = false,
+            AddAuthorization = false,
+            AddFastEndpoints = false
+        };
 
-        //builder.ConfigureObservability();
+        builder.ConfigureObservability();
 
-        builder.Services
-            //.RegisterApplicationServices()
-            //.RegisterInfrastructureServices()
-            //.RegisterApiServices(apiServicesConfiguration)
-            .AddEndpointsApiExplorer()
-            .AddSwaggerGen();
+        builder.Services.RegisterApiServices(apiServicesConfiguration);
 
         builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
 
@@ -44,14 +41,9 @@ public class Program
 
         var app = builder.Build();
 
-        //app.ConfigureApi(apiServicesConfiguration);
-
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        app.ConfigureApi(apiServicesConfiguration);
 
         app.ApplyMigrations<UserDbContext>();
-
-        app.UseHttpsRedirection();
 
         app.MapIdentityApi<User>();
 
