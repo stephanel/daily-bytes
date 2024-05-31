@@ -29,8 +29,14 @@
 (A) Init React UI #frontend #important {cm:2024-05-20}
 (A) Update integration tests - add DB fixture {due:2024-05-20} {cm:2024-05-21}
 (A) add an API gateway #backend #important {due:2024-05-25} {cm:2024-05-25}
+(A) Add Auth service - cookie based authentication #backend #important {due:2024-06-01} {cm:2024-05-31}
+(A) Add Auth service configuration to API Gateway #backend #important {due:2024-06-01} {cm:2024-05-31}
 
-(A) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}
+(A) Add Auth service - add bearer token authentication #backend #important {due:2024-06-01}
+(A) Add auth guard - angular #frontend #important {due:2024-06-01}
+(A) Add auth guard - react #frontend #important {due:2024-06-01}
+
+(B) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}
 
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 

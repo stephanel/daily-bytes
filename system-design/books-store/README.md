@@ -94,14 +94,14 @@ The following projects are common to both microservices and monolithic implement
 
 Source folder: [./backend/common/](./backend/common/)
 
-| Project | Folder |
-| ------------- | ------------- |
-| API.Gateway | Common/ApiGateway/ |
-| Auth Service | Common/Auth/ |
-| Common.Extensions | Common/Common.Extensions/ |
-| Common.Extensions.API | Common/Common.Extensions.API/ |
-| Common.Infrastructure | Common/Common.Infrastructure/ |
-| Common.TestFramework | Common.TestFramework/ |
+| Project | Folder | Ports (http, https) | Database | API Gateway Config |
+| - | - | - | - | - |
+| API.Gateway | Common/ApiGateway/ | 5217, 5218 | | |
+| Auth | Common/Auth/ | 5219, 5220 | identity | ✅ |
+| Common.Extensions | Common/Common.Extensions/ | - | | |
+| Common.Extensions.API | Common/Common.Extensions.API/ | - | | |
+| Common.Infrastructure | Common/Common.Infrastructure/ | - | | |
+| Common.TestFramework | Common.TestFramework/ | - | | |
 
 ### Backend - Microservices
 
@@ -112,13 +112,13 @@ Source folder: [./backend/microservices/src/](./backend/microservices/src/)
 
 Each projects is composed of 4 layers: API (or Consumer), Application, Domain, Infrastructure. 
 
-| Service | Project | Type |
-| ------------- | ------------- | ------------- |
-| Books API | Books.[layer] | Web API |
-| OrdersHistory API | OrdersHistory.[layer] | Web API |
-| OrderManagement Service | OrderManagement.[layer] | Web App (Consumer) |
-| UserAccounts API | UserAccounts.[layer] | Web API |
-| Subscriptions API | Subscriptions.[layer] | Web API |
+| Service | Project | Type | Ports (http, https) | Database | API Gateway Config |
+| - | - | - | - | - | - |
+| Books API | Books.[layer] | Web API | 5270, 5271 | books | ✅ |
+| OrdersHistory API | OrdersHistory.[layer] | Web API | 5272, 5273 | | |
+| OrderManagement Service | OrderManagement.[layer] | Web App (Consumer) | 5274,5275  | | |
+| UserAccounts API | UserAccounts.[layer] | Web API | 5276, 5277 | | |
+| Subscriptions API | Subscriptions.[layer] | Web API | 5278, 5279 | | |
 
 
 #### Test Projects
@@ -285,6 +285,11 @@ Then navigate to:
 - [C4 Models](https://c4model.com/)
 - [CQRS](https://martinfowler.com/bliki/CQRS.html)
 - [API Gateway using YARP](https://microsoft.github.io/reverse-proxy/articles/getting-started.html)
+- .NET 8 AspNetCore Identity
+  - [Overview](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&tabs=visual-studio)
+  - [The MapIdentityApi<TUser> endpoints](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0#the-mapidentityapituser-endpoints)
+  - [Token Base Authentication](https://learn.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/standalone-with-identity?view=aspnetcore-8.0#token-authentication)
+  - [Secure a Web API backend for SPAs](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-8.0)
 - [Angular](https://angular.io/docs)
 - [React](https://react.dev/learn)
 - [Vue.js](https://vuejs.org/guide/introduction.html)
