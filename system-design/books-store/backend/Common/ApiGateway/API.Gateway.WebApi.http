@@ -1,20 +1,36 @@
-@locahost = http://localhost:5217
+@localhost = http://localhost:5217
 
-GET {{locahost}}/books-service/books/health
+GET {{localhost}}/books-service/books/health
 ###
-GET {{locahost}}/books-service/books/alive
+GET {{localhost}}/books-service/books/alive
 ###
-GET {{locahost}}/books-service/books
+GET {{localhost}}/books-service/books
 Accept: application/json
 ###
-GET {{locahost}}/books-service/books/1
+GET {{localhost}}/books-service/books/1
 Accept: application/json
 ###
-GET {{locahost}}/books-service/books/2
+GET {{localhost}}/books-service/books/2
 Accept: application/json
 ###
-GET {{locahost}}/books-service/books/3
+GET {{localhost}}/books-service/books/3
 Accept: application/json
 ###
-GET {{locahost}}/users-service/users/1
+GET {{localhost}}/users-service/users/1
 Accept: application/json
+###
+POST {{localhost}}/auth-service/login?useCookies=true&useSessionCookies=true
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com",
+  "password": "Pa55w0rD!"
+}
+###
+
+GET {{localhost}}/auth-service/manage/info
+Accept: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8K13oOXloxJKpWhNlWqNTsTE-v-hupV1u_lTsiXREldIKPbW25Jy_S2ASM1Df2fwHeLcuZ-lHFnVcQA23AecxmKg_tb36MywqJgfr4xiJ3qJByeYXGvbyxLLpCoR1AyYpGAq5HfYdwUOrxnc4DonUo2J3NOk0K-LQey8kY8cOzaWIqwahdpzmxosrtIvKpQ2C-fEjf2u9Nblme24JVVksS-vZTPdHn5iNjJWkz7tgbUuCFFFhsHWopvz2qLObLGtnbpbeByxDcbOVi8HWNo17lwjrRgjQcmSswfGMwG6lpA5nvbL5m3JLmK2KK3CPxBxntTDutaNGTd7Y0dE_zjmLxaU6JxpODvhRoWtxbU2mhHdnhIRAWwOdySoMTXtnGJx9IfRywy0OPF4o5I56ZsCaK8h6-wEgQI9qXT_Z5zK4eb3mNgu6gAwsQr_Nz312SFQb4Ucy2tl1fVXFiqapo0px3uVuPgo8DFBDknY41QlNc5KStrV7xvEUo2I5zG0N4hQjteiHwOI-ggQbjJgEHFIjw7FVul8BlHee0tdovgtGDypN65bqH-StvHGSIlmsGsFk9XZIFuIZklNarOGII26_sC33oltS1jTQOAES0mLH-GnuJYANxl69xlLei8_cL7GlH2tSdkhdSEMFapViExoQ7iGZiDgVrUl-QFPGf9Dzo3dOgvW4dBypzrEDuADXHIo32v1-k-W5CjPObU7kpC9EOqgiIb8bfrjyDTlK6mzzk70ECURZZCV2IJnkOca8M_1Fg; path=/; secure; samesite=lax; httponly
+
+###
