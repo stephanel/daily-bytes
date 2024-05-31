@@ -41,7 +41,7 @@ public static class ApplicationBuilderExtensions
             else
             {
                 app.UseSwagger();
-                app.UseSwaggerUi();
+                app.UseSwaggerUI();
             }
         }
 
