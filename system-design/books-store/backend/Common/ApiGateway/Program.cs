@@ -4,7 +4,7 @@ using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-ApiServicesConfiguration apiServicesConfiguration = new()
+var apiServicesConfiguration = ApiServicesConfiguration.Default with
 {
     AddFastEndpoints = false,
     CorsConfiguration = new("localhostPolicy", [

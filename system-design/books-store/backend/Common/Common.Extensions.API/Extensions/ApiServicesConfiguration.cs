@@ -2,13 +2,14 @@
 
 namespace Common.Extensions.DependencyInjection;
 
-public static partial class ServiceCollectionsExtensions
+public record ApiServicesConfiguration
 {
-    public class ApiServicesConfiguration
-    {
-        public bool AddAuthorization { get; set; } = true;
-        public bool AddFastEndpoints { get; set; } = true;
-        public bool AddSwagger { get; set; } = true;
-        public CORSConfiguration? CorsConfiguration { get; set; } = null;
-    }
+    private ApiServicesConfiguration() { }
+
+    public bool AddAuthorization { get; init; } = true;
+    public bool AddFastEndpoints { get; init; } = true;
+    public bool AddSwagger { get; init; } = true;
+    public CORSConfiguration? CorsConfiguration { get; init; } = null;
+
+    public static ApiServicesConfiguration Default => new();
 }

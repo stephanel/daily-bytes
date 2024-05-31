@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	<RootNamespace>Auth.WebApi</RootNamespace>
+	<AssemblyName>Auth.WebApi</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\Common.Extensions.API\Common.Extensions.API.csproj" />
+	<ProjectReference Include="..\Common.Extensions\Common.Extensions.csproj" />
+  </ItemGroup>
+</Project>

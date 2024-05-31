@@ -14,7 +14,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        ApiServicesConfiguration apiServicesConfiguration = new()
+        var apiServicesConfiguration = ApiServicesConfiguration.Default with
         {
             CorsConfiguration = new("localhostPolicy", [
                "http://localhost:4200",
