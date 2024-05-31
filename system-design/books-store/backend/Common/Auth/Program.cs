@@ -1,5 +1,10 @@
+using Auth.WebApi.Application.Models;
+using Auth.WebApi.Persistence;
 using Common.Extensions.API.Observability;
 using Common.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Auth.WebApi;
 
@@ -11,21 +16,44 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        var apiServicesConfiguration = ApiServicesConfiguration.Default with
-        {
-            AddFastEndpoints = false
-        };
+        //var apiServicesConfiguration = ApiServicesConfiguration.Default with
+        //{
+        //    AddFastEndpoints = false
+        //};
 
-        builder.ConfigureObservability();
+        //builder.ConfigureObservability();
 
         builder.Services
             //.RegisterApplicationServices()
             //.RegisterInfrastructureServices()
-            .RegisterApiServices(apiServicesConfiguration);
+            //.RegisterApiServices(apiServicesConfiguration)
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen();
+
+        builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+
+        builder.Services.AddAuthorization();
+
+        builder.Services.AddDbContext<UserDbContext>(opt =>
+            {
+                opt.UseNpgsql(builder.Configuration.GetConnectionString("AuthDatabaseConnectionString"));
+            })
+            .AddIdentityCore<User>()
+            .AddEntityFrameworkStores<UserDbContext>()
+            .AddApiEndpoints();
 
         var app = builder.Build();
 
-        app.ConfigureApi(apiServicesConfiguration);
+        //app.ConfigureApi(apiServicesConfiguration);
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.ApplyMigrations<UserDbContext>();
+
+        app.UseHttpsRedirection();
+
+        app.MapIdentityApi<User>();
 
         await app.RunAsync();
     }

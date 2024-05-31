@@ -6,7 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!--<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<ProjectReference Include="..\Common.Extensions.API\Common.Extensions.API.csproj" />
 	<ProjectReference Include="..\Common.Extensions\Common.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 </Project>

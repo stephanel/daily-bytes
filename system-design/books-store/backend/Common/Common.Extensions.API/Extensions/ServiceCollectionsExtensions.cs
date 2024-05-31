@@ -1,6 +1,7 @@
 ﻿using Common.Extensions.Configuration;
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -14,10 +15,14 @@ public static partial class ServiceCollectionsExtensions
 
         services.AddEndpointsApiExplorer();
 
+        if (apiServicesConfiguration.AddAuthentication)
+        {
+            services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
+        }
         if (apiServicesConfiguration.AddAuthorization)
         {
-            services.AddAuthorization();
-
+            //services.AddAuthorization();
+            services.AddAuthorizationBuilder();
         }
 
         //.AddProblemDetails()
@@ -47,7 +52,7 @@ public static partial class ServiceCollectionsExtensions
         return services;
     }
 
-    public static void ConfigursCORSPolicies(this IServiceCollection services, CORSConfiguration configuration)
+    private static void ConfigursCORSPolicies(this IServiceCollection services, CORSConfiguration configuration)
     {
         services.AddCors(options =>
         {

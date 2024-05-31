@@ -1,11 +1,11 @@
-﻿using Common.Extensions.Configuration;
-using FastEndpoints;
+﻿using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 namespace Common.Extensions.DependencyInjection;
 
@@ -14,8 +14,6 @@ public static class ApplicationBuilderExtensions
     public static IApplicationBuilder ConfigureApi(this IApplicationBuilder app, ApiServicesConfiguration apiServicesConfiguration)
     {
         MapHealthChecks(app as WebApplication);
-
-        app.UseHttpsRedirection();
 
             //.UseExceptionHandler()
 
@@ -42,7 +40,7 @@ public static class ApplicationBuilderExtensions
             } 
             else
             {
-                //app.UseSwagger();
+                app.UseSwagger();
                 app.UseSwaggerUi();
             }
         }
@@ -51,6 +49,8 @@ public static class ApplicationBuilderExtensions
         {
             app.UseCors(apiServicesConfiguration.CorsConfiguration.PolicyName);
         }
+
+        app.UseHttpsRedirection();
 
         return app;
     }
@@ -65,5 +65,12 @@ public static class ApplicationBuilderExtensions
                 Predicate = r => r.Tags.Contains("live")
             });
         }
+    }
+    public static void ApplyMigrations<TDbContext>(this IApplicationBuilder builder) 
+        where TDbContext : DbContext
+    {
+        using IServiceScope scope = builder.ApplicationServices.CreateScope();
+        using var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+        dbContext.Database.Migrate();
     }
 }

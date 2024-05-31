@@ -1,6 +1,111 @@
-@Auth_HostAddress = http://localhost:5106
+@localhost = http://localhost:5219
 
-GET {{Auth_HostAddress}}/weatherforecast/
+POST {{localhost}}/register
+Accept: */*
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com",
+  "password": "Pa55w0rD!"
+}
+
+###
+
+POST {{localhost}}/login?useCookies=true&useSessionCookies=true
 Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com",
+  "password": "Pa55w0rD!"
+}
+
+###
+
+POST {{localhost}}/refresh
+Accept: application/json
+Content-Type: application/json
+
+{
+  "refreshToken": "{refreshToken}"
+}
+
+###
+
+GET {{localhost}}/confirmEmail?userId=5f1076aa-371c-404b-9dac-be0281196d39&code={code}&changedEmail={changedEmail}
+Accept: */*
+Cookie: .AspNetCore.Identity.Application=CfDJ8K13oOXloxJKpWhNlWqNTsRKezPDKDnPxffbGN8f491yzbDkVspaii5EYfUVCzWLlwOPtEkhpPslkCrQTc5T4DSbarKClDX8XTv83Alfhd1Xzc14WwDuT4AZp5OC5-f7Pi0xiuVt7XasFzpdzgWr1KdlqcJa72qrFgy7quf6E6RviZGvgnas_SqSclKlasqAKEyB-yWIbIprHsf9Z000lmxz6EJMjI99GvYU2Emw-XWs39G5eRnPz4sQwUyHdT0vr6uVn55mTecxA6w5VkfbrL9xogOu6OQrnMIRPOZEGwxpdHM8HDatmj8RbScEctOAc_Fdv6mFnnBtjkjiW1-0907otjUMNGyuYCVXz66MmBHTbb2ElT5hB2sp5UDGC5kFlJ5Az3YCBoQr1Agw-Phtp4zzqP8y5CgsL8TNOOTO2vemoY9ELvN--TXjYeo8BOemfhgNRtXFRygPafCdHgIpV-w0USbReKc0rLo3TVVV7dVTgD4fEVWj1u3_1phUNx1R4TDzYPfotAZWI4K5tg9T3OKEe6q2xTBi_5B8v_imPBBNxKmk212jKnYMxKRDha9cJrzDscDkjIq5ce0BynUijgT45l9sHxFblATsnbi7r44LxALI3UOnrhYTM_2V3P8FHJXamVMQC6IqTsO_ASB-prmQhUkPD61RP20s8oCxbz3dWSJRlH6ZjpKoQV89656fo18_Pi-c-MpYinCAiFHWr7q3jNXf7TGaoVT9g--ZjtARC7ScYheMTHsqXKp6dHWe2A; expires=Fri, 14 Jun 2024 18:01:54 GMT; path=/; secure; samesite=lax; httponly
+
+###
+
+POST {{localhost}}/resendConfirmationEmail
+Accept: */*
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com"
+}
+
+###
+
+POST {{localhost}}/forgotPassword
+Accept: */*
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com"
+}
+
+###
+
+POST {{localhost}}/resetPassword
+Accept: */*
+Content-Type: application/json
+
+{
+  "email": "john.doe@domain.com",
+  "resetCode": "string",
+  "newPassword": "NewPa55w0rD!"
+}
+
+###
+
+POST {{localhost}}/manage/2fa
+Accept: application/json
+Content-Type: application/json
+
+{
+  "enable": true,
+  "twoFactorCode": "AbCdE",
+  "resetSharedKey": true,
+  "resetRecoveryCodes": true,
+  "forgetMachine": true
+}
+
+###
+
+GET {{localhost}}/manage/info
+Accept: application/json
+Cookie: .AspNetCore.Identity.Application=CfDJ8K13oOXloxJKpWhNlWqNTsRJZjUWBsZZaUsacgMloSbLcClfRDTwqErCda5PNLsjbIQDBCRebKL0WoVy1_x9UI0vsd3N0KW8VHaJVLNG72G-m1uQjCuXOayinrxynYswMzysaIqvALvu313YMhfdCaafBOVEdYs9ux32_OyaJzfHAfd8Xp11iUJEscG-bNzET1c2_puzR84btxfRmIVA_EiyjAEfeNSjVgWOsy9FX3LbZt8bcHpx7F8HLiRBFF4Hh_wQVkB4auYg-hEHG2LDdtbEPazvnUCeGhwuZRbNK-RVqdAPbRIP7Xs5dUhJNUiw-lUIAdMXlhvA6JzLfz6qiXh-wstAMf-_PdIRbN-JxckkCKzRSbghY-YLjv0V6erCT_HvI7q-xHWc2V1JVqsPBRrZHlrbEKlU8vpV7v2J2AqdpkhShjb_2rX41XbXdeDw5z7HMB1VdBXhyaNy3tGdT2srFkFeqZcFsJFPIBEjinVyGPibiXg5r5joHKBeuIf4NrAR8YSBTvcxlNoxCvOLJdXG3HWkTmyciJZnELyzqRgGlA7fqfmxhsF_NZNlCLCpoAgc0fnK_yEdOBGUZrYEIPl-igst9c6oxjzIOAIGzIWQHnJ15cc-6yK13YLsRvm85H8zZ3so4iBXcM6ED8P99YhKjLfuRBg4bBkX93xdhB9TBkJK_TEOuI5b9141kttsleOGd1wDNZ3qmwy1y-pIdVmCW9eDWjQwqarmpuD2nEajHWZ0Hd7SbcRKjoznwfgRJQ; expires=Fri, 14 Jun 2024 18:00:53 GMT; path=/; secure; samesite=lax; httponly
+
+###
+
+POST {{localhost}}/manage/info
+Accept: application/json
+Content-Type: application/json
+
+{
+  "newEmail": "string",
+  "newPassword": "string",
+  "oldPassword": "string"
+}
+
+###
+
+POST {{localhost}}/logout
+Accept: application/json
+Content-Type: application/json
+
+{}
 
 ###

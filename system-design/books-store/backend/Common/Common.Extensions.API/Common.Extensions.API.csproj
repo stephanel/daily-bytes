@@ -10,6 +10,7 @@
 		
 		<PackageReference Include="FastEndpoints" />
 		<PackageReference Include="FastEndpoints.Swagger" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="Npgsql.OpenTelemetry" />
 		<PackageReference Include="OpenTelemetry.Exporter.Console" />
