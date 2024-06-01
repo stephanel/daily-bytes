@@ -41,7 +41,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Gateway", "..\Common\ApiGateway\API.Gateway.csproj", "{4FC3FDC8-E7CA-4A51-A53A-5B1199577BDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "..\Common\Auth\Auth.csproj", "{45C861B5-4140-4853-80E4-DBE5F1047018}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "..\Common\Auth\Auth.csproj", "{45C861B5-4140-4853-80E4-DBE5F1047018}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{F056E8AD-F00E-41EE-8F8B-83F2A29701E9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.docker\postgres-docker-compose.yml = ..\..\.docker\postgres-docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
