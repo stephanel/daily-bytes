@@ -40,7 +40,14 @@ public static partial class ServiceCollectionsExtensions
             }
             else
             {
-                services.AddSwaggerGen();
+                if(apiServicesConfiguration.SwaggerGenOptions is not null)
+                {
+                    services.AddSwaggerGen(apiServicesConfiguration.SwaggerGenOptions);
+                }
+                else
+                {
+                    services.AddSwaggerGen();
+                }
             }
         }
 

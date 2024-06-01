@@ -17,6 +17,11 @@ public static class ApplicationBuilderExtensions
 
             //.UseExceptionHandler()
 
+        if(apiServicesConfiguration.AddAuthentication)
+        {
+            app.UseAuthentication();
+        }
+
         if(apiServicesConfiguration.AddAuthorization)
         {
             app.UseAuthorization();

@@ -1,6 +1,5 @@
 using Books.DependencyInjection;
 using Common.Extensions.API.Observability;
-using Common.Extensions.Configuration;
 using Common.Extensions.DependencyInjection;
 using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
@@ -16,11 +15,11 @@ public class Program
 
         var apiServicesConfiguration = ApiServicesConfiguration.Default with
         {
-            CorsConfiguration = new("localhostPolicy", [
-               "http://localhost:4200",
-                "http://localhost:4201",
-                "http://localhost:4202"
-           ])
+           // CorsConfiguration = new("localhostPolicy", [
+           //    "http://localhost:4200",
+           //     "http://localhost:4201",
+           //     "http://localhost:4202"
+           //])
         };
 
         builder.ConfigureObservability();
