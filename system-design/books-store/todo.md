@@ -31,9 +31,9 @@
 (A) add an API gateway #backend #important {due:2024-05-25} {cm:2024-05-25}
 (A) Add Auth service - cookie based authentication #backend #important {due:2024-06-01} {cm:2024-05-31}
 (A) Add Auth service configuration to API Gateway #backend #important {due:2024-06-01} {cm:2024-05-31}
-
 (A) Add Auth service - add bearer token authentication #backend #important {due:2024-06-01} {cm:2024-06-01}
-(A) Add auth guard - angular #frontend #important {due:2024-06-01}
+(A) Add auth guard - angular #frontend #important {due:2024-06-01} {cm:2024-06-01}
+
 (A) Add auth guard - react #frontend #important {due:2024-06-02}
 
 (B) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}

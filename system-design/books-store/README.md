@@ -215,6 +215,12 @@ dotnet ef migrations add Create_Initial -p Books.Infrastructure -s Books.API -c 
 
 Run the following to update your local database:
 ```bash
+# Auth databases
+cd ./books-store/backend/Common/Auth
+dotnet ef database update -p Auth -s Auth -c UserDbContext -v
+
+
+# APIs databases
 cd ./books-store/backend/microservices/src
 
 # Books API
