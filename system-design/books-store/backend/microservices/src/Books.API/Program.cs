@@ -15,11 +15,11 @@ public class Program
 
         var apiServicesConfiguration = ApiServicesConfiguration.Default with
         {
-           // CorsConfiguration = new("localhostPolicy", [
-           //    "http://localhost:4200",
-           //     "http://localhost:4201",
-           //     "http://localhost:4202"
-           //])
+            CorsConfiguration = new("localhostPolicy", [
+               "http://localhost:4200",
+                "http://localhost:4201",
+                "http://localhost:4202"
+           ])
         };
 
         builder.ConfigureObservability();
