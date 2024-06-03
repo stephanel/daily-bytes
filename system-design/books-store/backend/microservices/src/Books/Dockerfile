@@ -32,6 +32,7 @@ RUN dotnet publish -c Release -o out ./microservices/src/Books/Books.API/Books.A
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+EXPOSE 9020
 WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "Books.API.dll"]

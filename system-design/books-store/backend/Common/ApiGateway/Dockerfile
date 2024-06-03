@@ -4,14 +4,14 @@ WORKDIR /App
 # Copy source files
 #/App
 #   |-Common
-#   |   |-Auth
+#   |   |-ApiGateway
 #   |   |-Common.Extensions
 #   |   |-Common.Extensions.API
 #   |   |-Common.Infrastructure
 #   |-Directory.Build.props
 #   |-Directory.Packages.props
 
-COPY ./Common/Auth                  ./Common/Auth
+COPY ./Common/ApiGateway            ./Common/ApiGateway
 COPY ./Common/Common.Extensions     ./Common/Common.Extensions
 COPY ./Common/Common.Extensions.API ./Common/Common.Extensions.API
 COPY ./Common/Common.Infrastructure ./Common/Common.Infrastructure
@@ -19,14 +19,13 @@ COPY ./Directory.Build.props        ./Directory.Build.props
 COPY ./Directory.Packages.props     ./Directory.Packages.props
 
 # Restore as distinct layers
-RUN dotnet restore ./Common/Auth/Auth.csproj
+RUN dotnet restore ./Common/ApiGateway/API.Gateway.csproj
 
 # Build and publish a release
-RUN dotnet publish -c Release -o out ./Common/Auth/Auth.csproj
+RUN dotnet publish -c Release -o out ./Common/ApiGateway/API.Gateway.csproj
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
-EXPOSE 9010
 WORKDIR /App
 COPY --from=build-env /App/out .
-ENTRYPOINT ["dotnet", "Auth.WebApi.dll"]
+ENTRYPOINT ["dotnet", "API.Gateway.WebApi.dll"]

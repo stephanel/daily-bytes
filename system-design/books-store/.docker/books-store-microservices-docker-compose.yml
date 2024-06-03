@@ -5,6 +5,24 @@ networks:
 
 services:
 
+  api-gateway:
+    container_name: books_store_api_gateway
+    build: 
+      context: ../backend
+      dockerfile: ./Common/ApiGateway/Dockerfile  
+    env_file:
+      - ../backend/Common/ApiGateway/.devops/test.env  
+    volumes:
+      - ./docker_volumes/api-gateway:/app
+    ports:
+      - 8080:8080 # http
+    depends_on:
+      - db
+      - auth-service
+      - books-api
+    networks:
+        - books_store_network
+
   auth-service:
     container_name: books_store_auth_service
     build: 
@@ -13,9 +31,9 @@ services:
     env_file:
       - ../backend/Common/Auth/.devops/test.env  
     volumes:
-      - ./docker_volumes/postgres:/app/out
+      - ./docker_volumes/auth-service:/app
     ports:
-      - 8080:8080 # http
+      - 9010:8080 # http
     depends_on:
       - db
     networks:
@@ -29,9 +47,9 @@ services:
     env_file:
       - ../backend/microservices/src/Books/.devops/test.env  
     volumes:
-      - ./docker_volumes/postgres:/app/out
+      - ./docker_volumes/books-api:/app
     ports:
-      - 8090:8080 # http
+      - 9020:8080 # http
     depends_on:
       - db
     networks:
