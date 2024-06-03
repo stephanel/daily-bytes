@@ -37,8 +37,11 @@
 (B) send traces to grafana, or alt. #important #observability {cm}
 (C) Init Vue.js UI #frontend {cm}
 (A) DevOps - docker setup to run the BooksApi and Auth in docker #devops #backend {due:2024-06-04} {cm}
+(A) DevOps - docker setup - add ApiGateway #devops #backend {due:2024-06-04} {cm}
 
-(A) DevOps - docker setup - add ApiGateway #devops #backend {due:2024-06-04}
+(A) DevOps - docker setup - add db migration  #devops #backend {due:2024-06-06}
+(A) Auth Service - fix healthcheck endpoint through API Gateway - base path is 'identity'  #devops #backend {due:2024-06-06}
+
 (A) Add auth guard - react #frontend #important {due:2024-06-08}
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 
