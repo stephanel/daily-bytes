@@ -4,6 +4,23 @@ networks:
   books_store_network:
 
 services:
+
+  auth-service:
+    container_name: books_store_auth_service
+    build: 
+      context: ../backend
+      dockerfile: ./Common/Auth/Dockerfile  
+    env_file:
+      - ../backend/Common/Auth/.devops/test.env  
+    volumes:
+      - ./docker_volumes/postgres:/app/out
+    ports:
+      - 8080:8080 # http
+    depends_on:
+      - db
+    networks:
+        - books_store_network
+
   books-api:
     container_name: books_store_books_api
     build: 
@@ -14,7 +31,7 @@ services:
     volumes:
       - ./docker_volumes/postgres:/app/out
     ports:
-      - 8080:8080
+      - 8090:8080 # http
     depends_on:
       - db
     networks:
