@@ -13,7 +13,7 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.Extensions.API\Common.Extensions.API.csproj" />
+    <ProjectReference Include="..\..\..\..\Common\Common.Extensions.API\Common.Extensions.API.csproj" />
     <ProjectReference Include="..\Books.Application\Books.Application.csproj" />
     <ProjectReference Include="..\Books.Infrastructure\Books.Infrastructure.csproj" />
   </ItemGroup>

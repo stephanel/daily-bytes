@@ -1,0 +1,21 @@
+version: '3.9'
+
+networks:
+  books_store_network:
+
+services:
+  books-api:
+    container_name: books_store_books_api
+    build: 
+      context: ../backend
+      dockerfile: ./microservices/src/Books/Dockerfile  
+    env_file:
+      - ../backend/microservices/src/Books/.devops/test.env  
+    volumes:
+      - ./docker_volumes/postgres:/app/out
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+        - books_store_network

@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{7924F1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5B49B4B7-83BF-4AA2-8687-85122C73EC14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.API", "src\Books.API\Books.API.csproj", "{C061325A-BD57-4196-9405-6D25953A8238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.API", "src\Books\Books.API\Books.API.csproj", "{C061325A-BD57-4196-9405-6D25953A8238}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.API.IntegrationTests", "tests\Books.API.IntegrationTests\Books.API.IntegrationTests.csproj", "{A139CD73-2BF1-4BD0-B51E-C88AA38420F8}"
 EndProject
@@ -22,6 +22,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D527F215-E10F-484B-A058-DE82DAB4C0DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Books", "Books", "{2BFF5333-E119-4B5F-B3E5-860850250D5F}"
+	ProjectSection(SolutionItems) = preProject
+		src\Books\Dockerfile = src\Books\Dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{6626239C-1DD4-42DD-BA8E-FD4A6E6DDBBB}"
 EndProject
@@ -29,11 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.UnitTests", "tests\Books.UnitTests\Books.UnitTests.csproj", "{E2BF1A00-5085-4AE9-9F77-0EE2BF63AC4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Application", "src\Books.Application\Books.Application.csproj", "{E50C3BE6-4EBC-4072-9599-F514D76A72DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Application", "src\Books\Books.Application\Books.Application.csproj", "{E50C3BE6-4EBC-4072-9599-F514D76A72DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Domain", "src\Books.Domain\Books.Domain.csproj", "{54987C5E-A66F-4C9A-9F6E-9386472A4DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Domain", "src\Books\Books.Domain\Books.Domain.csproj", "{54987C5E-A66F-4C9A-9F6E-9386472A4DF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Infrastructure", "src\Books.Infrastructure\Books.Infrastructure.csproj", "{34BE9457-463E-4B1F-97F3-2481387F7BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Infrastructure", "src\Books\Books.Infrastructure\Books.Infrastructure.csproj", "{34BE9457-463E-4B1F-97F3-2481387F7BB7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Extensions.API", "..\Common\Common.Extensions.API\Common.Extensions.API.csproj", "{6750CF58-E1E4-467D-BC48-18175557101C}"
 EndProject
@@ -46,6 +49,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{F056E8AD-F00E-41EE-8F8B-83F2A29701E9}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.docker\postgres-docker-compose.yml = ..\..\.docker\postgres-docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".devops", ".devops", "{AAC23426-8532-423F-95A9-F83467F9ED9C}"
+	ProjectSection(SolutionItems) = preProject
+		src\Books\.devops\test.env = src\Books\.devops\test.env
 	EndProjectSection
 EndProject
 Global
@@ -122,6 +130,7 @@ Global
 		{C00B871B-2E34-46F6-859F-B7CD081CBC14} = {5B49B4B7-83BF-4AA2-8687-85122C73EC14}
 		{4FC3FDC8-E7CA-4A51-A53A-5B1199577BDD} = {5B49B4B7-83BF-4AA2-8687-85122C73EC14}
 		{45C861B5-4140-4853-80E4-DBE5F1047018} = {5B49B4B7-83BF-4AA2-8687-85122C73EC14}
+		{AAC23426-8532-423F-95A9-F83467F9ED9C} = {2BFF5333-E119-4B5F-B3E5-860850250D5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B3DEC76-C2F1-4B24-A264-A199FFF4D632}

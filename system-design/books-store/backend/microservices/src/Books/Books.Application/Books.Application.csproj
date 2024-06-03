@@ -19,7 +19,7 @@
    </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
     <ProjectReference Include="..\Books.Domain\Books.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 version: '3.9'
 
 networks:
-  books_store_rabbitmq_network:
+  books_store_network:
 
 services:
 
@@ -16,4 +16,4 @@ services:
         - ./docker_volumes/rabbitmq/data/:/var/lib/rabbitmq/
         - ./docker_volumes/rabbitmq/log/:/var/log/rabbitmq
     networks:
-        - books_store_rabbitmq_network
+        - books_store_network

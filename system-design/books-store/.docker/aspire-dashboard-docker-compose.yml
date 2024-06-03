@@ -1,7 +1,7 @@
 version: '3.9'
 
 networks:
-  books_store_otel_network:
+  books_store_network:
 
 services:
   aspire-dashboard:
@@ -15,4 +15,4 @@ services:
     volumes:
       - ./docker_volumes/aspire-dashboard:/aspire-dashboard
     networks:
-      - books_store_otel_network
+      - books_store_network

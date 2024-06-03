@@ -1,7 +1,7 @@
 version: '3.9'
 
 networks:
-  books_store_postgres_network:
+  books_store_network:
 
 services:
 
@@ -22,4 +22,4 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - books_store_postgres_network
+      - books_store_network

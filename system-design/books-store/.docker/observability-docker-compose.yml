@@ -1,13 +1,12 @@
 version: '3.9'
 
 networks:
-  books_store_observability_network:
+  books_store_network:
 
 services:
 
   tempo:
     container_name: tempo
-    # image: *tempoImage
     image: grafana/tempo:2.3.1
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
@@ -19,10 +18,8 @@ services:
       - "4317"  # otlp grpc
       - "4318"  # otlp http
       # - "9411"   # zipkin
-    # depends_on:
-    #   - tempo-init
     networks:
-      - books_store_observability_network
+      - books_store_network
 
   prometheus:
     container_name: prometheus
@@ -39,7 +36,7 @@ services:
       - ./config/prometheus:/etc/prometheus
       - ./docker_volumes/prometheus:/prometheus
     networks:
-      - books_store_observability_network
+      - books_store_network
 
   loki:
     container_name: loki
@@ -50,7 +47,7 @@ services:
     volumes:
       - ./config/loki:/etc/loki
     networks:
-      - books_store_observability_network
+      - books_store_network
 
   otel-collector:
     container_name: otel_collector
@@ -72,7 +69,7 @@ services:
       - prometheus
       - tempo
     networks:
-      - books_store_observability_network 
+      - books_store_network 
 
   grafana:
     container_name: grafana
@@ -91,7 +88,7 @@ services:
       - ./config//grafana/datasource.yaml:/etc/grafana/provisioning/datasources/ds.yaml # name needs to be ds.yaml or it won't be properly provisionned with error 'Failed to provision data sources'
       - ./docker_volumes/grafana:/var/lib/grafana
     networks:
-      - books_store_observability_network
+      - books_store_network
     depends_on:
       - loki
       - prometheus
