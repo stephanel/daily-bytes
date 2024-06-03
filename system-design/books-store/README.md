@@ -235,7 +235,11 @@ Start the required resources by running the following commands:
 
 ```bash
 cd .docker
-docker compose -f postgres-docker-compose.yml -f rabbitmq-docker-compose.yml -f observability-docker-compose.yml up
+docker compose -f postgres-docker-compose.yml \
+  -f rabbitmq-docker-compose.yml \
+  -f observability-docker-compose.yml \
+  -f  books-store-microservices-docker-compose.yml \
+  up
 
 # 📝 replace `observability-docker-compose.yml` 
 # by `aspire-dashboard-docker-compose.yml`

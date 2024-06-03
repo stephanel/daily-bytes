@@ -33,28 +33,26 @@
 (A) Add Auth service configuration to API Gateway #backend #important {due:2024-06-01} {cm:2024-05-31}
 (A) Add Auth service - add bearer token authentication #backend #important {due:2024-06-01} {cm:2024-06-01}
 (A) Add auth guard - angular #frontend #important {due:2024-06-01} {cm:2024-06-01}
+(A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-19} {cm}
+(B) send traces to grafana, or alt. #important #observability {cm}
+(C) Init Vue.js UI #frontend {cm}
+(A) DevOps - docker setup to run the BooksApi and Auth in docker #devops #backend {due:2024-06-04} {cm}
 
-(A) Add auth guard - react #frontend #important {due:2024-06-02}
+(A) DevOps - docker setup - add ApiGateway #devops #backend {due:2024-06-04}
+(A) Add auth guard - react #frontend #important {due:2024-06-08}
+(A) frontend Http errors handling #frontend #important {due:2024-05-18}
 
 (B) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}
 
-(A) frontend Http errors handling #frontend #important {due:2024-05-18}
-
-(B) books: add publisher, publish date, number of pages, subjects
-
-(B) Make author clickable in books list and show details page for selected author with the list of written books #enhancement #frontend
-
-(B) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
-
-
-
-(A) grafana or aspire-dashboard or or seq/jaeger? #important {due:2024-05-19}
-(B) send traces to grafana, or alt. #important #observability
-
 (C) frontend angular - Http call retry/timeout mechanisms #frontend
 
+(D) DevOps - docker setup - add https support #devops #backend
 
-(C) Init Vue.js UI #frontend
+(E) explore a better way to register services dependencies - https://stackoverflow.com/a/72125775
+
+(F) books: add publisher, publish date, number of pages, subjects
+(F) Make author clickable in books list and show details page for selected author with the list of written books #enhancement #frontend
+
 
 (Z) Make logs/traces/metrics configurable.
 
