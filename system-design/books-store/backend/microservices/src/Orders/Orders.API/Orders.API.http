@@ -1,0 +1,11 @@
+@localhost = https://localhost:5281
+
+POST {{localhost}}/api/orders/items/add/1
+Accept: application/json
+###
+POST {{localhost}}/api/orders/items/add/2
+Accept: application/json
+###
+GET {{localhost}}/api/orders/cart
+Accept: application/json
+###

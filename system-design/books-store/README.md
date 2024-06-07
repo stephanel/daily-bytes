@@ -115,6 +115,7 @@ Each projects is composed of 4 layers: API (or Consumer), Application, Domain, I
 | Service | Project | Type | Ports (http, https) | Database | API Gateway Config |
 | - | - | - | - | - | - |
 | Books API | Books.[layer] | Web API | 5270, 5271 | books | ✅ |
+| Orders API | Orders.[layer] | Web API | 5280, 5281 | | |
 | OrdersHistory API | OrdersHistory.[layer] | Web API | 5272, 5273 | | |
 | OrderManagement Service | OrderManagement.[layer] | Web App (Consumer) | 5274,5275  | | |
 | UserAccounts API | UserAccounts.[layer] | Web API | 5276, 5277 | | |

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<RootNamespace>Orders.API.IntegrationTests</RootNamespace>
@@ -27,6 +27,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\..\Common\Common.TestFramework\Common.TestFramework.csproj" />
+		<ProjectReference Include="..\..\src\Orders\Orders.API\Orders.API.csproj" />
 	</ItemGroup>
 
 </Project>

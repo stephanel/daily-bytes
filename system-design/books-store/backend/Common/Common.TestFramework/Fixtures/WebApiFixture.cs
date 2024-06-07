@@ -44,6 +44,7 @@ public abstract class WebApiFixture<TProgram> : IntegrationTestBaseFixture  wher
             _messageSink = messageSink;
             _testConfig = new Dictionary<string, string?>
             {
+                // FIXME: move this out of this project
                 ["ConnectionStrings:BooksDatabaseConnectionString"] = databaseConnectionString
             };
         }

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<RootNamespace>Orders.API</RootNamespace>
+		<AssemblyName>Orders.API</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Common\Common.Extensions.API\Common.Extensions.API.csproj" />
+		<ProjectReference Include="..\Orders.Application\Orders.Application.csproj" />
+		<ProjectReference Include="..\Orders.Infrastructure\Orders.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="$(AssemblyName).IntegrationTests" />
+		<InternalsVisibleTo Include="$(AssemblyName).UnitTests" />
+	</ItemGroup>
+
+</Project>
