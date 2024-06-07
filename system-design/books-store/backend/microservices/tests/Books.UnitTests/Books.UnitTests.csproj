@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.TestFramework\Common.TestFramework.csproj" />
-    <ProjectReference Include="..\..\src\Books.Application\Books.Application.csproj" />
+    <ProjectReference Include="..\..\src\Books\Books.Application\Books.Application.csproj" />
   </ItemGroup>
 
 </Project>
