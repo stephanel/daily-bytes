@@ -6,6 +6,6 @@ Accept: application/json
 POST {{localhost}}/api/orders/items/add/2
 Accept: application/json
 ###
-GET {{localhost}}/api/orders/cart
+GET {{localhost}}/api/orders/current
 Accept: application/json
 ###

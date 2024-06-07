@@ -8,10 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="TestFramework\VerifyContext.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="xunit" />
 		<PackageReference Include="xunit.runner.visualstudio">
@@ -28,6 +24,17 @@
 		<ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\..\Common\Common.TestFramework\Common.TestFramework.csproj" />
 		<ProjectReference Include="..\..\src\Orders\Orders.API\Orders.API.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Endpoints\PostItem.Get_Book_Should_Return_NotFound_When_Requested_Book_Does_Not_Exists.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>PostItem.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\PostItem.Get_Book_Should_Return_Ok_When_Requested_Book_Exists.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>PostItem.cs</DependentUpon>
+	  </None>
 	</ItemGroup>
 
 </Project>

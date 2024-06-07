@@ -36,14 +36,22 @@ public abstract class VerifyTestContext
     protected async Task VerifyHttpResponseMessageAsync<T>(HttpResponseMessage response)
         where T : class
     {
-        var options = new JsonSerializerOptions()
-        {
-            Converters = { new JsonStringEnumConverter() },
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+        var results = await response.Content.ReadFromJsonAsync<T>(JsonSerializerOptions);
 
-        var results = await response.Content.ReadFromJsonAsync<T>(options);
-
+        // FIXME: refactor - need to control names of Verify output files
         await VerifyAsync(new { response, results });
     }
+
+    protected async Task VerifyHttpResponseCookieAsync<T>(HttpResponseMessage response)
+    where T : class
+    {
+        IEnumerable<string> cookies = response.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
+        await VerifyAsync(new { response, cookies });
+    }
+
+    protected JsonSerializerOptions JsonSerializerOptions => new JsonSerializerOptions()
+    {
+        Converters = { new JsonStringEnumConverter() },
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 }
