@@ -1,8 +1,10 @@
 # System Design
 
-- [Microservices](#microservices)
-  - [C4 System Context Diagram](#c4-system-context-diagram)
-  - [C4 Container Diagram](#c4-container-diagram)
+- [System Design](#system-design)
+  - [Microservices](#microservices)
+    - [C4 System Context Diagram](#c4-system-context-diagram)
+      - [C4 Container Diagram](#c4-container-diagram)
+      - [Place Order - Sequence Diagram](#place-order---sequence-diagram)
 
 ## Microservices
 
@@ -164,4 +166,80 @@ graph TB;
     services --sends logs,<br /> traces and<br /> metrics--> centralized_observability
     databases --sends logs,<br /> traces and<br /> metrics--> centralized_observability
     infra --sends logs,<br /> traces and<br /> metrics--> centralized_observability
+```
+
+
+
+#### Place Order - Sequence Diagram
+
+```mermaid
+%%{init: {'theme':'forest'}}%%
+sequenceDiagram;
+  actor User
+  participant spa_cart as Frontend Cart
+  participant orders_api as Orders API
+  box Backend Cart
+    participant orders_api_backend_cart as  Orders API<br/>Cart
+    participant orders_api_session as Orders API<br/>Session
+    participant redis as Redis Store
+  end
+  box Async Order Processing (Outbox pattern)
+    participant orders_database as Orders Database
+    participant orders_api_worker as Orders API<br/>Background Worker
+    participant rabbitmq as RabbitMQ
+    participant orders_management_service as Orders Management
+  end
+  participant mail as Mailing Service
+
+  User->>spa_cart: Add X books to cart
+  alt Session created (cookie exists)
+    spa_cart->>orders_api: Send request to add X books to backend cart (with cookie session)
+  else No session exists
+    spa_cart->>orders_api: Send request to add X books to backend cart (no cookie session)
+  end
+  orders_api->>orders_api_backend_cart: Add X books to session
+  alt No session exists
+    orders_api_backend_cart->>orders_api_session: Open session
+    orders_api_session->>redis: Write Redis
+    orders_api_session-->>orders_api_backend_cart: Session created
+  end
+  orders_api_backend_cart->>orders_api_session: Add X book to session
+  orders_api_session->>redis: Write Redis
+  orders_api_session-->>orders_api_backend_cart: Books added to session
+  orders_api_backend_cart-->>orders_api: Book added to session
+  orders_api-->>spa_cart: Code 2xx/Cookie Session
+  spa_cart-->>User: Show updated cart
+
+  User->>spa_cart: Validate the order
+  Note over spa_cart,orders_api: Provides user details (email, invoicing address)
+  spa_cart->>orders_api: Send request to validate the order (with cookie session)
+
+  orders_api->>orders_api_backend_cart: Get cart
+  orders_api_backend_cart->>orders_api_session: Read session cart
+  orders_api_session->>redis: Read Redis
+  redis-->>orders_api_session: 
+  orders_api_session-->>orders_api_backend_cart: Return session cart
+  orders_api_backend_cart-->>orders_api: Return cart
+
+  orders_api->>orders_api: Create an order
+
+  orders_api->>orders_database: Persist order 
+  orders_database-->>orders_api:  
+
+  orders_api->>orders_database: Persist OrderCreated payload (Outbox pattern)
+  orders_database-->>orders_api:  
+
+  orders_api-->>spa_cart: Code 201. Order created
+  spa_cart-->>User: Show the user Order is  created. Process is pending
+
+  orders_api_worker->>orders_database: Read OrderCreated payload (Outbox pattern)
+  orders_api_worker->>rabbitmq: Send OrderCreated message
+  orders_api_worker->>orders_database: Update OrderCreated message status as "Sent"
+  orders_database-->>orders_api_worker:  
+  orders_management_service->>rabbitmq: Consumes OrderCreated message
+
+  orders_management_service->>orders_management_service: Process order
+
+  orders_management_service->>mail: Send email to the user
+
 ```
