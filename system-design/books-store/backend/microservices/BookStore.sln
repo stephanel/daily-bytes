@@ -56,6 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".devops", ".devops", "{AAC2
 		src\Books\.devops\test.env = src\Books\.devops\test.env
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.API.IntegrationTests", "tests\Orders.API.IntegrationTests\Orders.API.IntegrationTests.csproj", "{8EB8AA8B-18D6-4069-ACC5-66821165521A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{45C861B5-4140-4853-80E4-DBE5F1047018}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45C861B5-4140-4853-80E4-DBE5F1047018}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45C861B5-4140-4853-80E4-DBE5F1047018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB8AA8B-18D6-4069-ACC5-66821165521A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB8AA8B-18D6-4069-ACC5-66821165521A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB8AA8B-18D6-4069-ACC5-66821165521A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB8AA8B-18D6-4069-ACC5-66821165521A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{4FC3FDC8-E7CA-4A51-A53A-5B1199577BDD} = {5B49B4B7-83BF-4AA2-8687-85122C73EC14}
 		{45C861B5-4140-4853-80E4-DBE5F1047018} = {5B49B4B7-83BF-4AA2-8687-85122C73EC14}
 		{AAC23426-8532-423F-95A9-F83467F9ED9C} = {2BFF5333-E119-4B5F-B3E5-860850250D5F}
+		{8EB8AA8B-18D6-4069-ACC5-66821165521A} = {6626239C-1DD4-42DD-BA8E-FD4A6E6DDBBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B3DEC76-C2F1-4B24-A264-A199FFF4D632}
