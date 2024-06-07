@@ -22,4 +22,8 @@
 		<ProjectReference Include="..\..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
 		<ProjectReference Include="..\Orders.Domain\Orders.Domain.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UseCases\GetCurrentOrder\" />
+	</ItemGroup>
 </Project>
