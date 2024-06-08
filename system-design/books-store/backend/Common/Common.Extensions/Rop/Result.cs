@@ -6,6 +6,7 @@ public record Result<TValue, TError>
     public readonly TError? Error = default;
 
     public bool IsSuccess { get; private set; }
+    public bool IsFailure => !IsSuccess;
 
     private Result(TValue value)
     {

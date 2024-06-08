@@ -1,7 +1,6 @@
 using Orders.DependencyInjection;
 using Common.Extensions.API.Observability;
 using Common.Extensions.DependencyInjection;
-using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 namespace Orders.API;
 
@@ -26,7 +25,7 @@ public class Program
 
         builder.Services
             .RegisterApplicationServices()
-            .RegisterInfrastructureServices()
+            .RegisterInfrastructureServices(builder.Configuration)
             .RegisterApiServices(apiServicesConfiguration);
 
         var app = builder.Build();

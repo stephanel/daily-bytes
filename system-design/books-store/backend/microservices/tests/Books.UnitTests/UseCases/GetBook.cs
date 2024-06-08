@@ -57,7 +57,7 @@ internal class FakeBookRepository : IGetBookByIdRepository
     public Task<Result<Book, Error>> GetAsync(BookId bookId, CancellationToken cancellationToken)
     {
         var book = _books.Find(x => x.Id == bookId);
-        Result<Book, Error> result = book ?? (Result<Book, Error>)new Error("NotFound");
+        Result<Book, Error> result = book ?? (Result<Book, Error>)Error.NotFound;
         return Task.FromResult(result);
     }
 

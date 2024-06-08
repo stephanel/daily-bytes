@@ -1,6 +1,5 @@
 using Common.Extensions.API.Observability;
 using Common.Extensions.DependencyInjection;
-using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

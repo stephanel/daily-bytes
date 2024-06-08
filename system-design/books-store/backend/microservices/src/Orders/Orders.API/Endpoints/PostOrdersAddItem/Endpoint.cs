@@ -12,7 +12,7 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<AddItemRequest>
 
     public override void Configure()
     {
-        Post("api/orders/items/{itemId}");
+        Post("api/orders/items");
         AllowAnonymous();
     }
 
@@ -20,7 +20,7 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<AddItemRequest>
     {
         var sessionId = ReadSessionId();
 
-        var result = await _mediator.Send(new AddItemToCurrentOrderRequest(request.ItemId, sessionId));
+        var result = await _mediator.Send(request.AsAddItemToCurrentOrderRequest(sessionId));
 
         if(result.IsSuccess)
         {
@@ -37,7 +37,7 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<AddItemRequest>
             return;
         }
 
-        await SendErrorsAsync((int)HttpStatusCode.BadRequest, ct);
+        await SendErrorsAsync(result.Error!.Code, ct);
         return;
     }
 
@@ -47,5 +47,9 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<AddItemRequest>
         return cookieSessionId is null ? default : (SessionId)cookieSessionId;
     }
 
-    internal record AddItemRequest(long ItemId);
+    internal record AddItemRequest(long ItemId, int Quantity)
+    {
+        internal AddItemToCurrentOrderRequest AsAddItemToCurrentOrderRequest(SessionId? sessionId)
+            => new AddItemToCurrentOrderRequest(ItemId, sessionId);
+    }
 }

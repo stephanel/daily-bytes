@@ -1,16 +1,32 @@
-﻿using Orders.Application.UseCases.AddItemToCurrentOrder;
+﻿using Common.Extensions.Rop;
+using Orders.Application.UseCases.AddItemToCurrentOrder;
+using Refit;
+using System.Net;
 
 namespace Orders.Infrastructure.ExternalServices;
 
-internal interface IBooksApiCLient
+internal interface IBooksApiClient
 {
-    // TODO: add Refit
+    [Get("/books-service/books/{id}")]
+    Task<ApiResponse<Book>> GetBookAsync(long id);
 }
 
-internal class BooksService : IBooksService
+internal class BooksService(IBooksApiClient booksApiClient) : IBooksService
 {
-    public Task<Book> GetBookAsync(long Id)
+    readonly IBooksApiClient _booksApiClient = booksApiClient;
+
+    public async Task<Result<Book, Error>> GetBookAsync(long Id)
     {
-        throw new NotImplementedException();
+        var response = await _booksApiClient.GetBookAsync(Id);
+
+        Func<ApiResponse<Book>, Result<Book, Error>> returnContent = r => r.Content!;
+        Func<ApiResponse<Book>, Result<Book, Error>> returnError = r => 
+            r.StatusCode == HttpStatusCode.NotFound
+            ? Error.NotFound
+            : Error.InternalError;
+
+        return response.StatusCode  == HttpStatusCode.OK 
+            ? returnContent(response)
+            : returnError(response);
     }
 }

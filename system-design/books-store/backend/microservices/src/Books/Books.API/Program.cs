@@ -1,7 +1,6 @@
 using Books.DependencyInjection;
 using Common.Extensions.API.Observability;
 using Common.Extensions.DependencyInjection;
-using static Common.Extensions.DependencyInjection.ServiceCollectionsExtensions;
 
 namespace Books.API;
 

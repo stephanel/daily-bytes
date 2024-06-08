@@ -45,6 +45,8 @@
 (A) Add auth guard - react #frontend #important {due:2024-06-08}
 (A) frontend Http errors handling #frontend #important {due:2024-05-18}
 
+(A) Add API versioning  #backend #important
+
 (B) Adapt integration tests: - run the different APIs, including the API gateway in docker (using fixtures) - change the tests to call through the API gateway #backend #important {due:2024-05-02}
 
 (C) frontend angular - Http call retry/timeout mechanisms #frontend

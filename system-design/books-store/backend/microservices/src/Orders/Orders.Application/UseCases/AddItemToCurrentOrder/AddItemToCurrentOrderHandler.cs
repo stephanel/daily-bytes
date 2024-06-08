@@ -13,14 +13,14 @@ internal class AddItemToCurrentOrderHandler(
 
     public async ValueTask<Result<AddItemToCurrentOrderResult, Error>> Handle(AddItemToCurrentOrderRequest request, CancellationToken cancellationToken)
     {
-        var book = (await _booksService.GetBookAsync(request.ItemId));
+        var result = await _booksService.GetBookAsync(request.ItemId);
 
-        if(book is null)
+        if(result.IsFailure)
         {
-            return Error.BadRequest;
+            return result.Error!;
         }
 
-        var sessionId = await _sessionManager.AddItem(book, request.SessionId);    // how to design SessionManager
+        var sessionId = await _sessionManager.AddItem(result.Value!, request.SessionId);    // how to design SessionManager
 
         // check item exists - call Books API
         //  => if not exists return failure "bad request"
@@ -32,7 +32,8 @@ internal class AddItemToCurrentOrderHandler(
     }
 }
 
-public record AddItemToCurrentOrderRequest(long ItemId, SessionId? SessionId = null) : IRequest<Result<AddItemToCurrentOrderResult, Error>>;
+public record AddItemToCurrentOrderRequest(long ItemId, SessionId? SessionId = null) 
+    : IRequest<Result<AddItemToCurrentOrderResult, Error>>;
 
 public record AddItemToCurrentOrderResult(SessionId SessionId);
 
@@ -49,7 +50,7 @@ public record SessionId
 
 public interface IBooksService 
 {
-    Task<Book> GetBookAsync(long Id);
+    Task<Result<Book, Error>> GetBookAsync(long Id);
 }
 
 public record Item(long Id);
@@ -59,9 +60,4 @@ public record Book(long Id) : Item(Id);    // TODO: move to Domain?
 public interface ISessionManager 
 {
     Task<SessionId> AddItem(Item item, SessionId? sessionId = null);
-}
-
-public record Error(string Message)
-{
-    public static readonly Error BadRequest = new("Bad request");
 }

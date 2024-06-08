@@ -13,9 +13,11 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+		<PackageReference Include="Refit.HttpClientFactory" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Common\Common.Extensions\Common.Extensions.csproj" />
 		<ProjectReference Include="..\..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
 		<ProjectReference Include="..\Orders.Application\Orders.Application.csproj" />
 	</ItemGroup>
