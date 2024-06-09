@@ -96,14 +96,21 @@ public sealed class MountebackFixture : IAsyncLifetime, IDisposable
     }
 
     public Task StubGetEndpointAsync<T>(string endpointPath, T responsebody) where T : class
-        => StubEndpointAsync(endpointPath, Method.Get, responsebody);
+        => StubEndpointJsonResponseAsync(endpointPath, Method.Get, responsebody);
 
-    private Task StubEndpointAsync<T>(string endpointPath, Method method, T responsebody) where T : class
+    public Task StubEndpointNotFoundAsync(string endpoint)
+    {
+        var stub = new HttpStub()
+            .OnPathAndMethodEqual(endpoint, Method.Get)
+            .ReturnsStatus(HttpStatusCode.NotFound);
+        return _mountebankClient.AddHttpImposterStubAsync(ImpostersPort, stub);
+    }
+
+    private Task StubEndpointJsonResponseAsync<T>(string endpointPath, Method method, T responsebody) where T : class
     {
         var stub = new HttpStub()
            .OnPathAndMethodEqual(endpointPath, method)
            .ReturnsJson<T>(HttpStatusCode.OK, responsebody);
-        //.ReturnsBody(HttpStatusCode.OK, JsonConvert.SerializeObject(responsebody));
         return _mountebankClient.AddHttpImposterStubAsync(ImpostersPort, stub);
     }
 }

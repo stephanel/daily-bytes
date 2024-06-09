@@ -1,9 +1,11 @@
-﻿using Books.API.IntegrationTests.TestFramework.Context;
+﻿using Books.API.IntegrationTests.TestFramework.Collections;
+using Books.API.IntegrationTests.TestFramework.Context;
 using Common.TestFramework.TestContexts;
 
 namespace Books.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
+[Collection(nameof(BooksWebApiDependenciesCollection))]
 public class GetBook : VerifyTestContext, IClassFixture<BooksWebApiFixture>
 {
     private readonly BooksWebApiFixture _fixture;

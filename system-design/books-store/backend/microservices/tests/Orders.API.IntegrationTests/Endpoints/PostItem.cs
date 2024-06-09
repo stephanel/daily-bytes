@@ -9,10 +9,12 @@ using System.Text;
 namespace Orders.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
-[Collection(nameof(TestDependenciesCollection))]
+[Collection(nameof(OrdersWebApiDependenciesCollection))]
 public class PostItem : VerifyTestContext, IClassFixture<OrdersWebApiFixture>
 {
     private readonly OrdersWebApiFixture _fixture;
+    
+    private int ItemId => 1;
 
     public PostItem(OrdersWebApiFixture fixture) : base(testOutputDirectory: "../Endpoints")
     {
@@ -22,32 +24,25 @@ public class PostItem : VerifyTestContext, IClassFixture<OrdersWebApiFixture>
     [Fact]
     public async Task Post_Item_Returns_Cookie_Session_When_Item_Exists()
     {
-        await _fixture.StubEndpointAsync("/books-service/books/1", new Book(1));
-
-        var payload = """{ "Item": 1 }""";
-        var response = await _fixture.Client.PostAsync(
-            $"/api/orders/items",
-            new StringContent(payload, Encoding.UTF8, MediaTypeNames.Application.Json),
-            CancellationToken.None);
+        await _fixture.MountebackFixture.StubGetEndpointAsync($"/books-service/books/{ItemId}", new Book(ItemId));
+        var response = await CallAddOrderItemEndpoint(ItemId);
         IEnumerable<string> cookies = response.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
         await VerifyAsync(new { response, cookies });
     }
 
-    //TODO: add mountebank
-
     [Fact]
     public async Task Post_Item_Returns_NotFound_When_Item_Does_Not_Exist()
     {
-        var payload = """{ "Item": 999 }""";
-
-        //_fixture.Client.DefaultRequestHeaders.Accept.Clear();
-        //_fixture.Client.DefaultRequestHeaders.Accept.Append(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
-
-        var response = await _fixture.Client.PostAsync(
-            $"/api/orders/items", 
-            new StringContent(payload, Encoding.UTF8, MediaTypeNames.Application.Json),
-            CancellationToken.None);
+        int itemId = 1;
+        await _fixture.MountebackFixture.StubEndpointNotFoundAsync($"/books-service/books/{itemId}");
+        var response = await CallAddOrderItemEndpoint(itemId);
         await VerifyAsync(new { response, body = await response.Content.ReadAsStringAsync() });
+    }
+
+    private Task<HttpResponseMessage> CallAddOrderItemEndpoint(int itemId)
+    {
+        var payload = new StringContent($$"""{ "ItemId": {{itemId}} }""", Encoding.UTF8, MediaTypeNames.Application.Json);
+        return _fixture.Client.PostAsync("/api/orders/items", payload, CancellationToken.None);
     }
 
     [Fact]

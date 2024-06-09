@@ -1,25 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Testcontainers.PostgreSql;
+﻿using Testcontainers.PostgreSql;
 
 namespace Common.TestFramework.Fixtures;
 
-public abstract class IntegrationTestBaseFixture  : IAsyncLifetime, IDisposable
+public sealed class DatabaseFixture  : IAsyncLifetime, IDisposable
 {
-    private readonly IMessageSink _messageSink;
-
-    protected IMessageSink MessageSink => _messageSink;
-
     private readonly PostgreSqlTestDatabaseBuilder _testDatabaseBuilder = new();
 
-    protected string? DatabaseConnectionString { get; private set; }
-
-    protected abstract IServiceProvider? ServiceProvider { get; }
-
-    protected IntegrationTestBaseFixture(IMessageSink messageSink)
-    {
-        _messageSink = messageSink;
-    }
+    public string? DatabaseConnectionString { get; private set; }
 
     /// <summary>
     /// This method is ionvoked by XUnit. Do not invoke directly.
@@ -29,34 +16,23 @@ public abstract class IntegrationTestBaseFixture  : IAsyncLifetime, IDisposable
     {
         await _testDatabaseBuilder.Container.StartAsync();
         DatabaseConnectionString = _testDatabaseBuilder.Container.GetConnectionString();
-        await CustomInitializeAsync();
-    }
-
-    protected abstract Task CustomInitializeAsync();
-
-    protected async Task MigrateAsync<TDbContext>(CancellationToken cancellationToken = default)
-        where TDbContext : DbContext
-    {
-        await using var scope = ServiceProvider!.GetRequiredService<IServiceScopeFactory>().CreateAsyncScope();
-        await using var ctx = scope.ServiceProvider.GetRequiredService<TDbContext>();
-        await ctx.Database.MigrateAsync(cancellationToken);
     }
 
     #region IAsyncLifetime
-    public virtual async Task DisposeAsync()
+    public async Task DisposeAsync()
     {
         await _testDatabaseBuilder.DisposeAsync();
     }
     #endregion
 
     #region IDisposable
-    public virtual void Dispose(bool disposing)
+    public void Dispose(bool disposing)
     {
         if (disposing)
         {
             // do nothing
         }
-        DisposeManagedResources();
+        // dispose managed resources
     }
 
     public void Dispose()
@@ -65,9 +41,7 @@ public abstract class IntegrationTestBaseFixture  : IAsyncLifetime, IDisposable
         GC.SuppressFinalize(this);
     }
 
-    protected abstract void DisposeManagedResources();
-
-    ~IntegrationTestBaseFixture()
+    ~DatabaseFixture()
     {
         Dispose(false);
     }
@@ -107,5 +81,4 @@ public abstract class IntegrationTestBaseFixture  : IAsyncLifetime, IDisposable
             await Container.DisposeAsync();
         }
     }
-
 }

@@ -3,25 +3,23 @@ using Orders.API.IntegrationTests.TestFramework.Collections;
 
 namespace Orders.API.IntegrationTests.TestFramework.Context;
 
-[Collection(nameof(TestDependenciesCollection))]
+[Collection(nameof(OrdersWebApiDependenciesCollection))]
 public class OrdersWebApiFixture : WebApiFixture<Program>
 {
-    private readonly MountebackFixture _mountebackFixture;
+    private readonly DatabaseFixture _databaseFixture;
+    
+    public MountebackFixture MountebackFixture { get; private init; }
 
-    protected override IReadOnlyDictionary<string, string?> CustomSettings => new Dictionary<string, string?>
+    protected override IReadOnlyDictionary<string, string?> AppSettings => new Dictionary<string, string?>
     {
-        // FIXME: move setings out of this project
-        ["ApiGateway:BaseUrl"] = $"http://localhost:{_mountebackFixture.ImpostersPort}",
+        ["ConnectionStrings:OrdersDatabaseConnectionString"] = _databaseFixture.DatabaseConnectionString,
+        ["ApiGateway:BaseUrl"] = $"http://localhost:{MountebackFixture.ImpostersPort}",
     };
 
-    public OrdersWebApiFixture(MountebackFixture mountebackFixture, IMessageSink diagnosticMessageSink) 
+    public OrdersWebApiFixture(DatabaseFixture databaseFixture, MountebackFixture mountebackFixture, IMessageSink diagnosticMessageSink) 
         : base(diagnosticMessageSink)
     {
-        _mountebackFixture = mountebackFixture;
+        _databaseFixture = databaseFixture;
+        MountebackFixture = mountebackFixture;
     }
-
-    protected override async Task RunDatabaseMigration() => await Task.CompletedTask;
-
-    public Task StubEndpointAsync<T>(string endpoint, T data) where T : class
-        => _mountebackFixture.StubGetEndpointAsync(endpoint, data);
 }
