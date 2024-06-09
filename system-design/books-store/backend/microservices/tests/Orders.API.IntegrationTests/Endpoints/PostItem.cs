@@ -1,14 +1,15 @@
-﻿using Orders.API.IntegrationTests.TestFramework.Context;
-using Common.TestFramework.TestContexts;
+﻿using Common.TestFramework.TestContexts;
 using Orders.API.DTOs;
-using FastEndpoints;
+using Orders.API.IntegrationTests.TestFramework.Collections;
+using Orders.API.IntegrationTests.TestFramework.Context;
+using Orders.Application.UseCases.AddItemToCurrentOrder;
 using System.Net.Mime;
-using System.Net.Http.Headers;
 using System.Text;
 
 namespace Orders.API.IntegrationTests.Endpoints;
 
 [IntegrationTests]
+[Collection(nameof(TestDependenciesCollection))]
 public class PostItem : VerifyTestContext, IClassFixture<OrdersWebApiFixture>
 {
     private readonly OrdersWebApiFixture _fixture;
@@ -21,6 +22,8 @@ public class PostItem : VerifyTestContext, IClassFixture<OrdersWebApiFixture>
     [Fact]
     public async Task Post_Item_Returns_Cookie_Session_When_Item_Exists()
     {
+        await _fixture.StubEndpointAsync("/books-service/books/1", new Book(1));
+
         var payload = """{ "Item": 1 }""";
         var response = await _fixture.Client.PostAsync(
             $"/api/orders/items",

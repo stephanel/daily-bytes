@@ -15,12 +15,14 @@ public abstract class WebApiFixture<TProgram> : IntegrationTestBaseFixture  wher
 
     protected override IServiceProvider ServiceProvider => _serviceProvider!;
 
+    protected virtual IReadOnlyDictionary<string, string?> CustomSettings { get; } = new Dictionary<string, string?>();
+
     protected WebApiFixture(IMessageSink diagnosticMessageSink) : base(diagnosticMessageSink)
     { }
 
     protected override async Task CustomInitializeAsync()
     {
-        WebApplicationFactory = new TestWebApplicationFactory(DatabaseConnectionString!, MessageSink!);
+        WebApplicationFactory = new TestWebApplicationFactory(DatabaseConnectionString!, MessageSink!, CustomSettings);
         _serviceProvider = WebApplicationFactory.Services;
         await RunDatabaseMigration();
     }
@@ -39,14 +41,21 @@ public abstract class WebApiFixture<TProgram> : IntegrationTestBaseFixture  wher
 
         private readonly Dictionary<string, string?> _testConfig;
 
-        public TestWebApplicationFactory(string databaseConnectionString, IMessageSink messageSink)
+        public TestWebApplicationFactory(
+            string databaseConnectionString, 
+            IMessageSink messageSink,
+            IReadOnlyDictionary<string, string?> customSettings)
         {
             _messageSink = messageSink;
             _testConfig = new Dictionary<string, string?>
             {
-                // FIXME: move this out of this project
-                ["ConnectionStrings:BooksDatabaseConnectionString"] = databaseConnectionString
+                ["ConnectionStrings:BooksDatabaseConnectionString"] = databaseConnectionString,// FIXME: move setings out of this project
+                //["ApiGateway:BaseUrl"] = "https://localhost:3000",
             };
+
+            _testConfig =  new[] { _testConfig, customSettings }
+                .SelectMany(d => d)
+                .ToDictionary();
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)

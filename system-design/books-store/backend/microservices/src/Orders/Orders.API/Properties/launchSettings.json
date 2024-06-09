@@ -10,7 +10,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "OTEL_EXPORTER_OTPL_ENDPOINT": "http://localhost:4317",
-        "OTEL_SERVICE_NAME": "Orders.API"
+        "OTEL_SERVICE_NAME": "Orders.API",
+        "ApiGateway__BaseUrl": "https://localhost:5218"
       }
     }
   }

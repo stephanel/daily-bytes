@@ -56,17 +56,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".devops", ".devops", "{AAC2
 		src\Books\.devops\test.env = src\Books\.devops\test.env
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.API.IntegrationTests", "tests\Orders.API.IntegrationTests\Orders.API.IntegrationTests.csproj", "{8EB8AA8B-18D6-4069-ACC5-66821165521A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.API.IntegrationTests", "tests\Orders.API.IntegrationTests\Orders.API.IntegrationTests.csproj", "{8EB8AA8B-18D6-4069-ACC5-66821165521A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{2CCED9E9-514F-4094-8718-76A4ABEE2B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.API", "src\Orders\Orders.API\Orders.API.csproj", "{90D49977-0715-41FD-8359-E2476251A71F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.API", "src\Orders\Orders.API\Orders.API.csproj", "{90D49977-0715-41FD-8359-E2476251A71F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.Application", "src\Orders\Orders.Application\Orders.Application.csproj", "{EED390D3-D56F-4699-A56A-C83148F44485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.Application", "src\Orders\Orders.Application\Orders.Application.csproj", "{EED390D3-D56F-4699-A56A-C83148F44485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.Infrastructure", "src\Orders\Orders.Infrastructure\Orders.Infrastructure.csproj", "{A1C4841C-5A4A-4A67-9515-C0A7BE705CA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.Infrastructure", "src\Orders\Orders.Infrastructure\Orders.Infrastructure.csproj", "{A1C4841C-5A4A-4A67-9515-C0A7BE705CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.Domain", "src\Orders\Orders.Domain\Orders.Domain.csproj", "{BDCDC03E-481F-4118-B4D9-58429DECA6E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.Domain", "src\Orders\Orders.Domain\Orders.Domain.csproj", "{BDCDC03E-481F-4118-B4D9-58429DECA6E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
