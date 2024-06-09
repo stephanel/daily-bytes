@@ -40,5 +40,11 @@
     },
     "IsSuccessStatusCode": false
   },
-  "body": "{\"statusCode\":404,\"message\":\"One or more errors occurred!\",\"errors\":{}}"
+  "body": {
+    "StatusCode": 404,
+    "Message": "One or more errors occurred!",
+    "Errors": {
+      "ValueKind": "Object"
+    }
+  }
 }

@@ -27,13 +27,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Endpoints\PostItem.Get_Book_Should_Return_NotFound_When_Requested_Book_Does_Not_Exists.verified.json">
+	  <None Update="Endpoints\GetOrder.Get_Book_Should_Return_NotFound_When_Requested_Book_Does_Not_Exists.verified.json">
 	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
-	    <DependentUpon>PostItem.cs</DependentUpon>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
 	  </None>
-	  <None Update="Endpoints\PostItem.Get_Book_Should_Return_Ok_When_Requested_Book_Exists.verified.json">
+	  <None Update="Endpoints\GetOrder.Get_Book_Should_Return_Ok_When_Requested_Book_Exists.verified.json">
 	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
-	    <DependentUpon>PostItem.cs</DependentUpon>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\GetOrder.Post_Item_Returns_Cookie_Session_When_Item_Exists.received.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\GetOrder.Post_Item_Returns_Cookie_Session_When_Item_Exists.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\GetOrder.Post_Item_Returns_NotFound_When_Item_Does_Not_Exist.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\GetOrder.Post_Item_Should_Return_Cookie_Session_When_Item_Exists.received.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>GetOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Get_Book_Should_Return_NotFound_When_Requested_Book_Does_Not_Exists.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Get_Book_Should_Return_Ok_When_Requested_Book_Exists.verified.json">
+	    <ParentFile>$([System.String]::Copy('%(FileName)').Split('.')[0])</ParentFile>
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Post_Item_Returns_Cookie_Session_When_Item_Exists.received.json">
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Post_Item_Returns_Cookie_Session_When_Item_Exists.verified.json">
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Post_Item_Returns_NotFound_When_Item_Does_Not_Exist.verified.json">
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
+	  </None>
+	  <None Update="Endpoints\AddItemsToOrder.Post_Item_Should_Return_Cookie_Session_When_Item_Exists.received.json">
+	    <DependentUpon>AddItemsToOrder.cs</DependentUpon>
 	  </None>
 	</ItemGroup>
 

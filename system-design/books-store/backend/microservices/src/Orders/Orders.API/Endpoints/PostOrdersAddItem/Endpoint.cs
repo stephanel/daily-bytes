@@ -16,6 +16,7 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<AddItemRequest>
         AllowAnonymous();
     }
 
+    // FIXME: code in HandleAsync method is same in BooksAPI. Refactor. move structure to Common.API
     public override async Task HandleAsync(AddItemRequest request, CancellationToken ct)
     {
         var sessionId = ReadSessionId();

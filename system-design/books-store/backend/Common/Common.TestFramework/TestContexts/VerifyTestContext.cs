@@ -36,10 +36,10 @@ public abstract class VerifyTestContext
     protected async Task VerifyHttpResponseMessageAsync<T>(HttpResponseMessage response)
         where T : class
     {
-        var results = await response.Content.ReadFromJsonAsync<T>(JsonSerializerOptions);
+        var responseBody = await response.Content.ReadFromJsonAsync<T>(JsonSerializerOptions);
 
         // FIXME: refactor - need to control names of Verify output files
-        await VerifyAsync(new { response, results });
+        await VerifyAsync(new { response, body = responseBody });
     }
 
     protected async Task VerifyHttpResponseCookieAsync<T>(HttpResponseMessage response)
