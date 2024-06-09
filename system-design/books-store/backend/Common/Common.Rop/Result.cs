@@ -1,4 +1,4 @@
-﻿namespace Common.Extensions.Rop;
+﻿namespace Common.Rop;
 
 public record Result<TValue, TError>
 {

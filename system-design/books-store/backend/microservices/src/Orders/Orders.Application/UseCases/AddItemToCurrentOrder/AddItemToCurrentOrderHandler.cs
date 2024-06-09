@@ -1,4 +1,4 @@
-﻿using Common.Extensions.Rop;
+﻿using Common.Rop;
 using Mediator;
 
 namespace Orders.Application.UseCases.AddItemToCurrentOrder;
@@ -17,7 +17,7 @@ internal class AddItemToCurrentOrderHandler(
 
         if(result.IsFailure)
         {
-            return result.Error!;
+            return result.Error!;   // FIXME: should we return BadRequest instead of NotFound?
         }
 
         var sessionId = await _sessionManager.AddItem(result.Value!, request.SessionId);    // how to design SessionManager

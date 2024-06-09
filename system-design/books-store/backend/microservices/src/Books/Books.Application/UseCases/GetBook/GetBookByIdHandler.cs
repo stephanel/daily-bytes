@@ -1,5 +1,5 @@
 ﻿using Books.Domain.Books;
-using Common.Extensions.Rop;
+using Common.Rop;
 
 namespace Books.Application.UseCases.GetBook;
 

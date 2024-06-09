@@ -1,8 +1,7 @@
 ﻿using Books.Application.UseCases.GetBook;
 using Books.Domain.Books;
-using Common.Extensions.Rop;
+using Common.Rop;
 using Common.TestFramework.Fakes;
-using Microsoft.Extensions.Logging;
 
 namespace Books.UnitTests.UseCases;
 

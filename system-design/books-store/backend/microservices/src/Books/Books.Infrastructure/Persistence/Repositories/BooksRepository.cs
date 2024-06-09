@@ -2,7 +2,7 @@
 using Books.Application.UseCases.GetBooks;
 using Books.Domain.Books;
 using Books.Infrastructure.Persistence.Models;
-using Common.Extensions.Rop;
+using Common.Rop;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Immutable;

@@ -32,8 +32,7 @@ internal sealed class Endpoint(IMediator mediator) : Endpoint<BookRequest>
             return;
         }
 
-        await SendErrorsAsync((int)HttpStatusCode.NotFound);
-
+        await SendErrorsAsync(result.Error!.Code, ct);
     }
 
     BookDto Map(Book book) => ObjectMapper.Map<BookDto>(book);
