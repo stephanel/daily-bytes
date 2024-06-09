@@ -14,6 +14,8 @@ public static class DependencyInjection
     {
         services.AddSingleton<IBooksService, BooksService>()
             .AddSingleton<ISessionManager, SessionManager>()
+            .AddSingleton<ICachedSessions, CachedSessions>()
+            .AddSingleton<ISessionIdGenerator, SessionIdGenerator>()
             ;
 
         services.AddRefitClient<IBooksApiClient>()

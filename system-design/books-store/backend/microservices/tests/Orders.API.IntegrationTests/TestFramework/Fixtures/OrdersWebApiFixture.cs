@@ -1,5 +1,8 @@
 ﻿using Common.TestFramework.Fixtures;
+using Microsoft.Extensions.DependencyInjection;
 using Orders.API.IntegrationTests.TestFramework.Collections;
+using Orders.API.IntegrationTests.TestFramework.Fakes;
+using Orders.Infrastructure.ExternalServices;
 
 namespace Orders.API.IntegrationTests.TestFramework.Context;
 
@@ -22,4 +25,9 @@ public class OrdersWebApiFixture : WebApiFixture<Program>
         _databaseFixture = databaseFixture;
         MountebackFixture = mountebackFixture;
     }
+
+    protected override List<ServiceDescriptor> ServicesToReplace => [
+        ServiceDescriptor.Singleton<ISessionIdGenerator, FakeSessionIdGenerator>()
+    ];
+
 }

@@ -2,7 +2,9 @@
 using Orders.API.DTOs;
 using Orders.API.IntegrationTests.TestFramework.Collections;
 using Orders.API.IntegrationTests.TestFramework.Context;
+using Orders.API.IntegrationTests.TestFramework.Fakes;
 using Orders.Application.UseCases.AddItemToCurrentOrder;
+using Orders.Infrastructure.ExternalServices;
 using System.Net.Mime;
 using System.Text;
 
@@ -15,7 +17,9 @@ public class AddItemsToOrder(OrdersWebApiFixture fixture)
     IClassFixture<OrdersWebApiFixture>
 {
     private readonly OrdersWebApiFixture _fixture = fixture;
-    
+
+    private readonly SessionId _sessionId = "52055aee-b822-4db8-a14a-3b4074c51c5c";
+
     private int ItemId => 1;
 
     private StringContent Payload => new(
@@ -28,6 +32,9 @@ public class AddItemsToOrder(OrdersWebApiFixture fixture)
     {
         // Arrange
         await _fixture.MountebackFixture.StubGetEndpointAsync($"/books-service/books/{ItemId}", new Book(ItemId));
+
+        var sessionIdGenerator = (FakeSessionIdGenerator)_fixture.GetRequiredService<ISessionIdGenerator>();
+        sessionIdGenerator.SeedNext(_sessionId);
 
         // Act
         var response = await CallAddOrderItemEndpoint();

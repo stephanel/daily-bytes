@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System.Net.WebSockets;
 
 namespace Common.TestFramework.Fixtures;
 
@@ -56,9 +57,21 @@ public abstract class WebApiFixture<TProgram> : WebApplicationFactory<TProgram> 
     {
         builder.ConfigureServices(services => 
         {
+            foreach(var serviceDescriptor in ServicesToReplace)
+            {
+
+                services
+                    .Where(descriptor => descriptor.ServiceType == serviceDescriptor.ServiceType)
+                    .ToList()
+                    .ForEach(s => services.Remove(s));
+                services.Add(serviceDescriptor);
+            }
+
             // customize service configuration here
         });
     }
+
+    protected virtual List<ServiceDescriptor> ServicesToReplace => [];
 
     protected override void Dispose(bool disposing)
     {
@@ -66,3 +79,5 @@ public abstract class WebApiFixture<TProgram> : WebApplicationFactory<TProgram> 
         Client?.Dispose();
     }
 }
+
+public record ServiceToReplace(Type Key, Type NewType);
