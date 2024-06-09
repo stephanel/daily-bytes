@@ -38,7 +38,7 @@ Books Store - Personal project to put new technologies or models into practice.
   - [MassTransit](https://github.com/MassTransit/MassTransit)
   - [Serilog](https://github.com/serilog/serilog)
   - [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet-instrumentation)
-  - [Xunit](https://xunit.net/), [FluentAssertions](https://github.com/fluentassertions/fluentassertions), [Verify](https://github.com/VerifyTests/Verify), [NetArchTest](https://github.com/BenMorris/NetArchTest)
+  - [Xunit](https://xunit.net/), [FluentAssertions](https://github.com/fluentassertions/fluentassertions), [Verify](https://github.com/VerifyTests/Verify), [Mountebank](https://www.mbtest.org/)/[MbDotNet](https://github.com/mattherman/MbDotNet)
 - Frontend
   - [Angular](https://angular.io/docs)
   - [React](https://react.dev/learn)
