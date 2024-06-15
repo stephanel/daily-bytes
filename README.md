@@ -7,6 +7,7 @@ My learning daily bytes using various tech/languages.
 - [Aspire Application - C#](./learning/aspire)
 - [Castle Dynamic Proxy - C#](./learning/castle-dynamic-proxy)
 - [Code Instrumentation using OpenTelemetry - C#](./learning/opentelemetry)
+- CatDance - A simple web app that serves cat GIFs, excuse to practice different technologies - [C#](./catdance/csharp), [F#](./catdance/fsharp), [Go](./catdance/go), [PHP](./catdance/php), [Python](./catdance/python)
 
 ## Design Patterns
 
