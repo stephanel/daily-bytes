@@ -16,6 +16,14 @@ builder.AddKafkaProducer<Null, WeatherForecastDto>("kafka",
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication()
+    .AddKeycloakJwtBearer("keycloak",  "weatherforcast", options =>
+    {
+        options.RequireHttpsMetadata = false;   // cause dev env
+        options.Audience = "account";
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,7 +67,39 @@ app.MapGet("/weatherforecast", async ([FromServices] IProducer<Null, WeatherFore
     .WithName("GetWeatherForecast")
     .WithOpenApi();
 
+app.MapGet("/weatherforecast-secured", async ([FromServices] IProducer<Null, WeatherForecastDto> producer,
+        [FromServices] ILogger<WeatherForecastDto> logger) =>
+    {
+        var address = new Faker().Address;
+        var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecastDto
+                (
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)],
+                    LocationStore.PickRandom()
+                ))
+            .ToArray();
+
+        var producerTasks = forecast
+            .Select(value => producer.ProduceAsync("weatherforcast_topic",
+                new Message<Null, WeatherForecastDto>()
+                {
+                    Value = value
+                }));
+        await Task.WhenAll(producerTasks);
+
+        return forecast;
+    })
+    .WithName("GetWeatherForecastSecured")
+    .RequireAuthorization()
+    .WithOpenApi();
+
 app.MapDefaultEndpoints();
+
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();
 

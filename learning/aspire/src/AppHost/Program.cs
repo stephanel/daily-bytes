@@ -1,5 +1,9 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+var keycloak = builder.AddKeycloak("keycloak" ,8076)
+    .WithExternalHttpEndpoints()
+    .WithDataVolume();
+
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume(isReadOnly: false)
     .WithPgWeb();
@@ -12,9 +16,11 @@ var kafka = builder.AddKafka("kafka")
 builder.AddProject<Projects.WebApi>("apiservice")
     .WithExternalHttpEndpoints()
     .WithReference(postgresDb)
-    .WaitFor(postgresDb)
+    .WithReference(keycloak)
     .WithReference(kafka)
-    .WaitFor(kafka);
+    .WaitFor(postgresDb)
+    .WaitFor(kafka)
+    .WaitFor(keycloak);
 
 var migrationService = builder.AddProject<Projects.MigrationService>("migrations")
     .WithReference(postgresDb)
