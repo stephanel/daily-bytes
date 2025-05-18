@@ -14,6 +14,7 @@ var kafka = builder.AddKafka("kafka")
     .WithKafkaUI();
 
 builder.AddProject<Projects.WebApi>("apiservice")
+    .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints()
     .WithReference(postgresDb)
     .WithReference(keycloak)
@@ -27,6 +28,7 @@ var migrationService = builder.AddProject<Projects.MigrationService>("migrations
     .WaitFor(postgresDb);
 
 builder.AddProject<Projects.Consumer>("consumerservice")
+    .WithHttpHealthCheck("/health")
     .WithReference(postgresDb)
     .WaitFor(postgresDb)
     .WithReference(kafka)
