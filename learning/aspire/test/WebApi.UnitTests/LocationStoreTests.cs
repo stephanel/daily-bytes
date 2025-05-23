@@ -1,3 +1,5 @@
+using WebApi.Data;
+
 namespace WebApi.UnitTests;
 
 public class LocationStoreTests

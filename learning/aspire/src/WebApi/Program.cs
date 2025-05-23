@@ -1,11 +1,10 @@
-using System.Reflection;
 using Bogus;
 using Confluent.Kafka;
-using Csv;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using ServiceDefaults;
 using WebApi;
+using WebApi.DTOs;
+using WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,115 +58,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
 app.MapSwagger().RequireAuthorization();
 
-app.MapGet("/weatherforecast", async ([FromServices] IProducer<Null, WeatherForecastDto> producer,
-        [FromServices] ILogger<WeatherForecastDto> logger) =>
-    {
-        var address = new Faker().Address;
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecastDto
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)],
-                    LocationStore.PickRandom()
-                ))
-            .ToArray();
-
-        var producerTasks = forecast
-            .Select(value => producer.ProduceAsync("weatherforcast_topic",
-                new Message<Null, WeatherForecastDto>()
-                {
-                    Value = value
-                }));
-        await Task.WhenAll(producerTasks);
-
-        return forecast;
-    })
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
-
-app.MapGet("/weatherforecast-secured", async ([FromServices] IProducer<Null, WeatherForecastDto> producer,
-        [FromServices] ILogger<WeatherForecastDto> logger) =>
-    {
-        var address = new Faker().Address;
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecastDto
-                (
-                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    Random.Shared.Next(-20, 55),
-                    summaries[Random.Shared.Next(summaries.Length)],
-                    LocationStore.PickRandom()
-                ))
-            .ToArray();
-
-        var producerTasks = forecast
-            .Select(value => producer.ProduceAsync("weatherforcast_topic",
-                new Message<Null, WeatherForecastDto>()
-                {
-                    Value = value
-                }));
-        await Task.WhenAll(producerTasks);
-
-        return forecast;
-    })
-    .WithName("GetWeatherForecastSecured")
-    .RequireAuthorization()
-    .WithOpenApi();
+app.MapGroup("/api").AddWeatherForecastEndpoints();
 
 app.MapDefaultEndpoints();
-
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 await app.RunAsync();
-
-namespace WebApi
-{
-    record WeatherForecastDto(
-        DateOnly Date,
-        int TemperatureC,
-        string? Summary,
-        LocationDto Location)
-    {
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-
-    record LocationDto(string City, string Country, string CountryCode);
-
-    internal static class LocationStore
-    {
-        private static readonly CsvDocument CsvDocumentCities;
-
-        static LocationStore()
-        {
-            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApi.Resources.cities.csv");
-            using var ms = new MemoryStream();
-            stream?.CopyTo(ms);
-            CsvOptions options = new()
-            {
-                HasHeader = true,
-                Separator = SeparatorType.Semicolon
-            };
-            CsvDocumentCities = CsvSerializer.ConvertToDocument(ms.ToArray(), options);
-        }
-
-        public static LocationDto PickRandom()
-        {
-            var rows = CsvDocumentCities.Rows;
-            var row = rows[Random.Shared.Next(rows.Length)];
-            return new(
-                City: row[1].GetValue<string>()!,
-                Country: row[7].GetValue<string>()!,
-                CountryCode: row[6].GetValue<string>()!
-            );
-        }
-    }
-}
