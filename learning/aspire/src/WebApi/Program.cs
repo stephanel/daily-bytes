@@ -1,6 +1,7 @@
 using Bogus;
 using Confluent.Kafka;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using ServiceDefaults;
 using WebApi;
 
@@ -14,13 +15,33 @@ builder.AddKafkaProducer<Null, WeatherForecastDto>("kafka",
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme.",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT", // Optional: if using JWT
+        Name = "Authorization", // Name of the header
+        In = ParameterLocation.Header
+    });
+
+    // Add the security requirement
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+                { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, []
+        }
+    });
+});
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication()
-    .AddKeycloakJwtBearer("keycloak",  "weatherforcast", options =>
+    .AddKeycloakJwtBearer("keycloak", "weatherforcast", options =>
     {
-        options.RequireHttpsMetadata = false;   // cause dev env
+        options.RequireHttpsMetadata = false; // cause dev env
         options.Audience = "account";
     });
 
@@ -39,6 +60,8 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+app.MapSwagger().RequireAuthorization();
 
 app.MapGet("/weatherforecast", async ([FromServices] IProducer<Null, WeatherForecastDto> producer,
         [FromServices] ILogger<WeatherForecastDto> logger) =>
@@ -120,6 +143,7 @@ namespace WebApi
     {
         public static LocationDto PickRandom() =>
             Locations[Random.Shared.Next(Locations.Length)];
+
         private static LocationDto[] Locations =>
         [
             new("Abu Dhabi", "United Arab Emirates", "AE"),
