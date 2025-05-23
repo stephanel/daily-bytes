@@ -12,6 +12,7 @@
         <PackageReference Include="Aspire.Hosting.Kafka" Version="9.2.1" />
         <PackageReference Include="Aspire.Keycloak.Authentication" Version="9.2.1-preview.1.25222.1" />
         <PackageReference Include="Bogus" Version="35.6.3" />
+        <PackageReference Include="CsvCSharp" Version="1.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.14"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
@@ -22,5 +23,9 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="WebApi.UnitTests" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\cities.csv" />
     </ItemGroup>
 </Project>
