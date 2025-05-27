@@ -1,6 +1,8 @@
-using Bogus;
+using System.Security.Claims;
 using Confluent.Kafka;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Linq;
 using ServiceDefaults;
 using WebApi;
 using WebApi.DTOs;
@@ -45,6 +47,24 @@ builder.Services.AddAuthentication()
     {
         options.RequireHttpsMetadata = false; // cause dev env
         options.Audience = "account";
+
+        options.Events = new JwtBearerEvents()
+        {
+            OnTokenValidated = ctx =>
+            {
+                ClaimsIdentity claimsIdentity = (ClaimsIdentity)ctx.Principal!.Identity!;
+
+                var claimRealmAccess = claimsIdentity.FindFirst((claim) => claim.Type == "realm_access")?.Value!;
+
+                // map real_access roles to ClaimsIdentity
+                // keycloak manages roles at realm level, or per resource
+                
+                JObject.Parse(claimRealmAccess).GetValue("roles")!.ToList()
+                    .ForEach(role => claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.ToString())));
+
+                return Task.CompletedTask;
+            }
+        };
     });
 
 var app = builder.Build();

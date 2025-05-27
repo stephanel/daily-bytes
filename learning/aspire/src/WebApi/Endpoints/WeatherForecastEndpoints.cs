@@ -8,9 +8,17 @@ public static class WeatherForecastEndpoints
             .WithName("GetWeatherForecast")
             .WithOpenApi();
 
-        builder.MapGet("/weatherforecast-secured", GetWeatherForecastEndpoints.GetSecured)
+        builder.MapGet("/weatherforecast-secured", GetWeatherForecastEndpoints.Get)
             .WithName("GetWeatherForecastSecured")
             .RequireAuthorization()
+            .WithOpenApi();
+
+        builder.MapGet("/weatherforecast-role-based", GetWeatherForecastEndpoints.Get)
+            .WithName("GetWeatherForecastRoleBased")
+            .RequireAuthorization(policy =>
+            {
+                policy.RequireRole("role1");
+            })
             .WithOpenApi();
 
         return builder;

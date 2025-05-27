@@ -16,6 +16,9 @@ builder.AddKafkaConsumer<Null, WeatherForecastDto>("kafka",
     consumerBuilder => { consumerBuilder.SetValueDeserializer(new JsonDeserializer<WeatherForecastDto>()); });
 
 builder.Services.AddHostedService<Worker>();
+builder.Services.Configure<HostOptions>(opt =>
+    opt.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore);
+
 
 var app = builder.Build();
 

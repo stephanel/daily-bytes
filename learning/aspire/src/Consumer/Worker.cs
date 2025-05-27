@@ -21,19 +21,28 @@ internal sealed partial class Worker(
         while (!stoppingToken.IsCancellationRequested)
         {
             var msg = _consumer.Consume(stoppingToken);
+            var offset = msg.Offset;
 
-            var payload = msg.Message.Value;
-            LogConsumedMessage(JsonSerializer.Serialize(payload));
+            try
+            {
 
-            var entity = Map(payload);
+                var payload = msg.Message.Value;
+                LogConsumedMessage(offset, JsonSerializer.Serialize(payload));
+
+                var entity = Map(payload);
             
-            using var scope = _serviceScopeFactory.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<WeatherForcastHistoryDatabaseContext>();
-            db.Set<WeatherForecast>().Add(entity);
-            await db.SaveChangesAsync(stoppingToken);
+                using var scope = _serviceScopeFactory.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<WeatherForcastHistoryDatabaseContext>();
+                db.Set<WeatherForecast>().Add(entity);
+                await db.SaveChangesAsync(stoppingToken);
+            }
+            catch (Exception ex)
+            {
+                LogErroConsumingMessage(offset, ex);
+            }
         }
     }
-
+    
     private WeatherForecast Map(WeatherForecastDto dto) => new()
     {
         Date = dto.Date,
@@ -44,8 +53,13 @@ internal sealed partial class Worker(
         CountryCode = dto.Location.CountryCode,
     };
     
-    [LoggerMessage(LogLevel.Information, "Consumed message... Persisting {Entity}")]
-    private partial void LogConsumedMessage(string entity);
+    [LoggerMessage(LogLevel.Information, "Consumed message from offset {offset}... Persisting {Entity}")]
+    private partial void LogConsumedMessage(long offset, string entity);
+    
+    
+    [LoggerMessage(LogLevel.Information, "Error consuming offset {Offset}")]
+    private partial void LogErroConsumingMessage(long offset, Exception exception);
+
 }
 
 
