@@ -3,7 +3,7 @@
 public class BookingTests
 {
     [Fact]
-    public void BookingInitialCreate()
+    public void CreateNewBooking_Append_BookingCreated()
     {
         // arrange
         var meetingSpace = MeetingSpace.Helsinki;
@@ -22,7 +22,7 @@ public class BookingTests
     }
 
     [Fact]
-    public void BookingUpdateTimeSlot()
+    public void UpdateTimeSlot_Append_BookedTimeSlotChanged()
     {
         // arrange
         var meetingSpace = MeetingSpace.Helsinki;
@@ -45,7 +45,7 @@ public class BookingTests
     }
 
     [Fact]
-    public void BookingUpdateMeetingSpace()
+    public void UpdateMeetingSpace_Append_MeetingSpaceChanged()
     {
         // arrange
         var startTime = DateTime.Now;

@@ -1,6 +1,5 @@
 using System.Text.Json;
-using EventSourcing.Domain.Entities;
-using EventSourcing.Domain.Events;
+using EventSourcing.Domain.Core;
 
 namespace EventSourcing.Infrastructure;
 

@@ -1,3 +1,4 @@
+using EventSourcing.Domain.Core;
 using EventSourcing.Domain.Enums;
 using EventSourcing.Domain.Events;
 

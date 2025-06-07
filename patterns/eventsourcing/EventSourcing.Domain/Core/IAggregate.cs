@@ -1,6 +1,6 @@
 using EventSourcing.Domain.Events;
 
-namespace EventSourcing.Domain.Entities;
+namespace EventSourcing.Domain.Core;
 
 public interface IAggregate
 {
