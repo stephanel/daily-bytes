@@ -27,7 +27,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Run Test
         run: dotnet test --logger trx --collect:"XPlat Code Coverage" --results-directory TestResults
