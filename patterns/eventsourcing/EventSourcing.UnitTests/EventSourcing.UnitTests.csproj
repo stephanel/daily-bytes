@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventSourcing.Domain\EventSourcing.Domain.csproj" />
+    <ProjectReference Include="../EventSourcing.Infrastructure/EventSourcing.Infrastructure.csproj" />
+    <ProjectReference Include="../EventSourcing.Domain/EventSourcing.Domain.csproj" />
   </ItemGroup>
 
 </Project>
