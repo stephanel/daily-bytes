@@ -2,4 +2,4 @@ using EventSourcing.Domain.Core;
 
 namespace EventSourcing.Domain.Events;
 
-public record class BookedTimeSlotChanged(DateTime StartTime, DateTime EndTime) : IDomainEvent;
+public record BookedTimeSlotChanged(DateTime StartTime, DateTime EndTime) : IDomainEvent;
