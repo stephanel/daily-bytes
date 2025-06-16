@@ -1,6 +1,6 @@
 namespace EventSourcing.Domain.Enums;
 
-public enum MeetingSpace
+public enum MeetingRoom
 {
     Helsinki,
     Paris

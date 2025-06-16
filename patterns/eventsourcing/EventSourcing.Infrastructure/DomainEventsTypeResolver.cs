@@ -1,11 +1,11 @@
-﻿using EventSourcing.Domain.Events;
+﻿using System.Runtime.CompilerServices;
+using EventSourcing.Domain.Events;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using EventSourcing.Domain.Core;
 
 namespace EventSourcing.Infrastructure;
-
 
 public class DomainEventsTypeResolver : DefaultJsonTypeInfoResolver
 {
@@ -21,15 +21,18 @@ public class DomainEventsTypeResolver : DefaultJsonTypeInfoResolver
                 TypeDiscriminatorPropertyName = "$event-type",
                 IgnoreUnrecognizedTypeDiscriminators = true,
                 UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
-                DerivedTypes =
-                {
-                    new JsonDerivedType(typeof(BookingCreated), nameof(BookingCreated)),
-                    new JsonDerivedType(typeof(BookedTimeSlotChanged), nameof(BookedTimeSlotChanged)),
-                    new JsonDerivedType(typeof(MeetingSpaceChanged), nameof(MeetingSpaceChanged))
-                }
             };
+
+            GetDomainEventAsDerivedTypes().ForEach(jsonTypeInfo.PolymorphismOptions.DerivedTypes.Add);
         }
 
         return jsonTypeInfo;
     }
+
+    private static List<JsonDerivedType> GetDomainEventAsDerivedTypes()
+        => AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(t =>
+                typeof(IDomainEvent).IsAssignableFrom(t) && t is { IsInterface: false, IsAbstract: false })
+            .Select(t => new JsonDerivedType(t, t.Name)).ToList();
 }
