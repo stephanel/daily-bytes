@@ -43,6 +43,9 @@ public class InMemoryEventStoreTests
         booking.AddAttendee(NewAttendee());
         _repository.Save(booking);
 
+        booking.RemoveAttendee(booking.Attendees[0]);
+        _repository.Save(booking);
+
         // arrange
         var loadedBooking = _repository.Load<Booking>(booking.Id);
         AssertBooking(booking, loadedBooking);
@@ -53,10 +56,8 @@ public class InMemoryEventStoreTests
         Assert.Equal(expected.MeetingRoom, actual.MeetingRoom);
         Assert.Equal(expected.StartTime, actual.StartTime);
         Assert.Equal(expected.EndTime, actual.EndTime);
+        Assert.Equal(expected.Attendees, actual.Attendees);
     }
-
-    private void AssertEvent<TDomainEvent>(TDomainEvent expected, TDomainEvent actual) where TDomainEvent : IDomainEvent
-        => Assert.Equivalent(expected, actual);
 
     private static Attendee NewAttendee() =>
         new(new Faker().Person.FirstName, new Faker().Person.LastName, new Faker().Person.Email);
