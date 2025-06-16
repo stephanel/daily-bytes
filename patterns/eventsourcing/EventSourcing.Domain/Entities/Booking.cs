@@ -68,6 +68,12 @@ public class Booking : IAggregate
         _events.Add(new AttendeeAdded(Attendees));
     }
 
+    public void RemoveAttendee(Attendee attendee)
+    {
+        Attendees = [..Attendees.Where(x => x != attendee)];
+        _events.Add(new AttendeeRemoved(Attendees));
+    }
+
     private void Apply(List<IDomainEvent> events)
     {
         foreach (var @event in events)
@@ -79,6 +85,7 @@ public class Booking : IAggregate
                 case BookedTimeSlotChanged e: Apply(e); break;
                 case MeetingRoomChanged e: Apply(e); break;
                 case AttendeeAdded e: Apply(e); break;
+                case AttendeeRemoved e: Apply(e); break;
                 default:
                     throw new NotImplementedException(
                         $"No Apply method found for event type '{@event.GetType().Name}'");
@@ -105,7 +112,9 @@ public class Booking : IAggregate
     
     private void Apply(AttendeeAdded @event) =>
         Attendees = @event.Attendees;
-
+    
+    private void Apply(AttendeeRemoved @event) =>
+        Attendees = @event.Attendees;
 }
 
 public record Attendee(string FirstName, string LastName, string Email);

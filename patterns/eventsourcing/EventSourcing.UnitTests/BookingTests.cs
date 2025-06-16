@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using EventSourcing.Domain.Core;
 
 namespace EventSourcing.UnitTests;
 
@@ -71,7 +70,7 @@ public class BookingTests
     }
 
     [Fact]
-    public void AddNewAttendee_Append_MeetingRoomChanged()
+    public void AddNewAttendee_Append_AttendeeAdded()
     {
         // arrange
         var startTime = DateTime.Now;
@@ -91,6 +90,26 @@ public class BookingTests
     }
 
     [Fact]
+    public void RemoveAttendee_Append_AttendeeRemoved()
+    {
+        // arrange
+        var startTime = DateTime.Now;
+        var endTime = startTime.AddHours(1);
+        var addedAttendee = NewAttendee();
+        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, startTime, endTime, [.._attendees, addedAttendee]);
+
+        // act
+        booking.RemoveAttendee(_attendees[0]);
+
+        // assert
+        Assert.Equal([addedAttendee], booking.Attendees);
+
+        Assert.Equal(2, booking.Events.Count);
+        Assert.IsType<BookingCreated>(booking.Events[0]);
+        Assert.IsType<AttendeeRemoved>(booking.Events[1]);
+    }
+
+    [Fact]
     public void BookingSubsequentUpdates()
     {
         // arrange
@@ -105,16 +124,26 @@ public class BookingTests
         var newStartTime = now.AddHours(1);
         var newEndTime = now.AddHours(2);
         booking.UpdateTimeSlot(newStartTime, newEndTime);
+        
+        // act
+        booking.RemoveAttendee(_attendees[0]);
+        
+        // act
+        var newAttendee = NewAttendee();
+        booking.AddAttendee(newAttendee);
 
         // assert
         Assert.Equal(newRoom, booking.MeetingRoom);
         Assert.Equal(newStartTime, booking.StartTime);
         Assert.Equal(newEndTime, booking.EndTime);
+        Assert.Equal([newAttendee], booking.Attendees);
 
-        Assert.Equal(3, booking.Events.Count);
+        Assert.Equal(5, booking.Events.Count);
         Assert.IsType<BookingCreated>(booking.Events[0]);
         Assert.IsType<MeetingRoomChanged>(booking.Events[1]);
         Assert.IsType<BookedTimeSlotChanged>(booking.Events[2]);
+        Assert.IsType<AttendeeRemoved>(booking.Events[3]);
+        Assert.IsType<AttendeeAdded>(booking.Events[4]);
     }
 
     private static Attendee NewAttendee() =>

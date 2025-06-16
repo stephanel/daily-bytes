@@ -1,5 +1,3 @@
-using EventSourcing.Domain.Events;
-
 namespace EventSourcing.Domain.Core;
 
 public interface IAggregate
