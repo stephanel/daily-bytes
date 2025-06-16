@@ -17,6 +17,8 @@ public class Booking : IAggregate
     public DateTime? StartTime { get; private set; }
     public DateTime? EndTime { get; private set; }
 
+    public IReadOnlyList<Attendee> Attendees { get; private set; } = [];
+
     public IReadOnlyList<IDomainEvent> Events => _events;
 
     /// <summary>
@@ -24,13 +26,14 @@ public class Booking : IAggregate
     /// Meant to be called from business logic to create a new booking
     /// </summary>
     /// <returns></returns>
-    public Booking(Guid id, MeetingRoom meetingRoom, DateTime startTime, DateTime endTime)
+    public Booking(Guid id, MeetingRoom meetingRoom, DateTime startTime, DateTime endTime, IReadOnlyList<Attendee> attendees)
     {
         Id = id;
         MeetingRoom = meetingRoom;
         StartTime = startTime;
         EndTime = endTime;
-        _events.Add(new BookingCreated(meetingRoom, startTime, endTime));
+        Attendees = attendees;
+        _events.Add(new BookingCreated(meetingRoom, startTime, endTime, attendees));
     }
 
     /// <summary>
@@ -59,6 +62,12 @@ public class Booking : IAggregate
         _events.Add(new MeetingRoomChanged(meetingRoom));
     }
 
+    public void AddAttendee(Attendee newAttendee)
+    {
+        Attendees = [..Attendees, newAttendee];
+        _events.Add(new AttendeeAdded(Attendees));
+    }
+
     private void Apply(List<IDomainEvent> events)
     {
         foreach (var @event in events)
@@ -69,6 +78,7 @@ public class Booking : IAggregate
                 case BookingCreated e: Apply(e); break;
                 case BookedTimeSlotChanged e: Apply(e); break;
                 case MeetingRoomChanged e: Apply(e); break;
+                case AttendeeAdded e: Apply(e); break;
                 default:
                     throw new NotImplementedException(
                         $"No Apply method found for event type '{@event.GetType().Name}'");
@@ -81,6 +91,7 @@ public class Booking : IAggregate
         MeetingRoom = @event.MeetingRoom;
         StartTime = @event.StartTime;
         EndTime = @event.EndTime;
+        Attendees = @event.Attendees;
     }
 
     private void Apply(BookedTimeSlotChanged @event)
@@ -91,4 +102,10 @@ public class Booking : IAggregate
 
     private void Apply(MeetingRoomChanged @event) =>
         MeetingRoom = @event.MeetingRoom;
+    
+    private void Apply(AttendeeAdded @event) =>
+        Attendees = @event.Attendees;
+
 }
+
+public record Attendee(string FirstName, string LastName, string Email);

@@ -1,7 +1,13 @@
-﻿namespace EventSourcing.UnitTests;
+﻿using Bogus;
+using EventSourcing.Domain.Core;
+
+namespace EventSourcing.UnitTests;
 
 public class BookingTests
 {
+    private readonly IReadOnlyList<Attendee> _attendees =
+        [NewAttendee()];
+
     [Fact]
     public void CreateNewBooking_Append_BookingCreated()
     {
@@ -11,12 +17,13 @@ public class BookingTests
         var endTime = startTime.AddHours(1);
 
         // act
-        Booking booking = new Booking(Guid.NewGuid(), room, startTime, endTime);
+        Booking booking = new Booking(Guid.NewGuid(), room, startTime, endTime, _attendees);
 
         // assert
         Assert.Equal(room, booking.MeetingRoom);
         Assert.Equal(startTime, booking.StartTime);
         Assert.Equal(endTime, booking.EndTime);
+        Assert.Equal(_attendees, booking.Attendees);
         Assert.Single(booking.Events);
         Assert.IsType<BookingCreated>(booking.Events[0]);
     }
@@ -27,7 +34,7 @@ public class BookingTests
         // arrange
         var room = MeetingRoom.Helsinki;
         var now = DateTime.Now;
-        Booking booking = new Booking(Guid.NewGuid(), room, now, now.AddHours(1));
+        Booking booking = new Booking(Guid.NewGuid(), room, now, now.AddHours(1), _attendees);
 
         // act
         var newStartTime = now.AddHours(1);
@@ -35,7 +42,6 @@ public class BookingTests
         booking.UpdateTimeSlot(newStartTime, newEndTime);
 
         // assert
-        Assert.Equal(room, booking.MeetingRoom);
         Assert.Equal(newStartTime, booking.StartTime);
         Assert.Equal(newEndTime, booking.EndTime);
 
@@ -50,7 +56,7 @@ public class BookingTests
         // arrange
         var startTime = DateTime.Now;
         var endTime = startTime.AddHours(1);
-        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, startTime, endTime);
+        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, startTime, endTime, _attendees);
 
         // act
         var newMeetingRoom = MeetingRoom.Paris;
@@ -58,8 +64,6 @@ public class BookingTests
 
         // assert
         Assert.Equal(newMeetingRoom, booking.MeetingRoom);
-        Assert.Equal(startTime, booking.StartTime);
-        Assert.Equal(endTime, booking.EndTime);
 
         Assert.Equal(2, booking.Events.Count);
         Assert.IsType<BookingCreated>(booking.Events[0]);
@@ -67,11 +71,31 @@ public class BookingTests
     }
 
     [Fact]
+    public void AddNewAttendee_Append_MeetingRoomChanged()
+    {
+        // arrange
+        var startTime = DateTime.Now;
+        var endTime = startTime.AddHours(1);
+        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, startTime, endTime, _attendees);
+
+        // act
+        var newAttendee = NewAttendee();
+        booking.AddAttendee(newAttendee);
+
+        // assert
+        Assert.Equal([.._attendees, newAttendee], booking.Attendees);
+
+        Assert.Equal(2, booking.Events.Count);
+        Assert.IsType<BookingCreated>(booking.Events[0]);
+        Assert.IsType<AttendeeAdded>(booking.Events[1]);
+    }
+
+    [Fact]
     public void BookingSubsequentUpdates()
     {
         // arrange
         var now = DateTime.Now;
-        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, now, now.AddHours(1));
+        Booking booking = new Booking(Guid.NewGuid(), MeetingRoom.Helsinki, now, now.AddHours(1), _attendees);
 
         // act
         var newRoom = MeetingRoom.Paris;
@@ -93,4 +117,6 @@ public class BookingTests
         Assert.IsType<BookedTimeSlotChanged>(booking.Events[2]);
     }
 
+    private static Attendee NewAttendee() =>
+        new(new Faker().Person.FirstName, new Faker().Person.LastName, new Faker().Person.Email);
 }

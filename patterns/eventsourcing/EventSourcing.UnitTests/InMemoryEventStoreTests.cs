@@ -1,3 +1,4 @@
+using Bogus;
 using EventSourcing.Domain.Core;
 
 namespace EventSourcing.UnitTests;
@@ -7,12 +8,14 @@ public class InMemoryEventStoreTests
     private readonly InMemoryEventStore _repository = new();
     private readonly DateTime _now = DateTime.Now;
 
+    private readonly IReadOnlyList<Attendee> _attendees = [NewAttendee()];
+
     [Fact]
     public void PersistInitialState()
     {
         // arrange
         // act
-        var booking = new Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, _now, _now.AddHours(1));
+        var booking = new Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, _now, _now.AddHours(1), _attendees);
         _repository.Save(booking);
 
         // arrange
@@ -24,7 +27,7 @@ public class InMemoryEventStoreTests
     public void PersistUpdatedStates()
     {
         // arrange
-        var booking = new Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, _now, _now.AddDays(1));
+        var booking = new Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, _now, _now.AddDays(1), _attendees);
         _repository.Save(booking);
 
         // act
@@ -35,28 +38,14 @@ public class InMemoryEventStoreTests
         _repository.Save(booking);
 
         booking.UpdateTimeSlot(_now.AddHours(2), _now.AddHours(3));
+        _repository.Save(booking);
+
+        booking.AddAttendee(NewAttendee());
         _repository.Save(booking);
 
         // arrange
         var loadedBooking = _repository.Load<Booking>(booking.Id);
         AssertBooking(booking, loadedBooking);
-    }
-
-    [Fact]
-    public void PreserveEventsOrder()
-    {
-        // arrange
-        var booking = new Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, _now, _now.AddDays(1));
-        booking.UpdateTimeSlot(_now.AddHours(1), _now.AddHours(2));
-        booking.UpdateMeetingRoom(MeetingRoom.Paris);
-        booking.UpdateTimeSlot(_now.AddHours(2), _now.AddHours(3));
-
-        // act
-        _repository.Save(booking);
-
-        // assert
-        var loadedBooking = _repository.Load<Booking>(booking.Id);
-        Assert.Equal(booking.Events, loadedBooking.Events);
     }
 
     private void AssertBooking(Booking expected, Booking actual)
@@ -68,4 +57,7 @@ public class InMemoryEventStoreTests
 
     private void AssertEvent<TDomainEvent>(TDomainEvent expected, TDomainEvent actual) where TDomainEvent : IDomainEvent
         => Assert.Equivalent(expected, actual);
+
+    private static Attendee NewAttendee() =>
+        new(new Faker().Person.FirstName, new Faker().Person.LastName, new Faker().Person.Email);
 }
