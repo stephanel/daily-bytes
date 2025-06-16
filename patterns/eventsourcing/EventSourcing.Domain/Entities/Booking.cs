@@ -13,24 +13,24 @@ public class Booking : IAggregate
     }
 
     public Guid Id { get; private init; }
-    public MeetingSpace MeetingSpace { get; private set; }
+    public MeetingRoom MeetingRoom { get; private set; }
     public DateTime? StartTime { get; private set; }
     public DateTime? EndTime { get; private set; }
 
-    public List<IDomainEvent> Events => _events;
+    public IReadOnlyList<IDomainEvent> Events => _events;
 
     /// <summary>
     /// Creates a new Booking instance with the specified ID, start time, and end time.
     /// Meant to be called from business logic to create a new booking
     /// </summary>
     /// <returns></returns>
-    public Booking(Guid id, MeetingSpace meetingSpace, DateTime startTime, DateTime endTime)
+    public Booking(Guid id, MeetingRoom meetingRoom, DateTime startTime, DateTime endTime)
     {
         Id = id;
-        MeetingSpace = meetingSpace;
+        MeetingRoom = meetingRoom;
         StartTime = startTime;
         EndTime = endTime;
-        _events.Add(new BookingCreated(meetingSpace, startTime, endTime));
+        _events.Add(new BookingCreated(meetingRoom, startTime, endTime));
     }
 
     /// <summary>
@@ -43,32 +43,32 @@ public class Booking : IAggregate
     public Booking(Guid id, List<IDomainEvent> events)
     {
         Id = id;
-        ApplyEvents(events);
+        Apply(events);
     }
 
-    public void Update(BookedTimeSlotChanged bookedTimeSlotChanged)
+    public void UpdateTimeSlot(DateTime startTime, DateTime endTime)
     {
-        StartTime = bookedTimeSlotChanged.StartTime;
-        EndTime = bookedTimeSlotChanged.EndTime;
-        _events.Add(bookedTimeSlotChanged);
+        StartTime = startTime;
+        EndTime = endTime;
+        _events.Add(new BookedTimeSlotChanged(startTime, endTime));
     }
 
-    public void Update(MeetingSpaceChanged meetingSpaceChanged)
+    public void UpdateMeetingRoom(MeetingRoom meetingRoom)
     {
-        MeetingSpace = meetingSpaceChanged.MeetingSpace;
-        _events.Add(meetingSpaceChanged);
+        MeetingRoom = meetingRoom;
+        _events.Add(new MeetingRoomChanged(meetingRoom));
     }
 
-    private void ApplyEvents(List<IDomainEvent> events)
+    private void Apply(List<IDomainEvent> events)
     {
         foreach (var @event in events)
         {
             _events.Add(@event);
             switch (@event)
             {
-                case BookingCreated e: ApplyEvent(e); break;
-                case BookedTimeSlotChanged e: ApplyEvent(e); break;
-                case MeetingSpaceChanged e: ApplyEvent(e); break;
+                case BookingCreated e: Apply(e); break;
+                case BookedTimeSlotChanged e: Apply(e); break;
+                case MeetingRoomChanged e: Apply(e); break;
                 default:
                     throw new NotImplementedException(
                         $"No Apply method found for event type '{@event.GetType().Name}'");
@@ -76,19 +76,19 @@ public class Booking : IAggregate
         }
     }
 
-    private void ApplyEvent(BookingCreated @event)
+    private void Apply(BookingCreated @event)
     {
-        MeetingSpace = @event.MeetingSpace;
+        MeetingRoom = @event.MeetingRoom;
         StartTime = @event.StartTime;
         EndTime = @event.EndTime;
     }
 
-    private void ApplyEvent(BookedTimeSlotChanged @event)
+    private void Apply(BookedTimeSlotChanged @event)
     {
         StartTime = @event.StartTime;
         EndTime = @event.EndTime;
     }
 
-    private void ApplyEvent(MeetingSpaceChanged @event) =>
-        MeetingSpace = @event.MeetingSpace;
+    private void Apply(MeetingRoomChanged @event) =>
+        MeetingRoom = @event.MeetingRoom;
 }

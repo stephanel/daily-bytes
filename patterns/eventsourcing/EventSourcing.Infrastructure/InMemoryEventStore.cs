@@ -3,7 +3,7 @@ using EventSourcing.Domain.Core;
 
 namespace EventSourcing.Infrastructure;
 
-internal class EventSourcingRepository
+internal class InMemoryEventStore
 {
     private readonly Dictionary<Guid, List<EventEntry>> _events = new();
 
@@ -32,9 +32,10 @@ internal class EventSourcingRepository
         TypeInfoResolver = new DomainEventsTypeResolver()
     };
 
-    private EventEntry Map(IDomainEvent domainEvent)
+    private EventEntry Map(IDomainEvent domainEvent, int version)
         => new(domainEvent.GetType().ToString(),
-            JsonSerializer.Serialize(domainEvent, _serializerOptions));
+            JsonSerializer.Serialize(domainEvent, _serializerOptions),
+            version + 1);
 
     private IDomainEvent Map(EventEntry eventEntry)
         => (IDomainEvent)JsonSerializer.Deserialize(eventEntry.Payload,
@@ -46,6 +47,3 @@ internal class EventSourcingRepository
             .Where(type => type is not null)
             .Select(type => type!).First();
 }
-
-// EventEntry is meat to mimic how the events would be persisted in a real-world scenario, using a real events storage system.
-internal record EventEntry(string DotNetType, string Payload);

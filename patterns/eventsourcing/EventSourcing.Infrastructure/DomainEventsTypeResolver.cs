@@ -25,7 +25,7 @@ public class DomainEventsTypeResolver : DefaultJsonTypeInfoResolver
                 {
                     new JsonDerivedType(typeof(BookingCreated), nameof(BookingCreated)),
                     new JsonDerivedType(typeof(BookedTimeSlotChanged), nameof(BookedTimeSlotChanged)),
-                    new JsonDerivedType(typeof(MeetingSpaceChanged), nameof(MeetingSpaceChanged))
+                    new JsonDerivedType(typeof(MeetingRoomChanged), nameof(MeetingRoomChanged))
                 }
             };
         }
