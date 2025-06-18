@@ -26,7 +26,7 @@ let ``Create new booking appends BookingCreated event`` () =
     let room = MeetingRoom.Helsinki
     let startTime = DateTime.Now
     let endTime = startTime.AddHours(1)
-    let attendees = ResizeArray<Attendee>([NewAttendee()])
+    let attendees = [NewAttendee()]
     
     // act
     let booking = Booking(id, room, startTime, endTime, attendees)
@@ -35,7 +35,7 @@ let ``Create new booking appends BookingCreated event`` () =
     Assert.Equal(room, booking.MeetingRoom)
     Assert.Equal(startTime, booking.StartTime);
     Assert.Equal(endTime, booking.EndTime);
-    Assert.Equal(attendees.ToArray(), booking.Attendees)
+    Assert.Equal<Attendee>(attendees, booking.Attendees)
     Assert.Single(booking.Events) |> ignore
 
     match booking.Events[0] with
@@ -44,7 +44,7 @@ let ``Create new booking appends BookingCreated event`` () =
             Assert.Equal(room, actualMeetingRoom)
             Assert.Equal(startTime, actualStartTime)
             Assert.Equal(endTime, actualEndTime)
-            Assert.Equal(attendees.ToArray(), actualAttendees)
+            Assert.Equal<Attendee>(attendees, actualAttendees)
         | _ -> Assert.Fail("The event is not a BookingCreated event")
 
 [<Fact>]
@@ -52,7 +52,7 @@ let ``Update time slot appends BookedTimeSlotChanged event`` () =
     // arrange
     let initialStartTime = DateTime.Now
     let initialEndTime = initialStartTime.AddHours(1)
-    let attendees = ResizeArray<Attendee>([NewAttendee()])
+    let attendees = [NewAttendee()]
     let booking = Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, initialStartTime, initialEndTime, attendees)
 
     // act
@@ -78,7 +78,7 @@ let ``Update meeting room appends MeetingRoomChanged event`` () =
     // arrange
     let now = DateTime.Now
     let initialRoom = MeetingRoom.Helsinki
-    let booking = Booking(Guid.CreateVersion7(), initialRoom, now, now.AddHours(1), ResizeArray<Attendee>([NewAttendee()]))
+    let booking = Booking(Guid.CreateVersion7(), initialRoom, now, now.AddHours(1), [NewAttendee()])
 
     // act
     let newRoom = MeetingRoom.Paris
@@ -95,4 +95,24 @@ let ``Update meeting room appends MeetingRoomChanged event`` () =
             Assert.Equal(newRoom, actualRoom)
         | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")
 
+[<Fact>]
+let ``Add new attendee appends AttendeeAdded event`` () =
+    // arrange
+    let now = DateTime.Now
+    let attendees = [NewAttendee()] 
+    let booking = Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, now, now.AddHours(1), attendees)
+
+    // act
+    let newAttendee = NewAttendee()
+    booking.AddAttendee(newAttendee)
     
+    // assert
+    Assert.Equal<Attendee>(attendees @ [newAttendee], booking.Attendees);
+    Assert.Equal(2, booking.Events.Count) |> ignore
+    match booking.Events[0] with
+        | BookingCreated(_, _, _, _, _) -> ()
+        | _ -> Assert.Fail("The first event is not a BookingCreated event")
+    match booking.Events[1] with
+        | AttendeeAdded(actualAttendees) ->
+            Assert.Equal<Attendee>(attendees @ [newAttendee], actualAttendees)
+        | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")

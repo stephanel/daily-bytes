@@ -24,12 +24,13 @@ type Event =
         meetingRoom: MeetingRoom *
         startTime: DateTime *
         endTime: DateTime *
-        attendees: ResizeArray<Attendee>
+        attendees: Attendee List
     | BookedTimeSlotChanged of startTime: DateTime * endTime: DateTime
     | MeetingRoomChanged of meetingRoom : MeetingRoom
+    | AttendeeAdded of attendees : Attendee List 
 
 type Booking
-    (id0: Guid, meetingRoom0: MeetingRoom, startTime0: DateTime, endTime0: DateTime, attendees0: ResizeArray<Attendee>)
+    (id0: Guid, meetingRoom0: MeetingRoom, startTime0: DateTime, endTime0: DateTime, attendees0: Attendee List)
     =
     let mutable id = id0
     let mutable meetingRoom = meetingRoom0
@@ -65,3 +66,7 @@ type Booking
     member this.UpdateMeetingRoom(newMeetingRoom: MeetingRoom) =
         meetingRoom <- newMeetingRoom
         events.Add(MeetingRoomChanged(meetingRoom = meetingRoom))
+        
+    member this.AddAttendee(newAttendee: Attendee) =
+        attendees <- attendees @ [newAttendee]
+        events.Add(AttendeeAdded(attendees = attendees))
