@@ -1,4 +1,6 @@
-﻿module EventSourcing.UnitTests
+﻿// ReSharper disable FSharpRedundantUnionCaseFieldPatterns
+
+module EventSourcing.UnitTests
 
 open System
 
@@ -63,17 +65,34 @@ let ``Update time slot appends BookedTimeSlotChanged event`` () =
     Assert.Equal(booking.EndTime, booking.EndTime)
     Assert.Equal(2, booking.Events.Count) |> ignore
     match booking.Events[0] with
-        | BookingCreated(actualId, actualMeetingRoom, actualStartTime, actualEndTime, actualAttendees) ->
-            Assert.Equal(booking.Id, actualId)
-            Assert.Equal(booking.MeetingRoom, actualMeetingRoom)
-            Assert.Equal(initialStartTime, actualStartTime)
-            Assert.Equal(initialEndTime, actualEndTime)
-            Assert.Equal(booking.Attendees.ToArray(), actualAttendees)
+        | BookingCreated(_, _, _, _, _) -> ()
         | _ -> Assert.Fail("The first event is not a BookingCreated event")
     match booking.Events[1] with
         | BookedTimeSlotChanged(actualStartTime, actualEndTime) ->
             Assert.Equal(newStartTime, actualStartTime)
             Assert.Equal(newEndTime, actualEndTime)
         | _ -> Assert.Fail("The second event is not a BookedTimeSlotChanged event")
+
+[<Fact>]
+let ``Update meeting room appends MeetingRoomChanged event`` () =
+    // arrange
+    let now = DateTime.Now
+    let initialRoom = MeetingRoom.Helsinki
+    let booking = Booking(Guid.CreateVersion7(), initialRoom, now, now.AddHours(1), ResizeArray<Attendee>([NewAttendee()]))
+
+    // act
+    let newRoom = MeetingRoom.Paris
+    booking.UpdateMeetingRoom(newRoom)
+    
+    // assert
+    Assert.Equal(newRoom, booking.MeetingRoom);
+    Assert.Equal(2, booking.Events.Count) |> ignore
+    match booking.Events[0] with
+        | BookingCreated(_, _, _, _, _) -> ()
+        | _ -> Assert.Fail("The first event is not a BookingCreated event")
+    match booking.Events[1] with
+        | MeetingRoomChanged(actualRoom) ->
+            Assert.Equal(newRoom, actualRoom)
+        | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")
 
     

@@ -2,6 +2,7 @@ module EventSourcing.Domain.Entities.Booking
 
 open System
 
+open EventSourcing.Domain.Enums
 open EventSourcing.Domain.Enums.MeetingRoom
 
 type Attendee =
@@ -25,6 +26,7 @@ type Event =
         endTime: DateTime *
         attendees: ResizeArray<Attendee>
     | BookedTimeSlotChanged of startTime: DateTime * endTime: DateTime
+    | MeetingRoomChanged of meetingRoom : MeetingRoom
 
 type Booking
     (id0: Guid, meetingRoom0: MeetingRoom, startTime0: DateTime, endTime0: DateTime, attendees0: ResizeArray<Attendee>)
@@ -59,3 +61,7 @@ type Booking
         startTime <- newStartTime
         endTime <- newEndTime
         events.Add(BookedTimeSlotChanged(startTime = startTime, endTime = endTime))
+
+    member this.UpdateMeetingRoom(newMeetingRoom: MeetingRoom) =
+        meetingRoom <- newMeetingRoom
+        events.Add(MeetingRoomChanged(meetingRoom = meetingRoom))
