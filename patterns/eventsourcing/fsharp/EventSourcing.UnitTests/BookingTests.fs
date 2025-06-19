@@ -139,3 +139,48 @@ let ``Remove an attendee appends AttendeeRemoved event`` () =
             Assert.Equal<Attendee>(expectedAttendees, actualAttendees)
         | _ -> Assert.Fail("The second event is not a AttendeeRemoved event")
 
+[<Fact>]
+let ``Booking subsequent updates`` () =
+    // arrange
+    let now = DateTime.Now
+    let initialAttendee = NewAttendee()
+    let booking = Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, now, now.AddHours(1), [NewAttendee(); initialAttendee])
+    
+    // act
+    let newRoom = MeetingRoom.Paris 
+    booking.UpdateMeetingRoom(newRoom)
+    
+    // act
+    let newStartTime = now.AddHours(1);
+    let newEndTime = now.AddHours(2)
+    booking.UpdateTimeSlot(newStartTime, newEndTime)
+    
+    // act
+    booking.RemoveAttendee(booking.Attendees.Head)
+                           
+    // act
+    let newAttendee = NewAttendee()
+    booking.AddAttendee(newAttendee)
+    
+    // assert
+    Assert.Equal(newRoom, booking.MeetingRoom);
+    Assert.Equal(newStartTime, booking.StartTime);
+    Assert.Equal(newEndTime, booking.EndTime)
+    Assert.Equal<Attendee>([initialAttendee; newAttendee], booking.Attendees);
+    Assert.Equal(5, booking.Events.Count) |> ignore
+    match booking.Events[0] with
+        | BookingCreated(_, _, _, _, _) -> ()
+        | _ -> Assert.Fail("The first event is not a BookingCreated event")
+    match booking.Events[1] with
+        | MeetingRoomChanged(_) -> ()
+        | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")
+    match booking.Events[2] with
+        | BookedTimeSlotChanged(_) -> ()
+        | _ -> Assert.Fail("The third event is not a BookedTimeSlotChanged event")
+    match booking.Events[3] with
+        | AttendeeRemoved(_) -> ()
+        | _ -> Assert.Fail("The second event is not a AttendeeRemoved event")
+    match booking.Events[4] with
+        | AttendeeAdded(_) -> ()
+        | _ -> Assert.Fail("The second event is not a AttendeeAdded event")
+
