@@ -27,7 +27,8 @@ type Event =
         attendees: Attendee List
     | BookedTimeSlotChanged of startTime: DateTime * endTime: DateTime
     | MeetingRoomChanged of meetingRoom : MeetingRoom
-    | AttendeeAdded of attendees : Attendee List 
+    | AttendeeAdded of attendees : Attendee List
+    | AttendeeRemoved of attendees : Attendee List
 
 type Booking
     (id0: Guid, meetingRoom0: MeetingRoom, startTime0: DateTime, endTime0: DateTime, attendees0: Attendee List)
@@ -70,3 +71,7 @@ type Booking
     member this.AddAttendee(newAttendee: Attendee) =
         attendees <- attendees @ [newAttendee]
         events.Add(AttendeeAdded(attendees = attendees))
+        
+    member this.RemoveAttendee(attendeeToRemove: Attendee) =
+        attendees <- attendees |> List.filter (fun a -> a <> attendeeToRemove)
+        events.Add(AttendeeRemoved(attendees = attendees))

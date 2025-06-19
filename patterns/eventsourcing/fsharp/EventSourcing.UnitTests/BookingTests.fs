@@ -115,4 +115,27 @@ let ``Add new attendee appends AttendeeAdded event`` () =
     match booking.Events[1] with
         | AttendeeAdded(actualAttendees) ->
             Assert.Equal<Attendee>(attendees @ [newAttendee], actualAttendees)
-        | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")
+        | _ -> Assert.Fail("The second event is not a AttendeeAdded event")
+        
+[<Fact>]
+let ``Remove an attendee appends AttendeeRemoved event`` () =
+    // arrange
+    let now = DateTime.Now
+    let attendees: Attendee List = [NewAttendee(); NewAttendee()] 
+    let booking = Booking(Guid.CreateVersion7(), MeetingRoom.Helsinki, now, now.AddHours(1), attendees)
+    
+    // act
+    booking.RemoveAttendee(attendees[0])
+    
+    // assert
+    let expectedAttendees: Attendee List = attendees |> List.filter (fun a -> a <> attendees[0])
+    Assert.Equal<Attendee>(expectedAttendees, booking.Attendees);
+    Assert.Equal(2, booking.Events.Count) |> ignore
+    match booking.Events[0] with
+        | BookingCreated(_, _, _, _, _) -> ()
+        | _ -> Assert.Fail("The first event is not a BookingCreated event")
+    match booking.Events[1] with
+        | AttendeeRemoved(actualAttendees) ->
+            Assert.Equal<Attendee>(expectedAttendees, actualAttendees)
+        | _ -> Assert.Fail("The second event is not a AttendeeRemoved event")
+
