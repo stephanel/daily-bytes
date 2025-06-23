@@ -11,7 +11,7 @@ open EventSourcing.Domain.Enums.MeetingRoom
 open EventSourcing.Domain.Entities.Booking
 
 let NewAttendee () : Attendee =
-    let faker = new Faker()
+    let faker = Faker()
 
     { FirstName = faker.Person.FirstName
       LastName = faker.Person.LastName
@@ -68,7 +68,7 @@ let ``Update time slot appends BookedTimeSlotChanged event`` () =
     Assert.Equal(booking.EndTime, booking.EndTime)
 
     let events = booking.Events
-    Assert.Equal(2, events.Length) |> ignore
+    Assert.Equal(2, events.Length)
 
     match events[0] with
     | BookingCreated(_, _, _, _, _) -> ()
@@ -97,7 +97,7 @@ let ``Update meeting room appends MeetingRoomChanged event`` () =
     Assert.Equal(newRoom, booking.MeetingRoom)
 
     let events = booking.Events
-    Assert.Equal(2, events.Length) |> ignore
+    Assert.Equal(2, events.Length)
 
     match events[0] with
     | BookingCreated(_, _, _, _, _) -> ()
@@ -124,7 +124,7 @@ let ``Add new attendee appends AttendeeAdded event`` () =
     Assert.Equal<Attendee>(attendees @ [ newAttendee ], booking.Attendees)
 
     let events = booking.Events
-    Assert.Equal(2, events.Length) |> ignore
+    Assert.Equal(2, events.Length)
 
     match events[0] with
     | BookingCreated(_, _, _, _, _) -> ()
@@ -151,7 +151,7 @@ let ``Remove an attendee appends AttendeeRemoved event`` () =
     Assert.Equal<Attendee>(expectedAttendees, booking.Attendees)
 
     let events = booking.Events
-    Assert.Equal(2, events.Length) |> ignore
+    Assert.Equal(2, events.Length)
 
     match events[0] with
     | BookingCreated(_, _, _, _, _) -> ()
@@ -199,24 +199,24 @@ let ``Booking subsequent updates`` () =
     Assert.Equal<Attendee>([ initialAttendee; newAttendee ], booking.Attendees)
 
     let events = booking.Events
-    Assert.Equal(5, events.Length) |> ignore
+    Assert.Equal(5, events.Length)
 
     match events[0] with
     | BookingCreated(_, _, _, _, _) -> ()
     | _ -> Assert.Fail("The first event is not a BookingCreated event")
 
     match events[1] with
-    | MeetingRoomChanged(_) -> ()
+    | MeetingRoomChanged _ -> ()
     | _ -> Assert.Fail("The second event is not a MeetingRoomChanged event")
 
     match events[2] with
-    | BookedTimeSlotChanged(_) -> ()
+    | BookedTimeSlotChanged _ -> ()
     | _ -> Assert.Fail("The third event is not a BookedTimeSlotChanged event")
 
     match events[3] with
-    | AttendeeRemoved(_) -> ()
+    | AttendeeRemoved _ -> ()
     | _ -> Assert.Fail("The second event is not a AttendeeRemoved event")
 
     match events[4] with
-    | AttendeeAdded(_) -> ()
+    | AttendeeAdded _ -> ()
     | _ -> Assert.Fail("The second event is not a AttendeeAdded event")
