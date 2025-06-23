@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <Compile Include="BookingTests.fs" />
+        <Compile Include="EventStoreTests.fs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -20,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\EventSourcing.Domain\EventSourcing.Domain.fsproj" />
+      <ProjectReference Include="..\EventSourcing.Infrastructure\EventSourcing.Infrastructure.fsproj" />
     </ItemGroup>
 
 </Project>
