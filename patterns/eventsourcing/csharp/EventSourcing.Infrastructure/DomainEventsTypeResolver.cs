@@ -23,13 +23,13 @@ public class DomainEventsTypeResolver : DefaultJsonTypeInfoResolver
                 UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
             };
 
-            GetDomainEventAsDerivedTypes().ForEach(jsonTypeInfo.PolymorphismOptions.DerivedTypes.Add);
+            GetDomainEventAsJsonDerivedTypes().ForEach(jsonTypeInfo.PolymorphismOptions.DerivedTypes.Add);
         }
 
         return jsonTypeInfo;
     }
 
-    private static List<JsonDerivedType> GetDomainEventAsDerivedTypes()
+    private static List<JsonDerivedType> GetDomainEventAsJsonDerivedTypes()
         => AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(assembly => assembly.GetTypes())
             .Where(t =>
