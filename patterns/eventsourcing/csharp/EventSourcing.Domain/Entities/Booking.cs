@@ -12,7 +12,7 @@ public class Booking : IAggregate
     {
     }
 
-    public Guid Id { get; private init; }
+    public Guid Id { get; }
     public MeetingRoom MeetingRoom { get; private set; }
     public DateTime? StartTime { get; private set; }
     public DateTime? EndTime { get; private set; }
@@ -26,7 +26,8 @@ public class Booking : IAggregate
     /// Meant to be called from business logic to create a new booking
     /// </summary>
     /// <returns></returns>
-    public Booking(Guid id, MeetingRoom meetingRoom, DateTime startTime, DateTime endTime, IReadOnlyList<Attendee> attendees)
+    public Booking(Guid id, MeetingRoom meetingRoom, DateTime startTime, DateTime endTime,
+        IReadOnlyList<Attendee> attendees)
     {
         Id = id;
         MeetingRoom = meetingRoom;
@@ -109,10 +110,10 @@ public class Booking : IAggregate
 
     private void Apply(MeetingRoomChanged @event) =>
         MeetingRoom = @event.MeetingRoom;
-    
+
     private void Apply(AttendeeAdded @event) =>
         Attendees = @event.Attendees;
-    
+
     private void Apply(AttendeeRemoved @event) =>
         Attendees = @event.Attendees;
 }

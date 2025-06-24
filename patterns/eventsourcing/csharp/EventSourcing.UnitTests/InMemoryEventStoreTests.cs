@@ -1,5 +1,4 @@
 using Bogus;
-using EventSourcing.Domain.Core;
 
 namespace EventSourcing.UnitTests;
 

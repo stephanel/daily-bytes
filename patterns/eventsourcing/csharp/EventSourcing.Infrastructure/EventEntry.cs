@@ -1,3 +1,3 @@
 namespace EventSourcing.Infrastructure;
 
-internal record EventEntry(string DotNetType, string Payload, int Version);
+internal record EventEntry(DateTimeOffset CreatedOn, string DotNetType, string Payload, int Version);
