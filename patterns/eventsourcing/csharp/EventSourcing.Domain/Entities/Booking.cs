@@ -50,30 +50,17 @@ public class Booking : IAggregate
         Apply(events);
     }
 
-    public void UpdateTimeSlot(DateTime startTime, DateTime endTime)
-    {
-        StartTime = startTime;
-        EndTime = endTime;
-        _events.Add(new BookedTimeSlotChanged(startTime, endTime));
-    }
+    public void UpdateTimeSlot(DateTime startTime, DateTime endTime) =>
+        Apply([new BookedTimeSlotChanged(startTime, endTime)]);
 
-    public void UpdateMeetingRoom(MeetingRoom meetingRoom)
-    {
-        MeetingRoom = meetingRoom;
-        _events.Add(new MeetingRoomChanged(meetingRoom));
-    }
+    public void UpdateMeetingRoom(MeetingRoom meetingRoom) =>
+        Apply([new MeetingRoomChanged(meetingRoom)]);
 
-    public void AddAttendee(Attendee newAttendee)
-    {
-        Attendees = [..Attendees, newAttendee];
-        _events.Add(new AttendeeAdded(Attendees));
-    }
+    public void AddAttendee(Attendee newAttendee) =>
+        Apply([new AttendeeAdded([..Attendees, newAttendee])]);
 
-    public void RemoveAttendee(Attendee attendee)
-    {
-        Attendees = [..Attendees.Where(x => x != attendee)];
-        _events.Add(new AttendeeRemoved(Attendees));
-    }
+    public void RemoveAttendee(Attendee attendee) =>
+        Apply([new AttendeeRemoved([..Attendees.Where(x => x != attendee)])]);
 
     private void Apply(List<IDomainEvent> events)
     {
