@@ -17,7 +17,11 @@ internal class InMemoryEventStore()
             _events[aggregate.Id] = [];
         }
 
-        _events[aggregate.Id] = events.Select(Map).ToList();
+        var maxVersion = _events[aggregate.Id]
+            .DefaultIfEmpty(EventEntry.Empty)
+            .Max(x => x.Version);
+
+        _events[aggregate.Id].AddRange( events.Select(Map).Where(x => x.Version > maxVersion));
     }
 
     public TAggregate Load<TAggregate>(Guid id) where TAggregate : IAggregate
