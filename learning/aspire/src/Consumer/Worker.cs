@@ -25,7 +25,6 @@ internal sealed partial class Worker(
 
             try
             {
-
                 var payload = msg.Message.Value;
                 LogConsumedMessage(offset, JsonSerializer.Serialize(payload));
 
