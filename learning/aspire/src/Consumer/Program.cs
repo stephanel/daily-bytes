@@ -1,7 +1,5 @@
-using Aspire.Confluent.Kafka;
 using Confluent.Kafka;
 using Consumer;
-using Consumer.Entities;
 using Consumer.Persistence;
 using ServiceDefaults;
 
@@ -12,7 +10,7 @@ builder.AddServiceDefaults();
 builder.AddNpgsqlDbContext<WeatherForcastHistoryDatabaseContext>(connectionName: "weatherforcasthistory");
 
 builder.AddKafkaConsumer<Null, WeatherForecastDto>("kafka",
-    configureSettings => { configureSettings.Config.GroupId = "consumer_1"; },
+    configureSettings => { configureSettings.Config.GroupId = "consumer_1"; configureSettings.Config.AllowAutoCreateTopics = true; },
     consumerBuilder => { consumerBuilder.SetValueDeserializer(new JsonDeserializer<WeatherForecastDto>()); });
 
 builder.Services.AddHostedService<Worker>();
