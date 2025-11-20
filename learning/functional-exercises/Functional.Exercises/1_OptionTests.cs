@@ -29,6 +29,14 @@ internal class _1_OptionTests
     public async Task Match_invoke_failure_path_when_value_is_none()
         => await Assert.That(Greet(None)).IsEqualTo($"Hello, World!");
 
+    [Test]
+    public async Task AsEnumerable_yields_inner_value()
+        => await Assert.That(((Option<int>)12).AsEnumerable()).IsEquivalentTo([12]);
+
+    [Test]
+    public async Task AsEnumerable_yields_no_value()
+    => await Assert.That(((Option<int>)None).AsEnumerable()).IsEquivalentTo(Enumerable.Empty<int>());
+
     string Greet(Option<string> greetee)
         => greetee.Match(
             () => "Hello, World!",

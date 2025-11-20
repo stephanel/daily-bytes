@@ -21,6 +21,40 @@ internal static class F
                 yield return r;
     }
 
+    /// <summary>
+    /// Projects each element of a sequence into an option and flattens the resulting options into a single sequence of
+    /// values.
+    /// </summary>
+    /// <remarks>This method is commonly used to chain operations that may or may not return a value,
+    /// effectively filtering out elements where the function returns an empty option. It is functionally similar to
+    /// SelectMany for option types.</remarks>
+    /// <typeparam name="T">The type of the elements in the source sequence.</typeparam>
+    /// <typeparam name="R">The type of the elements returned by the option-producing function.</typeparam>
+    /// <param name="list">The sequence of elements to bind.</param>
+    /// <param name="func">A function to apply to each element that returns an option of the result type.</param>
+    /// <returns>An enumerable sequence containing the values from each option returned by the function, excluding options with
+    /// no value.</returns>
+    public static IEnumerable<R> Bind<T, R>(this IEnumerable<T> list, Func<T, Option<R>> func)
+        => list.Bind(t => func(t).AsEnumerable());
+
+    /// <summary>
+    /// Projects the value of the option into a sequence of results using the specified mapping function, or returns an
+    /// empty sequence if the option has no value.
+    /// </summary>
+    /// <remarks>This method enables chaining of operations on optional values that produce sequences,
+    /// following the monadic bind pattern. It is commonly used to flatten nested option and sequence
+    /// operations.</remarks>
+    /// <typeparam name="T">The type of the value contained in the option.</typeparam>
+    /// <typeparam name="R">The type of the elements in the resulting sequence.</typeparam>
+    /// <param name="opt">The option to bind. If the option has a value, the mapping function is applied; otherwise, an empty sequence is
+    /// returned.</param>
+    /// <param name="func">A mapping function to apply to the value of the option, returning a sequence of results. Cannot be null.</param>
+    /// <returns>A sequence of results from applying the mapping function to the option's value, or an empty sequence if the
+    /// option has no value.</returns>
+    public static IEnumerable<R> Bind<T, R>(this Option<T> opt, Func<T, IEnumerable<R>> func)
+        => opt.AsEnumerable().Bind(func);
+
+
     public static Func<T, Unit> ToFunc<T>(this Action<T> action)
         => (t) => { action(t); return default; };
 

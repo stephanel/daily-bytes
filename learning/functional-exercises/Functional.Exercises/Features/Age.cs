@@ -2,7 +2,7 @@
 
 internal struct Age
 {
-    private int Value { get; }
+    public int Value { get; }
 
     public static Option<Age> Create(int age) => IsValid(age) ? F.Some(new Age(age)) : F.None;
 
