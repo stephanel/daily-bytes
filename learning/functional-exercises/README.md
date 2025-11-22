@@ -11,7 +11,7 @@
 | `ForEach` | n/a | `Iter` | `Iter` |
 | `Return` | n/a | `Pure` | `List` |
 
-## Concept of `Abstraction`
+## Abstractions
 
 An `abstraction` is a way to add an effect to the underlying type
 

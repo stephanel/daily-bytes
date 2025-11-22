@@ -7,10 +7,6 @@ internal static class F
 {
     internal struct NoneType { }
 
-    public static Option<T> Some<T>(T value) => new Option<T>(value);
-
-    public static NoneType None => default;
-
     public static Option<R> Bind<T, R>(this Option<T> opt, Func<T, Option<R>> f)
         => opt.Match(() => None, t => f(t));
 
@@ -64,7 +60,6 @@ internal static class F
     public static Option<Unit> ForEach<T>(this Option<T> opt, Action<T> action)
         => Map(opt, action.ToFunc());
 
-
     /// <summary>
     /// the Return function for IEnumerable&lt;T&gt;
     /// </summary>
@@ -75,7 +70,7 @@ internal static class F
         => items.ToImmutableList();
 
     public static Option<string> Lookup(this NameValueCollection source, string key)
-    => source[key]!;
+        => source[key]!;
 
     public static Option<T> Lookup<T>(this IDictionary<string, T> source, string key)
         => source.TryGetValue(key, out var result) ? Some(result) : None;
@@ -89,8 +84,18 @@ internal static class F
     public static IEnumerable<R> Map<T, R>(this IEnumerable<T> source, Func<T, R> f)
         => source.Select(f);
 
+    public static NoneType None => default;
+
     public static Option<TEnum> Parse<TEnum>(this string value) where TEnum : struct, Enum
         => Enum.TryParse<TEnum>(value, out var result) ? Some(result) : None;
+
+    /// <summary>
+    /// the Return function for Option&lt;T&gt;
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static Option<T> Some<T>(T value) => new Option<T>(value);
 
     public static Func<Unit> ToFunc(this Action action)
         => () => { action(); return default; };
